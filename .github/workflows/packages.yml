@@ -21,6 +21,8 @@ jobs:
         with:
           java-version: '8'
           distribution: 'temurin'
+          server-id: github-proton6980
+          settings-path: ${github.workspace}
 
       - name: Build and Package
         run: |
@@ -29,7 +31,6 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: |
-          echo '打印---------' + ${{ secrets.PACKAGES_TOKEN }}
           mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
