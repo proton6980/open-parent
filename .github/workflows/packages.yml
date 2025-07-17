@@ -19,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '1.8'  # 根据项目需求调整版本
+          java-version: '8'  # 根据项目需求调整版本
           distribution: 'temurin'
 
       - name: Build and Package
