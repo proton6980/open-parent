@@ -19,13 +19,13 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '8'  # 根据项目需求调整版本
+          java-version: '8'
           distribution: 'temurin'
 
       - name: Build and Package
         run: |
           # 根据项目类型运行相应的构建命令
-          mvn clean package  # 如果是 Maven 项目
+          mvn clean package
 
       - name: Publish to GitHub Packages
         run: |
