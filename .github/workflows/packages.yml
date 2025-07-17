@@ -21,8 +21,21 @@ jobs:
         with:
           java-version: '8'
           distribution: 'temurin'
-          server-id: github-proton6980
-          settings-path: ${github.workspace}
+
+      - name: 动态生成maven配置文件
+        run: |
+          mkdir -p ${{ github.workspace }}/.m2
+              Cat  << EOF > ${{ github.workspace }}/.m2/settings.xml
+              <settings>
+                <servers>
+                  <server>
+                    <id>github</id>
+                    <username>${{ env.GITHUB_ACTOR }}"
+                    <password>${{ secrets.PACKAGES_TOKEN }}"
+                  </server>
+                </servers>
+              </settings>
+              EOF
 
       - name: Build and Package
         run: |
