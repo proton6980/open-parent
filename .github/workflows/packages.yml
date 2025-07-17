@@ -22,28 +22,25 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
 
-      - name: 动态生成maven配置文件
+      - name: Configure Maven Settings
         run: |
           mkdir -p ~/.m2
-              cat  << EOF > ~/.m2/settings.xml
-              <settings>
-                <servers>
-                  <server>
-                    <id>github-proton6980</id>
-                    <username>\${{ env.GITHUB_ACTOR }}</username>
-                    <password>\${{ secrets.PACKAGES_TOKEN }}</password>
-                  </server>
-                </servers>
-              </settings>
-              EOF
+          cat <<EOF > ~/.m2/settings.xml
+          <settings>
+            <servers>
+              <server>
+                <id>github-proton6980</id>
+                <username>\${env.GITHUB_ACTOR}</username>
+                <password>\${env.GITHUB_TOKEN}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
 
       - name: Build and Package
-        run: |
-          # 根据项目类型运行相应的构建命令
-          mvn clean package
+        run: mvn clean package
 
       - name: Publish to GitHub Packages
-        run: |
-          mvn deploy
+        run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
