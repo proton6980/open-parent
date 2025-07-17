@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.open</groupId>
+        <artifactId>open-parent</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>open-starters</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>cache</module>
+        <module>encrypt</module>
+        <module>excel</module>
+        <module>http</module>
+        <module>json</module>
+        <module>mybatis-plus</module>
+        <module>oss</module>
+        <module>satoken</module>
+        <module>sse</module>
+        <module>swarm-bots</module>
+        <module>tenant</module>
+        <module>web</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+</project>

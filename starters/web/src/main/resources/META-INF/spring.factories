@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.open.starter.web.config.WebMvcAutoConfiguration,\
+com.open.starter.web.config.OpenWebAutoConfiguration,\
+com.open.starter.web.config.OpenApiDecryptAutoConfiguration,\
+com.open.starter.web.config.OpenEncryptorAutoConfiguration

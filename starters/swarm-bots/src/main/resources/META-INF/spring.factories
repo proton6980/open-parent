@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.open.starter.swarmbots.telegram.config.TelegramBotAutoConfiguration

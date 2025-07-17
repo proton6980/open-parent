@@ -1,0 +1,9 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.open.extend.i18n.config.OpenI18nAutoConfiguration,\
+com.open.extend.i18n.key.service.impl.KeyServiceImpl,\
+com.open.extend.i18n.value.service.impl.ValueServiceImpl,\
+com.open.extend.i18n.language.service.impl.LanguageServiceImpl,\
+com.open.extend.i18n.key.controller.BgKeyController,\
+com.open.extend.i18n.key.controller.FcKeyController,\
+com.open.extend.i18n.value.controller.BgValueController,\
+com.open.extend.i18n.language.controller.BgLanguageController

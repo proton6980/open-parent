@@ -1,0 +1,13 @@
+package com.open.extend.manager.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.open.extend.manager.domain.SysRoleMenu;
+
+/**
+ * 角色与菜单关联表 数据层
+ *
+ * @author godLian
+ */
+public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
+
+}
