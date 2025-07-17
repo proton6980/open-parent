@@ -1,9 +1,10 @@
-name: 发布至GitHub Packages
+name: 发布至 GitHub Packages
 
 on:
-  push:
-    branches:
-      - '1.8'  # 触发发布的分支名称
+#  push:
+#    branches:
+#      - '1.8'  # 触发发布的分支名称
+  workflow_dispatch:   # 手动触发
 
 jobs:
   publish:
