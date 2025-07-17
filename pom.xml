@@ -275,11 +275,11 @@
 
     <distributionManagement>
         <repository>
-            <id>github-proton6980</id>
+            <id>github</id>
             <url>https://maven.pkg.github.com/proton6980/packages</url>
         </repository>
         <snapshotRepository>
-            <id>github-proton6980</id>
+            <id>github</id>
             <url>https://maven.pkg.github.com/proton6980/packages</url>
         </snapshotRepository>
     </distributionManagement>
