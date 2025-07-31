@@ -7,33 +7,17 @@ import lombok.Getter;
 /**
  * open异常
  *
- * @author godLian
+ * @author open
  */
 @Getter
-public class OpenException extends RuntimeException {
+public class OpenException extends BaseException {
     private static final long serialVersionUID = 1L;
-    /**
-     * 模块
-     */
-    private final String module;
-    /**
-     * 错误码
-     */
-    private final int code;
 
     public OpenException(ExceptionModule module, int code, String message) {
-        this(module.name(), code, message);
-    }
-
-    public OpenException(String module, int code, String message) {
-        super(message);
-        this.module = module;
-        this.code = code;
+        super(module.name(), code, message);
     }
 
     public OpenException(String module, int code, String message, Object... args) {
-        super(StrUtil.format(message, args));
-        this.module = module;
-        this.code = code;
+        super(module, code, StrUtil.format(message, args));
     }
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 租户对象 sys_tenant
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

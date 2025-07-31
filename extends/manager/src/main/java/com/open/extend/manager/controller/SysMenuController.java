@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 菜单信息
  *
- * @author godLian
+ * @author open
  */
 @Validated
 @RequiredArgsConstructor

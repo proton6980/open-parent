@@ -7,7 +7,7 @@ import com.open.starter.mybatisplus.core.mapper.IBaseMapper;
 /**
  * 参数配置 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysConfigMapper extends IBaseMapper<SysConfig, SysConfigVo> {
 

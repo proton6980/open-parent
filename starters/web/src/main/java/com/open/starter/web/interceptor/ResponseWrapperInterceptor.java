@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * response响应包装拦截器
  *
- * @author godLian
+ * @author open
  */
 @RestControllerAdvice
 public class ResponseWrapperInterceptor implements ResponseBodyAdvice<Object> {

@@ -107,5 +107,10 @@ public interface Constants {
      * 0 long默认值
      */
     Long ZERO_LONG = 0L;
+
+    /**
+     * 验证码有效期（分钟）
+     */
+    Integer CAPTCHA_EXPIRATION = 2;
 }
 

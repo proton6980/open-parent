@@ -7,7 +7,7 @@ import cn.hutool.core.lang.RegexPool;
  * <p>
  * 常用正则表达式集合，更多正则见: https://any86.github.io/any-rule/
  *
- * @author godLian
+ * @author open
  */
 public interface RegexConstants extends RegexPool {
 

@@ -12,7 +12,7 @@ package com.open.commons.constants;
  * <p>
  * 例子: test#60s、test#0#60s、test#0#1m#1000、test#1h#0#500、test#1h#0#500#0
  *
- * @author godLian
+ * @author open
  */
 public interface CacheNames {
 

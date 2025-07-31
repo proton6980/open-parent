@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 /**
  * 租户助手
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

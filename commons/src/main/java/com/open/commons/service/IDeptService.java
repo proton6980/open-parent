@@ -3,7 +3,7 @@ package com.open.commons.service;
 /**
  * 通用 部门服务
  *
- * @author godLian
+ * @author open
  */
 public interface IDeptService {
 

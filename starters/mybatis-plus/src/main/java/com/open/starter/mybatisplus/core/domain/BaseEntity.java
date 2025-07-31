@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 /**
  * 基础实体类
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class BaseEntity implements Serializable {

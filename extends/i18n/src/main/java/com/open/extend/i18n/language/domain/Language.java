@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 语言表
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

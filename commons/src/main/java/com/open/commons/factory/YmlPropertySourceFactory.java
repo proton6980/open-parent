@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * yml 配置源工厂
  *
- * @author godLian
+ * @author open
  */
 public class YmlPropertySourceFactory extends DefaultPropertySourceFactory {
 

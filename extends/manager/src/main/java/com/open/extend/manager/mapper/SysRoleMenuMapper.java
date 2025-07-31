@@ -6,7 +6,7 @@ import com.open.extend.manager.domain.SysRoleMenu;
 /**
  * 角色与菜单关联表 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
 

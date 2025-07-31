@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 /**
  * 数据权限助手
  *
- * @author godLian
+ * @author open
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuppressWarnings("unchecked cast")

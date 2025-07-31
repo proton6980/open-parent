@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 数据权限组注解，用于标记数据权限配置数组
  *
- * @author godLian
+ * @author open
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

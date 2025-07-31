@@ -12,7 +12,7 @@ import org.aspectj.lang.annotation.Before;
 /**
  * 数据权限处理
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @Aspect

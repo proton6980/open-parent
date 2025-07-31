@@ -38,5 +38,14 @@
             <groupId>com.open</groupId>
             <artifactId>open-starter-oss</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.open</groupId>
+            <artifactId>open-starter-social</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+        </dependency>
     </dependencies>
 </project>

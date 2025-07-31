@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 用户头像信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class AvatarVo {

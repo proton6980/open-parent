@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 语言业务实现
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @Service

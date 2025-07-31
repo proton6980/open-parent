@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * SSE 配置项
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ConfigurationProperties("sse")

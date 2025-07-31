@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 /**
  * 通知公告业务对象 sys_notice
  *
- * @author godLian
+ * @author open
  */
 
 @Data

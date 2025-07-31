@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * 语言出参
  *
- * @author godLian
+ * @author open
  */
 @Data
 @AutoMapper(target = Language.class, reverseConvertGenerate = false, uses = Base64ImageConvertor.class)

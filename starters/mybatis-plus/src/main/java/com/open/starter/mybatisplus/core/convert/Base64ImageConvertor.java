@@ -8,7 +8,7 @@ import java.util.Base64;
 /**
  * Base64 图片转换器
  *
- * @author godLian
+ * @author open
  */
 public class Base64ImageConvertor {
 

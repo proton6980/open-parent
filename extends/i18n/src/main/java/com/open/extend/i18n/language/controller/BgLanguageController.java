@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 管理后台/多语言/语言控制器
  *
- * @author godLian
+ * @author open
  */
 @RestController
 @RequestMapping("/bg/language")

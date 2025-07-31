@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 租户视图对象 sys_tenant
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ExcelIgnoreUnannotated

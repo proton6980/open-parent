@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 租户套餐对象 sys_tenant_package
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

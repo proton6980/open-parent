@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 登录事件
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class LogininforEvent implements Serializable {

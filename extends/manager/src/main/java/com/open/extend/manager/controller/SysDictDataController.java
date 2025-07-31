@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 数据字典信息
  *
- * @author godLian
+ * @author open
  */
 @Validated
 @RequiredArgsConstructor

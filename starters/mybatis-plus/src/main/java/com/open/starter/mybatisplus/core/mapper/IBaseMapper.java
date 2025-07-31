@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  *
  * @param <E> table 实体类
  * @param <V> view 模型类
- * @author godLian
+ * @author open
  */
 public interface IBaseMapper<E extends BaseEntity, V> extends BaseMapper<E> {
 

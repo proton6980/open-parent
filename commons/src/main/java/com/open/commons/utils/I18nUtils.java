@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * 国际化工具类
  *
- * @author godLian
+ * @author open
  */
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public final class I18nUtils {

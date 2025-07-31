@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * open web 自动化配置
  *
- * @author godLian
+ * @author open
  */
 @Configuration
 public class OpenWebAutoConfiguration {

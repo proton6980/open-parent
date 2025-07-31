@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 多租户redis缓存key前缀处理
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class TenantKeyPrefixHandler extends KeyPrefixHandler {

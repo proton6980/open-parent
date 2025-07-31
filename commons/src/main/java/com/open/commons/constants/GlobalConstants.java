@@ -3,7 +3,7 @@ package com.open.commons.constants;
 /**
  * 全局的key常量 (业务无关的key)
  *
- * @author godLian
+ * @author open
  */
 public interface GlobalConstants {
 

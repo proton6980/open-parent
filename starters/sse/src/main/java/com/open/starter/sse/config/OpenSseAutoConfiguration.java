@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * SSE 自动装配
  *
- * @author godLian
+ * @author open
  */
 @Configuration
 @ConditionalOnProperty(value = "sse.enabled", havingValue = "true")

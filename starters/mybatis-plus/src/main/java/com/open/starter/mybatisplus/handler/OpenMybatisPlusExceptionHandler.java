@@ -10,7 +10,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 /**
  * mybatis-plus全局异常处理
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @RestControllerAdvice

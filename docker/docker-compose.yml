@@ -1,0 +1,66 @@
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql
+    env_file:
+      - ./env/mysql.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      open_network:
+        ipv4_address: 172.110.0.2
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+  redis:
+    image: redis:7.0.0
+    container_name: redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "--requirepass", "03mN0ZTyD5" ]
+    networks:
+      open_network:
+        ipv4_address: 172.110.0.3
+  nacos:
+    image: nacos/nacos-server:v2.5.1
+    container_name: nacos
+    env_file:
+      - ./env/nacos-mysql.env
+      - ./env/nacos-auth.env
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      open_network:
+        ipv4_address: 172.110.0.4
+
+networks:
+  open_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.110.0.0/16
+          gateway: 172.110.0.1
+
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /docker-data/mysql_data
+      o: bind
+  redis_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /docker-data/redis_data
+      o: bind

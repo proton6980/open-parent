@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 菜单权限表 sys_menu
  *
- * @author godLian
+ * @author open
  */
 
 @Data

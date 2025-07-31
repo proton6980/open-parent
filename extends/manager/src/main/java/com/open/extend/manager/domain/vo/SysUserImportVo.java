@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 用户对象导入VO
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

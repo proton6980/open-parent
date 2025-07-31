@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 角色表 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysRoleMapper extends IBaseMapper<SysRole, SysRoleVo> {
 

@@ -7,7 +7,7 @@ import com.open.starter.mybatisplus.core.mapper.IBaseMapper;
 /**
  * 通知公告表 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysNoticeMapper extends IBaseMapper<SysNotice, SysNoticeVo> {
 

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 用户 业务层
  *
- * @author godLian
+ * @author open
  */
 public interface ISysUserService extends IService<SysUser> {
 

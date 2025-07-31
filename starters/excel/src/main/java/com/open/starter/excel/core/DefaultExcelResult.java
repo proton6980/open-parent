@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 默认excel返回对象
  *
- * @author godLian
+ * @author open
  */
 public class DefaultExcelResult<T> implements ExcelResult<T> {
 

@@ -3,7 +3,7 @@ package com.open.starter.satoken.enums;
 /**
  * 业务操作类型
  *
- * @author godLian
+ * @author open
  */
 public enum BusinessType {
     /**

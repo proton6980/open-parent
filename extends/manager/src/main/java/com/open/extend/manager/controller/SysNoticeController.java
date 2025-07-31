@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 公告 信息操作处理
  *
- * @author godLian
+ * @author open
  */
 @Validated
 @RequiredArgsConstructor

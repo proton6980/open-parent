@@ -1,70 +1,48 @@
 package com.open.commons.exception;
 
-import com.open.commons.utils.MessageUtils;
-import com.open.commons.utils.StringUtils;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 /**
  * 基础异常
  *
- * @author godLian
+ * @author open
  */
-@Data
+@Getter
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class BaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     /**
      * 所属模块
      */
-    private String module;
+    private final String module;
 
     /**
      * 错误码
      */
-    private String code;
+    private final Integer code;
 
-    /**
-     * 错误码对应的参数
-     */
-    private Object[] args;
-
-    /**
-     * 错误消息
-     */
-    private String defaultMessage;
-
-    public BaseException(String module, String code, Object[] args) {
-        this(module, code, args, null);
+    public BaseException(String module, Integer code, String message) {
+        super(message);
+        this.module = module;
+        this.code = code;
     }
 
-    public BaseException(String module, String defaultMessage) {
-        this(module, null, null, defaultMessage);
+    public BaseException(String module, String message) {
+        this(module, null, message);
     }
 
-    public BaseException(String code, Object[] args) {
-        this(null, code, args, null);
+    public BaseException(Integer code, String message) {
+        this(null, code, message);
     }
 
-    public BaseException(String defaultMessage) {
-        this(null, null, null, defaultMessage);
+    public BaseException(Integer code) {
+        this(null, code, null);
     }
 
-    @Override
-    public String getMessage() {
-        String message = null;
-        if (StringUtils.isNotEmpty(code)) {
-            message = MessageUtils.message(code, args);
-        }
-        if (message == null) {
-            message = defaultMessage;
-        }
-        return message;
+    public BaseException(String message) {
+        this(null, null, message);
     }
 
 }

@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 /**
  * 菜单权限业务对象 sys_menu
  *
- * @author godLian
+ * @author open
  */
 
 @Data

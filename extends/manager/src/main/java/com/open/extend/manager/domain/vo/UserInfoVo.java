@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * 登录用户信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class UserInfoVo {

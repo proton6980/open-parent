@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  * 响应对象
  *
  * @param <T> 范型
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)

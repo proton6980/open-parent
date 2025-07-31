@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 自定义注解防止表单重复提交
  *
- * @author godLian
+ * @author open
  */
 @Inherited
 @Target(ElementType.METHOD)

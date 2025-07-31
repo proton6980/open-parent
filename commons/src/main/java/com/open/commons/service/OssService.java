@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 通用 OSS服务
  *
- * @author godLian
+ * @author open
  */
 public interface OssService {
 

@@ -34,7 +34,7 @@ import java.util.StringJoiner;
 /**
  * 操作日志记录处理
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @Aspect

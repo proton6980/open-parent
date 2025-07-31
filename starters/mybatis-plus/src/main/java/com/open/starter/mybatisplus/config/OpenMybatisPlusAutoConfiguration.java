@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
  * <a href="https://baomidou.com/pages/2a45ff/">DynamicTableNameInnerInterceptor 动态表名插件</a><br>
  * </p
  *
- * @author godLian
+ * @author open
  */
 @MapperScan(basePackages = "${mybatis-plus.global-config.mapper-scan:com.open.**.mapper}")
 @Configuration

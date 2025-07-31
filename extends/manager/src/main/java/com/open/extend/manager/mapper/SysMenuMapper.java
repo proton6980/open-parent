@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 菜单表 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysMenuMapper extends IBaseMapper<SysMenu, SysMenuVo> {
 

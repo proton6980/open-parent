@@ -5,7 +5,7 @@ import com.open.commons.pojo.R;
 /**
  * web层通用数据处理
  *
- * @author godLian
+ * @author open
  */
 public class BaseController {
 

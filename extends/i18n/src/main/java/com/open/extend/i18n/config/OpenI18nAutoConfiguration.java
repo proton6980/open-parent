@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 /**
  * I18n自动化配置
  *
- * @author godLian
+ * @author open
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(I18nProperties.class)

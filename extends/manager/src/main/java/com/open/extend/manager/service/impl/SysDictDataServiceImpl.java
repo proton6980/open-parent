@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 字典 业务层处理
  *
- * @author godLian
+ * @author open
  */
 @RequiredArgsConstructor
 @Service

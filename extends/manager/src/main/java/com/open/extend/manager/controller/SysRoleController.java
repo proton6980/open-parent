@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * 角色信息
  *
- * @author godLian
+ * @author open
  */
 @Validated
 @RequiredArgsConstructor

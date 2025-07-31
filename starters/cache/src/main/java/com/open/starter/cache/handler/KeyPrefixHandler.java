@@ -6,7 +6,7 @@ import org.redisson.api.NameMapper;
 /**
  * redis缓存key前缀处理
  *
- * @author godLian
+ * @author open
  * @date 2022/7/14 17:44
  * @since 4.3.0
  */

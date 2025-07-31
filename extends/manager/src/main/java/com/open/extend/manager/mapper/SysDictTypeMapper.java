@@ -7,7 +7,7 @@ import com.open.starter.mybatisplus.core.mapper.IBaseMapper;
 /**
  * 字典表 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysDictTypeMapper extends IBaseMapper<SysDictType, SysDictTypeVo> {
 

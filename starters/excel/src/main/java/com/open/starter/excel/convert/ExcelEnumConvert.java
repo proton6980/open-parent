@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * 枚举格式化转换处理
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class ExcelEnumConvert implements Converter<Object> {

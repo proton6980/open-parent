@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 通知公告视图对象 sys_notice
  *
- * @author godLian
+ * @author open
  */
 @Data
 @AutoMapper(target = SysNotice.class)

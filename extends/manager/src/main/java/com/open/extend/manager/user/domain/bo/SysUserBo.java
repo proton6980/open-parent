@@ -4,6 +4,7 @@ import com.open.commons.constants.Constants;
 import com.open.commons.xss.Xss;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
+import com.open.starter.tenant.core.domain.TenantAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,13 +17,13 @@ import javax.validation.constraints.Size;
 /**
  * 用户信息业务对象 sys_user
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @AutoMapper(target = SysUser.class, reverseConvertGenerate = false)
-public class SysUserBo extends BaseAdminEntity {
+public class SysUserBo extends TenantAdminEntity {
 
     /**
      * 部门ID

@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 部门视图对象 sys_dept
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ExcelIgnoreUnannotated

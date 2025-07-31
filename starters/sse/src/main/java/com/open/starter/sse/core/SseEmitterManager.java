@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 /**
  * 管理 Server-Sent Events (SSE) 连接
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class SseEmitterManager {

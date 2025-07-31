@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 用户信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

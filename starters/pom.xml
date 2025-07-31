@@ -22,6 +22,7 @@
         <module>mybatis-plus</module>
         <module>oss</module>
         <module>satoken</module>
+        <module>social</module>
         <module>sse</module>
         <module>swarm-bots</module>
         <module>tenant</module>

@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 /**
  * 数据权限过滤
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class OpenDataPermissionHandler {

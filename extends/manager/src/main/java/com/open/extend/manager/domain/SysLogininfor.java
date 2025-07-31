@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 系统访问记录表 sys_logininfor
  *
- * @author godLian
+ * @author open
  */
 @Data
 @TableName("sys_logininfor")

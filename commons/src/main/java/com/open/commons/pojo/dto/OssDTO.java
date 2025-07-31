@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * OSS对象
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

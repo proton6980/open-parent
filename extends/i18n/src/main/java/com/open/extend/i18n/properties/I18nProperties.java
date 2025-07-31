@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * open i18n 配置项
- * @author godLian
+ * @author open
  */
 @Data
 @ConfigurationProperties(prefix = "open.i18n")

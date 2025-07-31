@@ -3,7 +3,7 @@ package com.open.starter.swarmbots;
 /**
  * 机器人客户端
  *
- * @author godLian
+ * @author open
  */
 public interface BotClient {
 

@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 /**
  * 岗位信息 服务层处理
  *
- * @author godLian
+ * @author open
  */
 @RequiredArgsConstructor
 @Service

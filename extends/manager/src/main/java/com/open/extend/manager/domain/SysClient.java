@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 授权管理对象 sys_client
  *
- * @author godLian
+ * @author open
  * @date 2023-05-15
  */
 @Data

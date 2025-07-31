@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * telegram bot 配置
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ConfigurationProperties(prefix = "open.telegram.bot")

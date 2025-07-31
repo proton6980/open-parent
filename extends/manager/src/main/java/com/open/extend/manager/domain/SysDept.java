@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 部门表 sys_dept
  *
- * @author godLian
+ * @author open
  */
 
 @Data

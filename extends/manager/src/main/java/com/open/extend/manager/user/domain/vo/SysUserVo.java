@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 用户信息视图对象 sys_user
  *
- * @author godLian
+ * @author open
  */
 @Data
 @AutoMapper(target = SysUser.class)

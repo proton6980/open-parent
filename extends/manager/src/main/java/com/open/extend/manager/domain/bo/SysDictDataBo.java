@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 /**
  * 字典数据业务对象 sys_dict_data
  *
- * @author godLian
+ * @author open
  */
 
 @Data

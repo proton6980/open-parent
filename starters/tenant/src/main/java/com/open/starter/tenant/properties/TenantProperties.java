@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 租户 配置属性
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ConfigurationProperties(prefix = "open.tenant")

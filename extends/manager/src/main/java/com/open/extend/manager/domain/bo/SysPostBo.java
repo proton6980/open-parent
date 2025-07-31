@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 /**
  * 岗位信息业务对象 sys_post
  *
- * @author godLian
+ * @author open
  */
 
 @Data

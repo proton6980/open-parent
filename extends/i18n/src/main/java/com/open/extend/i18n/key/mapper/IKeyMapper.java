@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 键表数据库操作接口
  *
- * @author godLian
+ * @author open
  */
 @Mapper
 public interface IKeyMapper extends IBaseMapper<Key, KeyVo> {

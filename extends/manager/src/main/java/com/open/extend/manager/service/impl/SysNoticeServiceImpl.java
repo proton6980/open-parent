@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 公告 服务层实现
  *
- * @author godLian
+ * @author open
  */
 @RequiredArgsConstructor
 @Service

@@ -24,7 +24,7 @@ import java.util.*;
 /**
  * 列值重复合并策略
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class CellMergeStrategy extends AbstractMergeStrategy implements WorkbookWriteHandler {

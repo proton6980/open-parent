@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * JSON 工具类
  *
- * @author godLian
+ * @author open
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JacksonUtils {

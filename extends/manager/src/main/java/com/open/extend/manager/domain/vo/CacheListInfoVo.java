@@ -9,7 +9,7 @@ import java.util.Properties;
 /**
  * 缓存监控列表信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class CacheListInfoVo {

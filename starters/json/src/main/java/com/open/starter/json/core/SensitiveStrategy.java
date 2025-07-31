@@ -8,7 +8,7 @@ import java.util.function.Function;
 /**
  * 脱敏策略
  *
- * @author godLian
+ * @author open
  */
 @AllArgsConstructor
 public enum SensitiveStrategy {

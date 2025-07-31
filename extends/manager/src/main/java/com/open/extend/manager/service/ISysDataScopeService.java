@@ -3,7 +3,7 @@ package com.open.extend.manager.service;
 /**
  * 通用 数据权限 服务
  *
- * @author godLian
+ * @author open
  */
 public interface ISysDataScopeService {
 

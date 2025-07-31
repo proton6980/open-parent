@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 角色部门列表树信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class DeptTreeSelectVo {

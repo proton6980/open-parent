@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * 用户权限处理
  *
- * @author godLian
+ * @author open
  */
 public interface ISysPermissionService {
 

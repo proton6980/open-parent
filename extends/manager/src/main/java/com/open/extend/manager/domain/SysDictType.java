@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 字典类型表 sys_dict_type
  *
- * @author godLian
+ * @author open
  */
 
 @Data

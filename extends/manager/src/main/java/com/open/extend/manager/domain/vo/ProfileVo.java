@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 用户个人信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class ProfileVo {

@@ -3,7 +3,7 @@ package com.open.starter.satoken.enums;
 /**
  * 操作状态
  *
- * @author godLian
+ * @author open
  */
 public enum BusinessStatus {
     /**

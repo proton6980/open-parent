@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * okhttp工具类
  *
- * @author godLian
+ * @author open
  */
 public final class OkHttpUtil {
     private static final OkHttpClient CLIENT = SpringUtil.getBean(OkHttpClient.class);

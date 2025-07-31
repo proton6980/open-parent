@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 /**
  * 字典类型业务对象 sys_dict_type
  *
- * @author godLian
+ * @author open
  */
 
 @Data

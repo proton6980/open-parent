@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * 一个注解只能对应一个模板
  * </p>
  *
- * @author godLian
+ * @author open
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

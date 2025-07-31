@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * 租户业务对象 sys_tenant
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

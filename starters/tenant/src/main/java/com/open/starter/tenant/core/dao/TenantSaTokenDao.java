@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * SaToken 认证数据持久层 适配多租户
  *
- * @author godLian
+ * @author open
  */
 public class TenantSaTokenDao extends OpenSaTokenDao {
 

@@ -3,7 +3,7 @@ package com.open.starter.satoken.enums;
 /**
  * 操作人类别
  *
- * @author godLian
+ * @author open
  */
 public enum OperatorType {
     /**

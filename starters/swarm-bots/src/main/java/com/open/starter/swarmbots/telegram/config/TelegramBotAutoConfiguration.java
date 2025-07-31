@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * telegram bot自动化配置
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @Configuration

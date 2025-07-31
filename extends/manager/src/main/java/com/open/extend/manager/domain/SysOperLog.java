@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 操作日志记录表 oper_log
  *
- * @author godLian
+ * @author open
  */
 
 @Data

@@ -5,7 +5,8 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.open.commons.exception.ServiceException;
+import com.open.commons.exception.BaseException;
+import com.open.commons.exception.OpenException;
 import com.open.commons.utils.StringUtils;
 import com.open.commons.utils.sql.SqlUtil;
 import lombok.Data;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * 分页查询实体类
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor
@@ -94,7 +95,7 @@ public class PageQuery implements Serializable {
         String[] orderByArr = orderBy.split(StringUtils.SEPARATOR);
         String[] isAscArr = isAsc.split(StringUtils.SEPARATOR);
         if (isAscArr.length != 1 && isAscArr.length != orderByArr.length) {
-            throw new ServiceException("排序参数有误");
+            throw new BaseException("排序参数有误");
         }
 
         List<OrderItem> list = new ArrayList<>();
@@ -107,7 +108,7 @@ public class PageQuery implements Serializable {
             } else if ("desc".equals(isAscStr)) {
                 list.add(OrderItem.desc(orderByStr));
             } else {
-                throw new ServiceException("排序参数有误");
+                throw new BaseException("排序参数有误");
             }
         }
         return list;

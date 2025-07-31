@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * 操作日志记录视图对象 sys_oper_log
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ExcelIgnoreUnannotated

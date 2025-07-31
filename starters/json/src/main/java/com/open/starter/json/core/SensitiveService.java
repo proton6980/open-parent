@@ -5,7 +5,7 @@ package com.open.starter.json.core;
  * 默认管理员不过滤
  * 需自行根据业务重写实现
  *
- * @author godLian
+ * @author open
  */
 public interface SensitiveService {
 

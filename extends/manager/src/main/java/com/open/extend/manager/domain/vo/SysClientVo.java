@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 授权管理视图对象 sys_client
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ExcelIgnoreUnannotated

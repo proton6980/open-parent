@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 客户端API/多语言
  *
- * @author godLian
+ * @author open
  */
 @RestController
 @RequestMapping("/fc/key")

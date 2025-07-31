@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 社会化关系对象 sys_social
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

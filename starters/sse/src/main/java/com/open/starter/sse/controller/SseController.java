@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * SSE 控制器
  *
- * @author godLian
+ * @author open
  */
 @RestController
 @ConditionalOnProperty(value = "sse.enabled", havingValue = "true")

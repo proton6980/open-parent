@@ -3,7 +3,7 @@ package com.open.commons.exception.enums;
 /**
  * 异常模块
  *
- * @author godLian
+ * @author open
  */
 public enum ExceptionModule {
     /**

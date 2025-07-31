@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 用户密码修改bo
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class SysUserPasswordBo implements Serializable {

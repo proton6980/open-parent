@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * okhttp 配置属性
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ConfigurationProperties(prefix = "open.okhttp")

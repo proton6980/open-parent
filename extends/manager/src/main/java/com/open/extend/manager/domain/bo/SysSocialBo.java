@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 社会化关系业务对象 sys_social
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

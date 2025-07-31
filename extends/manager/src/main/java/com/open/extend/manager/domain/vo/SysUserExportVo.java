@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * 用户对象导出VO
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

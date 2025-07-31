@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 /**
  * 个人信息业务处理
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 /**
  * 参数配置业务对象 sys_config
  *
- * @author godLian
+ * @author open
  */
 
 @Data

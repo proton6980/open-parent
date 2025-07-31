@@ -17,7 +17,7 @@ import java.security.cert.X509Certificate;
 /**
  * okhttp自动配置
  *
- * @author godLian
+ * @author open
  */
 @ConditionalOnMissingBean(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)

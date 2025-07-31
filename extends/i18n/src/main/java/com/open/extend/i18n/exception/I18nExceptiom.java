@@ -8,7 +8,7 @@ import com.open.extend.i18n.key.service.KeyService;
 /**
  * 多语言异常
  *
- * @author godLian
+ * @author open
  */
 public class I18nExceptiom extends OpenException {
     private final static String MODULE = "i18n-db";

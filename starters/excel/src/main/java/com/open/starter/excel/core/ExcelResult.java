@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * excel返回对象
  *
- * @author godLian
+ * @author open
  */
 public interface ExcelResult<T> {
 

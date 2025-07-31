@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 角色表 sys_role
  *
- * @author godLian
+ * @author open
  */
 
 @Data

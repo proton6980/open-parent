@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 值入参
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

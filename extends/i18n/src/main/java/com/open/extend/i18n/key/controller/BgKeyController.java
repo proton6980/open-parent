@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 管理后台/多语言/键控制器
  *
- * @author godLian
+ * @author open
  */
 @RestController
 @RequestMapping("/bg/key")

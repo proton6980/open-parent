@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 租户基类
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

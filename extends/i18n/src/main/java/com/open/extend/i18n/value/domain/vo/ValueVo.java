@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 值出参
  *
- * @author godLian
+ * @author open
  */
 @Data
 @AutoMapper(target = Value.class)

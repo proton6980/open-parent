@@ -10,7 +10,7 @@ import com.open.starter.mybatisplus.core.page.PageQuery;
 /**
  * 语言业务接口
  *
- * @author godLian
+ * @author open
  */
 public interface LanguageService extends IService<Language> {
     /**

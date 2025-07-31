@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 文件上传Factory
  *
- * @author Lion Li
+ * @author open
  */
 @Slf4j
 public class OssFactory {

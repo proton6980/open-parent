@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 枚举格式化
  *
- * @author godLian
+ * @author open
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

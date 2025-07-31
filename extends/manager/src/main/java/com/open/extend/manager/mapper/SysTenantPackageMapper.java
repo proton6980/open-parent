@@ -7,7 +7,7 @@ import com.open.starter.mybatisplus.core.mapper.IBaseMapper;
 /**
  * 租户套餐Mapper接口
  *
- * @author godLian
+ * @author open
  */
 public interface SysTenantPackageMapper extends IBaseMapper<SysTenantPackage, SysTenantPackageVo> {
 

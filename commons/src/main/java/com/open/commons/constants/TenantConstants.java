@@ -3,7 +3,7 @@ package com.open.commons.constants;
 /**
  * 租户常量信息
  *
- * @author godLian
+ * @author open
  */
 public interface TenantConstants {
 

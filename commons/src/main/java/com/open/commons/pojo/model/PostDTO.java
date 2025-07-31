@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 岗位
  *
- * @author godLian
+ * @author open
  */
 @Data
 @NoArgsConstructor

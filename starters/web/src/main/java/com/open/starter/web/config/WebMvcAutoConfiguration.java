@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * web mvc自动化配置
  *
- * @author godLian
+ * @author open
  */
 @Configuration
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {

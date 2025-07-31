@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Undertow 自定义配置
  *
- * @author godLian
+ * @author open
  */
 @Configuration
 public class OpenUndertowAutoConfiguration implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {

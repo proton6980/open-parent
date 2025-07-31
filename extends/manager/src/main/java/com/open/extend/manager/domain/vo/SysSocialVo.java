@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 社会化关系视图对象 sys_social
  *
- * @author godLian
+ * @author open
  */
 @Data
 @AutoMapper(target = SysSocial.class)

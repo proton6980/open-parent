@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 /**
  * Cache 装饰器模式(用于扩展 Caffeine 一级缓存)
  *
- * @author godLian
+ * @author open
  */
 public class CaffeineCacheDecorator implements Cache {
 

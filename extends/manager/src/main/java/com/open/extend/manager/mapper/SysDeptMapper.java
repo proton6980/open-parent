@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 部门管理 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysDeptMapper extends IBaseMapper<SysDept, SysDeptVo> {
 

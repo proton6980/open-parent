@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * SaToken异常处理器
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @RestControllerAdvice

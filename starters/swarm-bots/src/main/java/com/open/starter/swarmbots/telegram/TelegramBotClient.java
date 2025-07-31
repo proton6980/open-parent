@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * telegram bot 客户端
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @RequiredArgsConstructor

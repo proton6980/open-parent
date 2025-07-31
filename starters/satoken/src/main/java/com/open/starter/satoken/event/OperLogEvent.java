@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 操作日志事件
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class OperLogEvent implements Serializable {

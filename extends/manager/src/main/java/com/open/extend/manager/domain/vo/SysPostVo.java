@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 岗位信息视图对象 sys_post
  *
- * @author godLian
+ * @author open
  */
 @Data
 @ExcelIgnoreUnannotated

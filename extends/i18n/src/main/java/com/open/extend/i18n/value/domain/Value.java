@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 /**
  * 值表
  *
- * @author godLian
+ * @author open
  */
 @Data
 @Accessors(chain = true)

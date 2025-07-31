@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 数据库助手
  *
- * @author godLian
+ * @author open
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DataBaseHelper {

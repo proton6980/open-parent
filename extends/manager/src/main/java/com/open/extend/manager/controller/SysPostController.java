@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 岗位信息操作处理
  *
- * @author godLian
+ * @author open
  */
 @Validated
 @RequiredArgsConstructor

@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 键表
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

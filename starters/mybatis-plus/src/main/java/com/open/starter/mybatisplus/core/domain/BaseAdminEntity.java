@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 管理后台基础实体
  *
- * @author godLian
+ * @author open
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

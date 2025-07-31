@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 岗位信息 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysPostMapper extends IBaseMapper<SysPost, SysPostVo> {
 

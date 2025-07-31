@@ -11,7 +11,7 @@ import org.springframework.cache.Cache;
 /**
  * 重写 cacheName 处理方法 支持多租户
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class TenantSpringCacheManager extends OpenSpringCacheManager {

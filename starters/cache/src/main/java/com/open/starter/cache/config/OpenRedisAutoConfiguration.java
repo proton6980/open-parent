@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.open.starter.cache.aspectj.RateLimiterAspect;
 import com.open.starter.cache.handler.KeyPrefixHandler;
 import com.open.starter.cache.handler.OpenCacheExceptionHandler;
 import com.open.starter.cache.properties.RedissonProperties;
@@ -29,7 +30,7 @@ import java.util.TimeZone;
 /**
  * redis配置
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
@@ -104,6 +105,11 @@ public class OpenRedisAutoConfiguration {
     @Bean
     public OpenCacheExceptionHandler redisExceptionHandler() {
         return new OpenCacheExceptionHandler();
+    }
+
+    @Bean
+    public RateLimiterAspect rateLimiterAspect() {
+        return new RateLimiterAspect();
     }
 
     /**

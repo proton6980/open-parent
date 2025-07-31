@@ -34,6 +34,7 @@
         <ip2region.version>2.7.0</ip2region.version>
         <bouncycastle.version>1.81</bouncycastle.version>
         <aws-sdk.version>2.31.78</aws-sdk.version>
+        <justauth.version>1.16.7</justauth.version>
     </properties>
 
     <dependencyManagement>
@@ -139,6 +140,11 @@
                 <artifactId>s3-transfer-manager</artifactId>
                 <version>${aws-sdk.version}</version>
             </dependency>
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${justauth.version}</version>
+            </dependency>
 
             <!--    open dependencis begin    -->
             <dependency>
@@ -149,6 +155,11 @@
             <dependency>
                 <groupId>com.open</groupId>
                 <artifactId>open-extend-i18n</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.open</groupId>
+                <artifactId>open-extend-manager</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -179,6 +190,11 @@
             <dependency>
                 <groupId>com.open</groupId>
                 <artifactId>open-starter-satoken</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.open</groupId>
+                <artifactId>open-starter-social</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

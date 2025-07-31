@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * 扩展 hutool TreeUtil 封装系统树构建
  *
- * @author godLian
+ * @author open
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TreeBuildUtils extends TreeUtil {

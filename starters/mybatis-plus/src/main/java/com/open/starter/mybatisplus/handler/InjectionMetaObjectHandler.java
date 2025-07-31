@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * MP注入处理器
  *
- * @author godLian
+ * @author open
  */
 @Slf4j
 public class InjectionMetaObjectHandler implements MetaObjectHandler {

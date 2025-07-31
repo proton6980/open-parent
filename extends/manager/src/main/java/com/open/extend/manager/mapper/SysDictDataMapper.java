@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 字典表 数据层
  *
- * @author godLian
+ * @author open
  */
 public interface SysDictDataMapper extends IBaseMapper<SysDictData, SysDictDataVo> {
 

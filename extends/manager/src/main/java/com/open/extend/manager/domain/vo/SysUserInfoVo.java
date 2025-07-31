@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 用户信息
  *
- * @author godLian
+ * @author open
  */
 @Data
 public class SysUserInfoVo {

@@ -10,7 +10,7 @@ import com.open.starter.mybatisplus.core.page.PageQuery;
 /**
  * 值业务接口
  *
- * @author godLian
+ * @author open
  */
 public interface ValueService extends IService<Value> {
     /**

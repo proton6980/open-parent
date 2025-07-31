@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 /**
  * 角色信息业务对象 sys_role
  *
- * @author godLian
+ * @author open
  */
 
 @Data
