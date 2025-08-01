@@ -1,8 +1,8 @@
-package com.open.extend.manager.enums;
+package com.open.commons.enums;
 
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.captcha.generator.RandomGenerator;
-import com.open.extend.manager.captcha.UnsignedMathGenerator;
+import com.open.commons.utils.captcha.UnsignedMathGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

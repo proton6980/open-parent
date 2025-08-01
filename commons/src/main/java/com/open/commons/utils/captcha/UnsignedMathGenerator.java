@@ -1,4 +1,4 @@
-package com.open.extend.manager.captcha;
+package com.open.commons.utils.captcha;
 
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.math.Calculator;

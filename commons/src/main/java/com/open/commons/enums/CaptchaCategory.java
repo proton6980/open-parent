@@ -1,4 +1,4 @@
-package com.open.extend.manager.enums;
+package com.open.commons.enums;
 
 import cn.hutool.captcha.AbstractCaptcha;
 import cn.hutool.captcha.CircleCaptcha;

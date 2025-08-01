@@ -1,4 +1,4 @@
-package com.open.extend.manager.controller;
+package com.open.extend.manager.auth.controller;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.hutool.core.codec.Base64;
@@ -8,6 +8,8 @@ import com.open.commons.constants.Constants;
 import com.open.commons.exception.BaseException;
 import com.open.commons.pojo.LoginBody;
 import com.open.commons.pojo.R;
+import com.open.extend.manager.auth.service.TokenService;
+import com.open.extend.manager.controller.vo.CaptchaVo;
 import com.open.extend.manager.controller.vo.LoginVo;
 import com.open.commons.utils.*;
 import com.open.extend.manager.controller.bo.RegisterBody;
@@ -17,6 +19,7 @@ import com.open.extend.manager.controller.vo.TenantListVo;
 import com.open.extend.manager.domain.bo.SysTenantBo;
 import com.open.extend.manager.domain.vo.SysClientVo;
 import com.open.extend.manager.domain.vo.SysTenantVo;
+import com.open.extend.manager.properties.CaptchaProperties;
 import com.open.extend.manager.service.*;
 import com.open.starter.satoken.utils.LoginHelper;
 import com.open.starter.social.properties.SocialLoginConfigProperties;
@@ -50,15 +53,32 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/auth")
 public class TokenController {
-
+    private final CaptchaProperties captchaProperties;
     private final SocialProperties socialProperties;
-    private final SysLoginService sysLoginService;
-    private final ScheduledExecutorService scheduledExecutorService;
+
     private final ISysClientService sysClientService;
     private final ISysSocialService sysSocialService;
     private final ISysConfigService sysConfigService;
     private final ISysTenantService sysTenantService;
+
+    private final TokenService tokenService;
+    private final ScheduledExecutorService scheduledExecutorService;
+
+    /**
+     * 生成验证码
+     */
+    @GetMapping("/code")
+    public R<CaptchaVo> getCode() {
+        CaptchaVo captchaVo = new CaptchaVo();
+        boolean captchaEnabled = captchaProperties.getEnabled();
+        if (!captchaEnabled) {
+            captchaVo.setCaptchaEnabled(false);
+            return R.ok(captchaVo);
+        }
+        return R.ok(tokenService.getCodeImpl());
+    }
 
     /**
      * 登录方法
@@ -84,7 +104,7 @@ public class TokenController {
             throw new BaseException("auth.grant.type.blocked");
         }
         // 校验租户
-        sysLoginService.checkTenant(loginBody.getTenantId());
+        tokenService.checkTenant(loginBody.getTenantId());
         // 登录
         LoginVo loginVo = IAuthStrategy.login(body, clientVo, grantType);
 
@@ -134,7 +154,7 @@ public class TokenController {
         if (!response.ok()) {
             return R.fail(response.getMsg());
         }
-        sysLoginService.socialRegister(authUserData);
+        tokenService.socialRegister(authUserData);
         return R.ok();
     }
 
@@ -155,7 +175,7 @@ public class TokenController {
      */
     @PostMapping("logout")
     public R<Void> logout() {
-        sysLoginService.logout();
+        tokenService.logout();
         return R.ok();
     }
 
@@ -169,7 +189,7 @@ public class TokenController {
             return R.fail("当前系统没有开启注册功能！");
         }
         // 用户注册
-        sysLoginService.register(registerBody);
+        tokenService.register(registerBody);
         return R.ok();
     }
 

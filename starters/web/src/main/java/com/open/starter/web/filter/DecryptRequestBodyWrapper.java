@@ -64,11 +64,11 @@ public class DecryptRequestBodyWrapper extends HttpServletRequestWrapper {
 
     @Override
     public ServletInputStream getInputStream() {
-        final ByteArrayInputStream bais = new ByteArrayInputStream(body);
+        final ByteArrayInputStream basis = new ByteArrayInputStream(body);
         return new ServletInputStream() {
             @Override
             public int read() {
-                return bais.read();
+                return basis.read();
             }
 
             @Override

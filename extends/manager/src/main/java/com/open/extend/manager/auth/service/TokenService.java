@@ -1,9 +1,12 @@
-package com.open.extend.manager.service;
+package com.open.extend.manager.auth.service;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.captcha.AbstractCaptcha;
+import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.extra.spring.SpringUtil;
@@ -12,21 +15,29 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.open.commons.constants.Constants;
 import com.open.commons.constants.GlobalConstants;
 import com.open.commons.constants.TenantConstants;
+import com.open.commons.enums.CaptchaType;
 import com.open.commons.enums.UserType;
 import com.open.commons.exception.BaseException;
 import com.open.commons.exception.OpenException;
 import com.open.commons.pojo.model.LoginUser;
 import com.open.commons.utils.MessageUtils;
+import com.open.commons.utils.ReflectUtils;
 import com.open.commons.utils.StringUtils;
 import com.open.extend.manager.controller.bo.RegisterBody;
+import com.open.extend.manager.controller.vo.CaptchaVo;
 import com.open.extend.manager.domain.bo.SysSocialBo;
 import com.open.extend.manager.domain.vo.SysSocialVo;
 import com.open.extend.manager.domain.vo.SysTenantVo;
 import com.open.extend.manager.properties.CaptchaProperties;
 import com.open.extend.manager.properties.UserPasswordProperties;
+import com.open.extend.manager.service.ISysConfigService;
+import com.open.extend.manager.service.ISysSocialService;
+import com.open.extend.manager.service.ISysTenantService;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
 import com.open.extend.manager.user.service.ISysUserService;
+import com.open.starter.cache.annotation.RateLimiter;
+import com.open.starter.cache.enums.LimitType;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.satoken.event.LogininforEvent;
 import com.open.starter.satoken.utils.LoginHelper;
@@ -35,8 +46,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +63,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class SysLoginService {
+public class TokenService {
     private final ISysTenantService systemTenantService;
     private final ISysUserService sysUserService;
     private final ISysConfigService sysConfigService;
@@ -160,6 +175,37 @@ public class SysLoginService {
             throw new OpenException("", 500, "user.register.error");
         }
         recordLogininfor(tenantId, username, Constants.REGISTER, MessageUtils.message("user.register.success"));
+    }
+
+    /**
+     * 生成验证码
+     * 独立方法避免验证码关闭之后仍然走限流
+     */
+    @RateLimiter(count = 10, limitType = LimitType.IP)
+    public CaptchaVo getCodeImpl() {
+        // 保存验证码信息
+        String uuid = IdUtil.simpleUUID();
+        String verifyKey = GlobalConstants.CAPTCHA_CODE_KEY + uuid;
+        // 生成验证码
+        CaptchaType captchaType = captchaProperties.getType();
+        boolean isMath = CaptchaType.MATH == captchaType;
+        Integer length = isMath ? captchaProperties.getNumberLength() : captchaProperties.getCharLength();
+        CodeGenerator codeGenerator = ReflectUtils.newInstance(captchaType.getClazz(), length);
+        AbstractCaptcha captcha = SpringUtil.getBean(captchaProperties.getCategory().getClazz());
+        captcha.setGenerator(codeGenerator);
+        captcha.createCode();
+        // 如果是数学验证码，使用SpEL表达式处理验证码结果
+        String code = captcha.getCode();
+        if (isMath) {
+            ExpressionParser parser = new SpelExpressionParser();
+            Expression exp = parser.parseExpression(StringUtils.remove(code, "="));
+            code = exp.getValue(String.class);
+        }
+        RedisUtils.setCacheObject(verifyKey, code, Duration.ofMinutes(Constants.CAPTCHA_EXPIRATION));
+        CaptchaVo captchaVo = new CaptchaVo();
+        captchaVo.setUuid(uuid);
+        captchaVo.setImg(captcha.getImageBase64());
+        return captchaVo;
     }
 
     /**

@@ -2,7 +2,6 @@ package com.open.extend.manager.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 用户密码配置
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * @author open
  */
 @Data
-@Configuration
 @ConfigurationProperties(prefix = "open.user.password")
 public class UserPasswordProperties {
 

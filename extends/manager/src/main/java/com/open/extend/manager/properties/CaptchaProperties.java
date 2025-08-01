@@ -1,10 +1,9 @@
 package com.open.extend.manager.properties;
 
-import com.open.extend.manager.enums.CaptchaCategory;
-import com.open.extend.manager.enums.CaptchaType;
+import com.open.commons.enums.CaptchaCategory;
+import com.open.commons.enums.CaptchaType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 验证码配置
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @author ruoyi
  */
 @Data
-@Configuration
 @ConfigurationProperties(prefix = "open.security.captcha")
 public class CaptchaProperties {
 
