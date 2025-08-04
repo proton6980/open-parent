@@ -2,7 +2,7 @@ package com.open.extend.manager.user.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.open.extend.manager.domain.vo.SysRoleVo;
+import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.starter.json.annotation.Sensitive;
 import com.open.starter.json.core.SensitiveStrategy;
@@ -26,7 +26,7 @@ public class SysUserVo implements Serializable {
     /**
      * 用户ID
      */
-    private Long userId;
+    private Long id;
 
     /**
      * 租户ID
@@ -41,12 +41,12 @@ public class SysUserVo implements Serializable {
     /**
      * 用户账号
      */
-    private String userName;
+    private String username;
 
     /**
      * 用户昵称
      */
-    private String nickName;
+    private String nickname;
 
     /**
      * 用户类型（sys_user系统用户）

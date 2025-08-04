@@ -4,8 +4,7 @@ import cn.dev33.satoken.stp.StpInterface;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.open.commons.enums.UserType;
-import com.open.commons.exception.OpenException;
-import com.open.commons.exception.enums.ExceptionModule;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.pojo.model.LoginUser;
 import com.open.commons.service.IPermissionService;
 import com.open.commons.utils.StringUtils;
@@ -33,7 +32,7 @@ public class SaPermissionImpl implements StpInterface {
                 List<String> list = StringUtils.splitList(loginId.toString(), ":");
                 return new ArrayList<>(permissionService.getMenuPermission(Long.parseLong(list.get(1))));
             } else {
-                throw new OpenException(ExceptionModule.SATOKEN_STARTER, 500, "PermissionService 实现类不存在");
+                throw new BusinessException("PermissionService 实现类不存在");
             }
         }
         UserType userType = UserType.getUserType(loginUser.getUserType());
@@ -56,7 +55,7 @@ public class SaPermissionImpl implements StpInterface {
                 List<String> list = StringUtils.splitList(loginId.toString(), ":");
                 return new ArrayList<>(permissionService.getRolePermission(Long.parseLong(list.get(1))));
             } else {
-                throw new OpenException(ExceptionModule.SATOKEN_STARTER, 500, "PermissionService 实现类不存在");
+                throw new BusinessException("PermissionService 实现类不存在");
             }
         }
         UserType userType = UserType.getUserType(loginUser.getUserType());

@@ -66,7 +66,7 @@ public class KeyServiceImpl extends ServiceImpl<IKeyMapper, Key> implements KeyS
         Language language = this.languageMapper.selectOne(Wrappers.lambdaQuery(Language.class)
                 .eq(Language::getCode, languageCode));
         if (Objects.isNull(language)) {
-            throw new OpenException("i18n-db", 500, "languageCode {} is not exist", languageCode);
+            throw new OpenException(StrUtil.format("languageCode {} is not exist", languageCode));
         }
         List<Key> keys = this.list();
         if (CollUtil.isEmpty(keys)) {

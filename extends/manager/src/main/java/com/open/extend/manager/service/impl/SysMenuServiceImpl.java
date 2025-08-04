@@ -13,7 +13,7 @@ import com.open.commons.utils.StreamUtils;
 import com.open.commons.utils.StringUtils;
 import com.open.commons.utils.TreeBuildUtils;
 import com.open.extend.manager.domain.SysMenu;
-import com.open.extend.manager.domain.SysRole;
+import com.open.extend.manager.role.domain.SysRole;
 import com.open.extend.manager.domain.SysRoleMenu;
 import com.open.extend.manager.domain.SysTenantPackage;
 import com.open.extend.manager.domain.bo.SysMenuBo;
@@ -21,7 +21,7 @@ import com.open.extend.manager.domain.vo.MetaVo;
 import com.open.extend.manager.domain.vo.RouterVo;
 import com.open.extend.manager.domain.vo.SysMenuVo;
 import com.open.extend.manager.mapper.SysMenuMapper;
-import com.open.extend.manager.mapper.SysRoleMapper;
+import com.open.extend.manager.role.mapper.ISysRoleMapper;
 import com.open.extend.manager.mapper.SysRoleMenuMapper;
 import com.open.extend.manager.mapper.SysTenantPackageMapper;
 import com.open.extend.manager.service.ISysMenuService;
@@ -41,7 +41,7 @@ import java.util.*;
 public class SysMenuServiceImpl implements ISysMenuService {
 
     private final SysMenuMapper baseMapper;
-    private final SysRoleMapper roleMapper;
+    private final ISysRoleMapper roleMapper;
     private final SysRoleMenuMapper roleMenuMapper;
     private final SysTenantPackageMapper tenantPackageMapper;
 

@@ -2,6 +2,7 @@ package com.open.extend.manager.user.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.domain.vo.SysUserExportVo;
@@ -11,6 +12,7 @@ import com.open.starter.mybatisplus.annotation.DataPermission;
 import com.open.starter.mybatisplus.core.mapper.IBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ import java.util.List;
  * @author open
  */
 @Mapper
+@ConditionalOnMissingBean(ISysUserMapper.class)
 public interface ISysUserMapper extends IBaseMapper<SysUser, SysUserVo> {
 
     @DataPermission({
@@ -70,11 +73,11 @@ public interface ISysUserMapper extends IBaseMapper<SysUser, SysUserVo> {
     })
     Page<SysUserVo> selectUnallocatedList(@Param("page") Page<SysUser> page, @Param(Constants.WRAPPER) Wrapper<SysUser> queryWrapper);
 
-    @DataPermission({
-        @DataColumn(key = "deptName", value = "dept_id"),
-        @DataColumn(key = "userName", value = "user_id")
-    })
-    long countUserById(Long userId);
+    default long countUserById(Long userId){
+        return this.selectCount(Wrappers.lambdaQuery(SysUser.class)
+                .eq(SysUser::getId, userId)
+                .eq(SysUser::getDeleted, 0));
+    }
 
     @Override
     @DataPermission({

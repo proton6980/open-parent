@@ -5,10 +5,10 @@
 <mapper namespace="com.open.extend.manager.user.mapper.ISysUserMapper">
 
     <resultMap type="com.open.extend.manager.user.domain.vo.SysUserVo" id="SysUserResult">
-        <id property="userId" column="user_id"/>
+        <id property="id" column="id"/>
     </resultMap>
     <resultMap type="com.open.extend.manager.domain.vo.SysUserExportVo" id="SysUserExportResult">
-        <id property="userId" column="user_id"/>
+        <id property="userId" column="id"/>
     </resultMap>
 
     <select id="selectPageUserList" resultMap="SysUserResult">
@@ -17,8 +17,8 @@
             ${ew.getSqlSelect}
         </if>
         <if test="ew.getSqlSelect == null">
-            u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.sex,
-            u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark
+            u.id, u.dept_id, u.nickname, u.username, u.email, u.avatar, u.phonenumber, u.sex,
+            u.enable, u.del_flag, u.login_ip, u.login_time, u.create_by, u.create_time, u.remark
         </if>
         from sys_user u
         ${ew.getCustomSqlSegment}
@@ -30,76 +30,68 @@
             ${ew.getSqlSelect}
         </if>
         <if test="ew.getSqlSelect == null">
-            u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.sex,
-            u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark
+            u.id, u.dept_id, u.nickname, u.username, u.email, u.avatar, u.phonenumber, u.sex,
+            u.enable, u.del_flag, u.login_ip, u.login_time, u.create_by, u.create_time, u.remark
         </if>
         from sys_user u
         ${ew.getCustomSqlSegment}
     </select>
 
     <select id="selectUserExportList" resultMap="SysUserExportResult">
-        select u.user_id,
+        select u.id,
                u.dept_id,
-               u.nick_name,
-               u.user_name,
+               u.nickname,
+               u.username,
                u.email,
                u.avatar,
                u.phonenumber,
                u.sex,
-               u.status,
+               u.enable,
                u.del_flag,
                u.login_ip,
-               u.login_date,
+               u.login_time,
                u.create_by,
                u.create_time,
                u.remark,
                d.dept_name,
                d.leader,
-               u1.user_name as leaderName
+               u1.username as leaderName
         from sys_user u
-                 left join sys_dept d on u.dept_id = d.dept_id
+                 left join sys_dept d on u.dept_id = d.id
                  left join sys_user u1 on u1.user_id = d.leader
             ${ew.getCustomSqlSegment}
     </select>
 
     <select id="selectAllocatedList" resultMap="SysUserResult">
-        select distinct u.user_id,
+        select distinct u.id,
                         u.dept_id,
-                        u.user_name,
-                        u.nick_name,
+                        u.username,
+                        u.nickname,
                         u.email,
                         u.phonenumber,
-                        u.status,
+                        u.enable,
                         u.create_time
         from sys_user u
-                 left join sys_dept d on u.dept_id = d.dept_id
-                 left join sys_user_role sur on u.user_id = sur.user_id
-                 left join sys_role r on r.role_id = sur.role_id
+                 left join sys_dept d on u.dept_id = d.id
+                 left join sys_user_role sur on u.id = sur.user_id
+                 left join sys_role r on r.id = sur.role_id
             ${ew.getCustomSqlSegment}
     </select>
 
     <select id="selectUnallocatedList" resultMap="SysUserResult">
-        select distinct u.user_id,
+        select distinct u.id,
                         u.dept_id,
-                        u.user_name,
-                        u.nick_name,
+                        u.username,
+                        u.nickname,
                         u.email,
                         u.phonenumber,
-                        u.status,
+                        u.enable,
                         u.create_time
         from sys_user u
-                 left join sys_dept d on u.dept_id = d.dept_id
-                 left join sys_user_role sur on u.user_id = sur.user_id
-                 left join sys_role r on r.role_id = sur.role_id
+                 left join sys_dept d on u.dept_id = d.id
+                 left join sys_user_role sur on u.id = sur.user_id
+                 left join sys_role r on r.id = sur.role_id
             ${ew.getCustomSqlSegment}
     </select>
-
-    <select id="countUserById" resultType="Long">
-        select count(*)
-        from sys_user
-        where del_flag = '0'
-          and user_id = #{userId}
-    </select>
-
 
 </mapper>

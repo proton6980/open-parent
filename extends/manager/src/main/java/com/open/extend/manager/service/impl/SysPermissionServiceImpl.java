@@ -3,7 +3,7 @@ package com.open.extend.manager.service.impl;
 import com.open.commons.constants.TenantConstants;
 import com.open.extend.manager.service.ISysMenuService;
 import com.open.extend.manager.service.ISysPermissionService;
-import com.open.extend.manager.service.ISysRoleService;
+import com.open.extend.manager.role.service.ISysRoleService;
 import com.open.starter.satoken.utils.LoginHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

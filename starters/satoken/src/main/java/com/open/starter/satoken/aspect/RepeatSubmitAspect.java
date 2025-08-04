@@ -7,10 +7,8 @@ import cn.hutool.crypto.SecureUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.open.commons.constants.Constants;
 import com.open.commons.constants.GlobalConstants;
-import com.open.commons.exception.OpenException;
-import com.open.commons.exception.enums.ExceptionModule;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.pojo.R;
 import com.open.commons.utils.JacksonUtils;
 import com.open.commons.utils.MessageUtils;
@@ -47,7 +45,7 @@ public class RepeatSubmitAspect {
         long interval = repeatSubmit.timeUnit().toMillis(repeatSubmit.interval());
 
         if (interval < 1000) {
-            throw new OpenException(ExceptionModule.SATOKEN_STARTER, 500, "重复提交间隔时间不能小于'1'秒");
+            throw new BusinessException("重复提交间隔时间不能小于'1'秒");
         }
         HttpServletRequest request = ServletUtils.getRequest();
         String nowParams = argsArrayToString(point.getArgs());
@@ -68,7 +66,7 @@ public class RepeatSubmitAspect {
             if (StringUtils.startsWith(message, "{") && StringUtils.endsWith(message, "}")) {
                 message = MessageUtils.message(StringUtils.substring(message, 1, message.length() - 1));
             }
-            throw new OpenException(ExceptionModule.SATOKEN_STARTER, 500, message);
+            throw new BusinessException(message);
         }
     }
 

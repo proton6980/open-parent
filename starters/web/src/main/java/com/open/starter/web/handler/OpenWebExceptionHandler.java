@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Objects;
+
 /**
  * 全局异常处理
  *
@@ -24,6 +26,6 @@ public class OpenWebExceptionHandler {
     @ExceptionHandler(OpenException.class)
     public R<Void> handleSqlException(OpenException e) {
         log.error("{}模块异常:", e.getModule(), e);
-        return R.fail(e.getCode(), e.getMessage());
+        return R.fail(Objects.isNull(e.getCode()) ? 500 : e.getCode(), e.getMessage());
     }
 }

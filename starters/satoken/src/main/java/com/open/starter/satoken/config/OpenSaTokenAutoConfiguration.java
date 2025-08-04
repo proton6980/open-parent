@@ -1,5 +1,6 @@
 package com.open.starter.satoken.config;
 
+import cn.dev33.satoken.context.SaTokenContext;
 import cn.dev33.satoken.dao.SaTokenDao;
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
 import cn.dev33.satoken.stp.StpInterface;
@@ -21,6 +22,11 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource(value = "classpath:common-satoken.yml", factory = YmlPropertySourceFactory.class)
 public class OpenSaTokenAutoConfiguration {
+
+//    @Bean
+//    public SaTokenContext saTokenContext() {
+//        return new OpenSaTokenContext();
+//    }
 
     @Bean
     public StpLogic getStpLogicJwt() {

@@ -6,6 +6,7 @@ import cn.hutool.captcha.AbstractCaptcha;
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Opt;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.BCrypt;
@@ -16,23 +17,29 @@ import com.open.commons.constants.Constants;
 import com.open.commons.constants.GlobalConstants;
 import com.open.commons.constants.TenantConstants;
 import com.open.commons.enums.CaptchaType;
+import com.open.commons.enums.LoginType;
 import com.open.commons.enums.UserType;
-import com.open.commons.exception.BaseException;
-import com.open.commons.exception.OpenException;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.pojo.model.LoginUser;
+import com.open.commons.pojo.model.PostDTO;
+import com.open.commons.pojo.model.RoleDTO;
 import com.open.commons.utils.MessageUtils;
 import com.open.commons.utils.ReflectUtils;
 import com.open.commons.utils.StringUtils;
-import com.open.extend.manager.controller.bo.RegisterBody;
-import com.open.extend.manager.controller.vo.CaptchaVo;
+import com.open.extend.manager.auth.bo.RegisterBody;
+import com.open.extend.manager.auth.vo.CaptchaVo;
+import com.open.extend.manager.dept.domain.vo.SysDeptVo;
+import com.open.extend.manager.dept.service.ISysDeptService;
 import com.open.extend.manager.domain.bo.SysSocialBo;
-import com.open.extend.manager.domain.vo.SysSocialVo;
-import com.open.extend.manager.domain.vo.SysTenantVo;
+import com.open.extend.manager.domain.vo.*;
+import com.open.extend.manager.exception.UserException;
+import com.open.extend.manager.post.domain.vo.SysPostVo;
+import com.open.extend.manager.post.service.ISysPostService;
 import com.open.extend.manager.properties.CaptchaProperties;
 import com.open.extend.manager.properties.UserPasswordProperties;
-import com.open.extend.manager.service.ISysConfigService;
-import com.open.extend.manager.service.ISysSocialService;
-import com.open.extend.manager.service.ISysTenantService;
+import com.open.extend.manager.role.domain.vo.SysRoleVo;
+import com.open.extend.manager.role.service.ISysRoleService;
+import com.open.extend.manager.service.*;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
 import com.open.extend.manager.user.service.ISysUserService;
@@ -54,6 +61,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * 登录校验方法
@@ -66,6 +74,10 @@ import java.util.List;
 public class TokenService {
     private final ISysTenantService systemTenantService;
     private final ISysUserService sysUserService;
+    private final ISysPermissionService sysPermissionService;
+    private final ISysDeptService sysDeptService;
+    private final ISysRoleService sysRoleService;
+    private final ISysPostService sysPostService;
     private final ISysConfigService sysConfigService;
     private final ISysSocialService sysSocialService;
 
@@ -93,7 +105,7 @@ public class TokenService {
         bo.setNickName(authUserData.getNickname());
         List<SysSocialVo> checkList = sysSocialService.selectByAuthId(authId);
         if (CollUtil.isNotEmpty(checkList)) {
-            throw new BaseException("此三方账号已经被绑定!");
+            throw new BusinessException("此三方账号已经被绑定!");
         }
         // 查询是否已经绑定用户
         SysSocialBo params = new SysSocialBo();
@@ -161,18 +173,18 @@ public class TokenService {
 
         boolean exist = TenantHelper.dynamic(tenantId, () -> {
             if (!("true".equals(sysConfigService.selectConfigByKey("sys.account.registerUser")))) {
-                throw new BaseException("当前系统没有开启注册功能");
+                throw new BusinessException("当前系统没有开启注册功能");
             }
             return sysUserService.exists(new LambdaQueryWrapper<SysUser>()
-                    .eq(SysUser::getUserName, sysUserBo.getUserName()));
+                    .eq(SysUser::getUsername, sysUserBo.getUserName()));
         });
         if (exist) {
-            throw new OpenException("", 500, "user.register.save.error", username);
+            throw new BusinessException("user.register.save.error", username);
         }
 
         boolean regFlag = sysUserService.registerUser(sysUserBo, tenantId);
         if (!regFlag) {
-            throw new OpenException("", 500, "user.register.error");
+            throw new BusinessException("user.register.error");
         }
         recordLogininfor(tenantId, username, Constants.REGISTER, MessageUtils.message("user.register.success"));
     }
@@ -221,11 +233,11 @@ public class TokenService {
         RedisUtils.deleteObject(verifyKey);
         if (captcha == null) {
             recordLogininfor(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
-            throw new BaseException("验证码不存在");
+            throw new BusinessException("验证码不存在");
         }
         if (!code.equalsIgnoreCase(captcha)) {
             recordLogininfor(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
-            throw new BaseException("验证码不正确");
+            throw new BusinessException("验证码不正确");
         }
     }
 
@@ -247,41 +259,41 @@ public class TokenService {
         SpringUtil.getApplicationContext().publishEvent(logininforEvent);
     }
 
-//    /**
-//     * 登录校验
-//     */
-//    public void checkLogin(LoginType loginType, String tenantId, String username, Supplier<Boolean> supplier) {
-//        String errorKey = CacheConstants.PWD_ERR_CNT_KEY + username;
-//        String loginFail = Constants.LOGIN_FAIL;
-//        Integer maxRetryCount = userPasswordProperties.getMaxRetryCount();
-//        Integer lockTime = userPasswordProperties.getLockTime();
-//
-//        // 获取用户登录错误次数，默认为0 (可自定义限制策略 例如: key + username + ip)
-//        int errorNumber = ObjectUtil.defaultIfNull(RedisUtils.getCacheObject(errorKey), 0);
-//        // 锁定时间内登录 则踢出
-//        if (errorNumber >= maxRetryCount) {
-//            recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
-//            throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
-//        }
-//
-//        if (supplier.get()) {
-//            // 错误次数递增
-//            errorNumber++;
-//            RedisUtils.setCacheObject(errorKey, errorNumber, Duration.ofMinutes(lockTime));
-//            // 达到规定错误次数 则锁定登录
-//            if (errorNumber >= maxRetryCount) {
-//                recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
-//                throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
-//            } else {
-//                // 未达到规定错误次数
-//                recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
-//                throw new UserException(loginType.getRetryLimitCount(), errorNumber);
-//            }
-//        }
-//
-//        // 登录成功 清空错误次数
-//        RedisUtils.deleteObject(errorKey);
-//    }
+    /**
+     * 登录校验
+     */
+    public void checkLogin(LoginType loginType, String tenantId, String username, Supplier<Boolean> supplier) {
+        String errorKey = Constants.PWD_ERR_CNT_KEY + username;
+        String loginFail = Constants.LOGIN_FAIL;
+        Integer maxRetryCount = userPasswordProperties.getMaxRetryCount();
+        Duration lockTime = userPasswordProperties.getLockTime();
+
+        // 获取用户登录错误次数，默认为0 (可自定义限制策略 例如: key + username + ip)
+        int errorNumber = ObjectUtil.defaultIfNull(RedisUtils.getCacheObject(errorKey), 0);
+        // 锁定时间内登录 则踢出
+        if (errorNumber >= maxRetryCount) {
+            recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+            throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
+        }
+
+        if (supplier.get()) {
+            // 错误次数递增
+            errorNumber++;
+            RedisUtils.setCacheObject(errorKey, errorNumber, lockTime);
+            // 达到规定错误次数 则锁定登录
+            if (errorNumber >= maxRetryCount) {
+                recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+                throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
+            } else {
+                // 未达到规定错误次数
+                recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
+                throw new UserException(loginType.getRetryLimitCount(), errorNumber);
+            }
+        }
+
+        // 登录成功 清空错误次数
+        RedisUtils.deleteObject(errorKey);
+    }
 
     /**
      * 校验租户
@@ -310,5 +322,32 @@ public class TokenService {
             log.info("登录租户：{} 已超过有效期.", tenantId);
             throw new RuntimeException("tenant.expired");
         }
+    }
+
+    /**
+     * 构建登录用户
+     */
+    public LoginUser buildLoginUser(SysUser user) {
+        LoginUser loginUser = new LoginUser();
+        Long userId = user.getId();
+        loginUser.setTenantId(user.getTenantId());
+        loginUser.setUserId(userId);
+        loginUser.setDeptId(user.getDeptId());
+        loginUser.setUsername(user.getUsername());
+        loginUser.setNickname(user.getNickname());
+        loginUser.setPassword(user.getPassword());
+        loginUser.setUserType(user.getUserType());
+        loginUser.setMenuPermission(sysPermissionService.getMenuPermission(userId));
+        loginUser.setRolePermission(sysPermissionService.getRolePermission(userId));
+        if (ObjectUtil.isNotNull(user.getDeptId())) {
+            Opt<SysDeptVo> deptOpt = Opt.of(user.getDeptId()).map(sysDeptService::selectDeptById);
+            loginUser.setDeptName(deptOpt.map(SysDeptVo::getDeptName).orElse(StringUtils.EMPTY));
+            loginUser.setDeptCategory(deptOpt.map(SysDeptVo::getDeptCategory).orElse(StringUtils.EMPTY));
+        }
+        List<SysRoleVo> roles = sysRoleService.selectRolesByUserId(userId);
+        List<SysPostVo> posts = sysPostService.selectPostsByUserId(userId);
+        loginUser.setRoles(BeanUtil.copyToList(roles, RoleDTO.class));
+        loginUser.setPosts(BeanUtil.copyToList(posts, PostDTO.class));
+        return loginUser;
     }
 }

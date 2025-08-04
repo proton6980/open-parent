@@ -13,8 +13,14 @@ import com.open.commons.constants.Constants;
 import com.open.commons.constants.TenantConstants;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StringUtils;
+import com.open.extend.manager.dept.domain.SysDept;
+import com.open.extend.manager.dept.mapper.ISysDeptMapper;
+import com.open.extend.manager.role.domain.SysRole;
+import com.open.extend.manager.role.mapper.ISysRoleMapper;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.mapper.ISysUserMapper;
+import com.open.extend.manager.userrole.domain.SysUserRole;
+import com.open.extend.manager.userrole.mapper.ISysUserRoleMapper;
 import com.open.starter.mybatisplus.core.page.PageQuery;
 import com.open.starter.mybatisplus.core.page.TableDataInfo;
 import com.open.extend.manager.domain.*;
@@ -45,11 +51,11 @@ public class SysTenantServiceImpl implements ISysTenantService {
     private final SysTenantMapper baseMapper;
     private final SysTenantPackageMapper tenantPackageMapper;
     private final ISysUserMapper userMapper;
-    private final SysDeptMapper deptMapper;
-    private final SysRoleMapper roleMapper;
+    private final ISysDeptMapper deptMapper;
+    private final ISysRoleMapper roleMapper;
     private final SysRoleMenuMapper roleMenuMapper;
     private final SysRoleDeptMapper roleDeptMapper;
-    private final SysUserRoleMapper userRoleMapper;
+    private final ISysUserRoleMapper userRoleMapper;
     private final SysDictTypeMapper dictTypeMapper;
     private final SysDictDataMapper dictDataMapper;
     private final SysConfigMapper configMapper;
@@ -148,8 +154,8 @@ public class SysTenantServiceImpl implements ISysTenantService {
         // 创建系统用户
         SysUser user = new SysUser();
         user.setTenantId(tenantId);
-        user.setUserName(bo.getUsername());
-        user.setNickName(bo.getUsername());
+        user.setUsername(bo.getUsername());
+        user.setNickname(bo.getUsername());
         user.setPassword(BCrypt.hashpw(bo.getPassword()));
         user.setDeptId(deptId);
         userMapper.insert(user);
@@ -230,7 +236,7 @@ public class SysTenantServiceImpl implements ISysTenantService {
         role.setRoleName(TenantConstants.TENANT_ADMIN_ROLE_NAME);
         role.setRoleKey(TenantConstants.TENANT_ADMIN_ROLE_KEY);
         role.setRoleSort(1);
-        role.setStatus(Constants.NORMAL);
+        role.setEnable(true);
         roleMapper.insert(role);
         Long roleId = role.getId();
 

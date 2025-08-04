@@ -5,19 +5,21 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.open.commons.constants.Constants;
-import com.open.commons.exception.BaseException;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.pojo.LoginBody;
 import com.open.commons.pojo.R;
+import com.open.extend.manager.auth.service.IAuthStrategy;
 import com.open.extend.manager.auth.service.TokenService;
-import com.open.extend.manager.controller.vo.CaptchaVo;
-import com.open.extend.manager.controller.vo.LoginVo;
+import com.open.extend.manager.client.service.ISysClientService;
+import com.open.extend.manager.auth.vo.CaptchaVo;
+import com.open.extend.manager.auth.vo.LoginVo;
 import com.open.commons.utils.*;
-import com.open.extend.manager.controller.bo.RegisterBody;
-import com.open.extend.manager.controller.bo.SocialLoginBody;
-import com.open.extend.manager.controller.vo.LoginTenantVo;
-import com.open.extend.manager.controller.vo.TenantListVo;
+import com.open.extend.manager.auth.bo.RegisterBody;
+import com.open.extend.manager.auth.bo.SocialLoginBody;
+import com.open.extend.manager.auth.vo.LoginTenantVo;
+import com.open.extend.manager.auth.vo.TenantListVo;
 import com.open.extend.manager.domain.bo.SysTenantBo;
-import com.open.extend.manager.domain.vo.SysClientVo;
+import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.domain.vo.SysTenantVo;
 import com.open.extend.manager.properties.CaptchaProperties;
 import com.open.extend.manager.service.*;
@@ -99,9 +101,9 @@ public class TokenController {
         // 查询不到 client 或 client 内不包含 grantType
         if (ObjectUtil.isNull(clientVo) || !StringUtils.contains(clientVo.getGrantType(), grantType)) {
             log.info("客户端id: {} 认证类型：{} 异常!.", clientId, grantType);
-            throw new BaseException("auth.grant.type.error");
+            throw new BusinessException("auth.grant.type.error");
         } else if (!Constants.NORMAL.equals(clientVo.getStatus())) {
-            throw new BaseException("auth.grant.type.blocked");
+            throw new BusinessException("auth.grant.type.blocked");
         }
         // 校验租户
         tokenService.checkTenant(loginBody.getTenantId());
@@ -126,7 +128,7 @@ public class TokenController {
                                  @RequestParam String tenantId, @RequestParam String domain) {
         SocialLoginConfigProperties obj = socialProperties.getType().get(source);
         if (ObjectUtil.isNull(obj)) {
-            throw new BaseException(source + "平台账号暂不支持");
+            throw new BusinessException(source + "平台账号暂不支持");
         }
         AuthRequest authRequest = SocialUtils.getAuthRequest(source, socialProperties);
         Map<String, String> map = new HashMap<>();

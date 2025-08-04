@@ -62,7 +62,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
                 successNum++;
                 successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 导入成功");
             } else if (isUpdateSupport) {
-                Long userId = sysUser.getUserId();
+                Long userId = sysUser.getId();
                 SysUserBo user = BeanUtil.toBean(userVo, SysUserBo.class);
                 user.setId(userId);
                 ValidatorUtils.validate(user);
@@ -74,7 +74,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImportVo
                 successMsg.append("<br/>").append(successNum).append("、账号 ").append(user.getUserName()).append(" 更新成功");
             } else {
                 failureNum++;
-                failureMsg.append("<br/>").append(failureNum).append("、账号 ").append(sysUser.getUserName()).append(" 已存在");
+                failureMsg.append("<br/>").append(failureNum).append("、账号 ").append(sysUser.getUsername()).append(" 已存在");
             }
         } catch (Exception e) {
             failureNum++;

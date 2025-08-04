@@ -49,8 +49,8 @@ public class SysProfileController extends BaseController {
         SysUserVo user = userService.selectUserById(LoginHelper.getUserId());
         ProfileVo profileVo = new ProfileVo();
         profileVo.setUser(user);
-        profileVo.setRoleGroup(userService.selectUserRoleGroup(user.getUserId()));
-        profileVo.setPostGroup(userService.selectUserPostGroup(user.getUserId()));
+        profileVo.setRoleGroup(userService.selectUserRoleGroup(user.getId()));
+        profileVo.setPostGroup(userService.selectUserPostGroup(user.getId()));
         return R.ok(profileVo);
     }
 
@@ -96,7 +96,7 @@ public class SysProfileController extends BaseController {
             return R.fail("新密码不能与旧密码相同");
         }
 
-        if (userService.resetUserPwd(user.getUserId(), BCrypt.hashpw(bo.getNewPassword())) > 0) {
+        if (userService.resetUserPwd(user.getId(), BCrypt.hashpw(bo.getNewPassword())) > 0) {
             return R.ok();
         }
         return R.fail("修改密码异常，请联系管理员");

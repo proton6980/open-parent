@@ -2,7 +2,7 @@ package com.open.commons.config;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.exception.BaseException;
+import com.open.commons.exception.BusinessException;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -41,7 +41,7 @@ public class OpenAsyncAutoConfiguration implements AsyncConfigurer {
             if (ArrayUtil.isNotEmpty(objects)) {
                 sb.append(", Parameter value - ").append(Arrays.toString(objects));
             }
-            throw new BaseException(sb.toString());
+            throw new BusinessException(sb.toString());
         };
     }
 

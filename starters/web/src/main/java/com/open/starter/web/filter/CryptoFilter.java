@@ -2,8 +2,7 @@ package com.open.starter.web.filter;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.exception.OpenException;
-import com.open.commons.exception.enums.ExceptionModule;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.utils.StringUtils;
 import com.open.starter.web.annotation.ApiEncrypt;
 import com.open.starter.web.properties.ApiDecryptProperties;
@@ -56,7 +55,7 @@ public class CryptoFilter implements Filter {
                     HandlerExceptionResolver exceptionResolver = SpringUtil.getBean("handlerExceptionResolver", HandlerExceptionResolver.class);
                     exceptionResolver.resolveException(
                             servletRequest, servletResponse, null,
-                            new OpenException(ExceptionModule.WEB_STARTER, HttpStatus.FORBIDDEN.value(), "没有访问权限，请联系管理员授权"));
+                            new BusinessException(HttpStatus.FORBIDDEN.value(), "没有访问权限，请联系管理员授权"));
                     return;
                 }
             }

@@ -112,5 +112,10 @@ public interface Constants {
      * 验证码有效期（分钟）
      */
     Integer CAPTCHA_EXPIRATION = 2;
+
+    /**
+     * 登录账户密码错误次数 redis key
+     */
+    String PWD_ERR_CNT_KEY = "pwd_err_cnt:";
 }
 

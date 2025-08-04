@@ -4,8 +4,7 @@ import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.exception.OpenException;
-import com.open.commons.exception.enums.ExceptionModule;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.pojo.model.LoginUser;
 import com.open.commons.pojo.model.RoleDTO;
 import com.open.commons.utils.StreamUtils;
@@ -110,7 +109,7 @@ public class OpenDataPermissionHandler {
                 return parenthesis;
             }
         } catch (JSQLParserException e) {
-            throw new OpenException(ExceptionModule.MYBATIS_STARTER, 500, "数据权限解析异常 => " + e.getMessage());
+            throw new BusinessException("数据权限解析异常 => " + e.getMessage());
         } finally {
             DataPermissionHelper.removePermission();
         }
@@ -122,7 +121,7 @@ public class OpenDataPermissionHandler {
      * @param dataPermission 数据权限注解
      * @param isSelect       标志当前操作是否为查询操作，查询操作和更新或删除操作在处理过滤条件时会有不同的处理方式
      * @return 构建的数据过滤条件的 SQL 语句
-     * @throws OpenException 如果角色的数据范围异常或者 key 与 value 的长度不匹配，则抛出 OpenException 异常
+     * @throws BusinessException 如果角色的数据范围异常或者 key 与 value 的长度不匹配，则抛出 OpenException 异常
      */
     private String buildDataFilter(DataPermission dataPermission, boolean isSelect) {
         // 更新或删除需满足所有条件
@@ -142,7 +141,7 @@ public class OpenDataPermissionHandler {
         Map<DataColumn, Boolean> ignoreMap = new HashMap<>();
         for (DataColumn dataColumn : dataPermission.value()) {
             if (dataColumn.key().length != dataColumn.value().length) {
-                throw new OpenException(ExceptionModule.MYBATIS_STARTER, 500, "角色数据范围异常 => key与value长度不匹配");
+                throw new BusinessException("角色数据范围异常 => key与value长度不匹配");
             }
             // 包含权限标识符 这直接跳过
             if (StringUtils.isNotBlank(dataColumn.permission()) &&
@@ -163,7 +162,7 @@ public class OpenDataPermissionHandler {
             // 获取角色权限泛型
             DataScopeType type = DataScopeType.findCode(role.getDataScope());
             if (ObjectUtil.isNull(type)) {
-                throw new OpenException(ExceptionModule.MYBATIS_STARTER, 500, "角色数据范围异常 => " + role.getDataScope());
+                throw new BusinessException("角色数据范围异常 => " + role.getDataScope());
             }
             // 全部数据权限直接返回
             if (type == DataScopeType.ALL) {

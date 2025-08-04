@@ -1,23 +1,54 @@
 package com.open.commons.exception;
 
 import cn.hutool.core.util.StrUtil;
-import com.open.commons.exception.enums.ExceptionModule;
+import com.open.commons.utils.MessageUtils;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
- * open异常
+ * open封装异常
  *
  * @author open
  */
 @Getter
-public class OpenException extends BaseException {
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+public class OpenException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public OpenException(ExceptionModule module, int code, String message) {
-        super(module.name(), code, message);
+    /**
+     * 所属模块
+     */
+    private String module;
+    /**
+     * 错误码
+     */
+    private Integer code;
+    /**
+     * 错误信息
+     */
+    private String defaultMessage;
+
+    public OpenException(String module, Integer code, String key, Object... args) {
+        this.module = module;
+        this.code = code;
+        String message = MessageUtils.message(key, args);
+        this.defaultMessage = StrUtil.isEmpty(message) ? StrUtil.format(key, args) : message;
     }
 
-    public OpenException(String module, int code, String message, Object... args) {
-        super(module, code, StrUtil.format(message, args));
+    public OpenException(String module, Integer code, String defaultMessage) {
+        this.module = module;
+        this.code = code;
+        this.defaultMessage = defaultMessage;
+    }
+
+    public OpenException(Integer code, String defaultMessage) {
+        this(null, code, defaultMessage);
+    }
+
+
+    public OpenException(String defaultMessage) {
+        this(null, null, defaultMessage);
     }
 }

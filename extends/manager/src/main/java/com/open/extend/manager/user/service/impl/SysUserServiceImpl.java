@@ -20,17 +20,24 @@ import com.open.commons.service.UserService;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StreamUtils;
 import com.open.commons.utils.StringUtils;
+import com.open.extend.manager.dept.domain.SysDept;
+import com.open.extend.manager.dept.mapper.ISysDeptMapper;
+import com.open.extend.manager.post.mapper.ISysPostMapper;
+import com.open.extend.manager.role.domain.SysRole;
+import com.open.extend.manager.role.mapper.ISysRoleMapper;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.mapper.ISysUserMapper;
+import com.open.extend.manager.userpost.domain.SysUserPost;
+import com.open.extend.manager.userpost.mapper.ISysUserPostMapper;
+import com.open.extend.manager.userrole.domain.SysUserRole;
+import com.open.extend.manager.userrole.mapper.ISysUserRoleMapper;
 import com.open.starter.mybatisplus.core.page.PageQuery;
 import com.open.starter.mybatisplus.core.page.TableDataInfo;
-import com.open.extend.manager.domain.*;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
-import com.open.extend.manager.domain.vo.SysPostVo;
-import com.open.extend.manager.domain.vo.SysRoleVo;
+import com.open.extend.manager.post.domain.vo.SysPostVo;
+import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.domain.vo.SysUserExportVo;
 import com.open.extend.manager.user.domain.vo.SysUserVo;
-import com.open.extend.manager.mapper.*;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.mybatisplus.helper.DataBaseHelper;
 import com.open.starter.satoken.utils.LoginHelper;
@@ -54,11 +61,11 @@ import java.util.*;
 public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> implements ISysUserService, UserService {
 
     private final ISysUserMapper baseMapper;
-    private final SysDeptMapper deptMapper;
-    private final SysRoleMapper roleMapper;
-    private final SysPostMapper postMapper;
-    private final SysUserRoleMapper userRoleMapper;
-    private final SysUserPostMapper userPostMapper;
+    private final ISysDeptMapper deptMapper;
+    private final ISysRoleMapper roleMapper;
+    private final ISysPostMapper postMapper;
+    private final ISysUserRoleMapper userRoleMapper;
+    private final ISysUserPostMapper userPostMapper;
 
     @Override
     public TableDataInfo<SysUserVo> selectPageUserList(SysUserBo user, PageQuery pageQuery) {
@@ -148,7 +155,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
      */
     @Override
     public SysUserVo selectUserByUserName(String userName) {
-        return baseMapper.selectVoOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserName, userName));
+        return baseMapper.selectVoOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, userName));
     }
 
     /**
@@ -159,7 +166,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
      */
     @Override
     public SysUserVo selectUserByPhonenumber(String phonenumber) {
-        return baseMapper.selectVoOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getPhonenumber, phonenumber));
+        return baseMapper.selectVoOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getMobilePrefix, phonenumber));
     }
 
     /**
@@ -175,7 +182,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
         if (ObjectUtil.isNull(user)) {
             return user;
         }
-        user.setRoles(roleMapper.selectRolesByUserId(user.getUserId()));
+        user.setRoles(roleMapper.selectRolesByUserId(user.getId()));
         log.info("user角色数据:{}", user);
         return user;
     }
@@ -190,8 +197,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Override
     public List<SysUserVo> selectUserByIds(List<Long> userIds, Long deptId) {
         return baseMapper.selectUserList(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getId, SysUser::getUserName, SysUser::getNickName)
-                .eq(SysUser::getStatus, Constants.NORMAL)
+                .select(SysUser::getId, SysUser::getUsername, SysUser::getNickname)
+                .eq(SysUser::getEnable, Constants.NORMAL)
                 .eq(ObjectUtil.isNotNull(deptId), SysUser::getDeptId, deptId)
                 .in(CollUtil.isNotEmpty(userIds), SysUser::getId, userIds));
     }
@@ -235,7 +242,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Override
     public boolean checkUserNameUnique(SysUserBo user) {
         boolean exist = baseMapper.exists(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getUserName, user.getUserName())
+                .eq(SysUser::getUsername, user.getUserName())
                 .ne(ObjectUtil.isNotNull(user.getId()), SysUser::getId, user.getId()));
         return !exist;
     }
@@ -248,7 +255,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Override
     public boolean checkPhoneUnique(SysUserBo user) {
         boolean exist = baseMapper.exists(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getPhonenumber, user.getPhonenumber())
+                .eq(SysUser::getMobilePrefix, user.getPhonenumber())
                 .ne(ObjectUtil.isNotNull(user.getId()), SysUser::getId, user.getId()));
         return !exist;
     }
@@ -377,7 +384,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     public int updateUserStatus(Long userId, String status) {
         return baseMapper.update(null,
                 new LambdaUpdateWrapper<SysUser>()
-                        .set(SysUser::getStatus, status)
+                        .set(SysUser::getEnable, status)
                         .eq(SysUser::getId, userId));
     }
 
@@ -392,8 +399,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     public int updateUserProfile(SysUserBo user) {
         return baseMapper.update(null,
                 new LambdaUpdateWrapper<SysUser>()
-                        .set(ObjectUtil.isNotNull(user.getNickName()), SysUser::getNickName, user.getNickName())
-                        .set(SysUser::getPhonenumber, user.getPhonenumber())
+                        .set(ObjectUtil.isNotNull(user.getNickName()), SysUser::getNickname, user.getNickName())
+                        .set(SysUser::getMobilePrefix, user.getPhonenumber())
                         .set(SysUser::getEmail, user.getEmail())
                         .set(SysUser::getSex, user.getSex())
                         .eq(SysUser::getId, user.getId()));
@@ -568,8 +575,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Override
     public String selectUserNameById(Long userId) {
         SysUser sysUser = baseMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getUserName).eq(SysUser::getId, userId));
-        return ObjectUtil.isNull(sysUser) ? null : sysUser.getUserName();
+                .select(SysUser::getUsername).eq(SysUser::getId, userId));
+        return ObjectUtil.isNull(sysUser) ? null : sysUser.getUsername();
     }
 
     /**
@@ -582,8 +589,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Cacheable(cacheNames = CacheNames.SYS_NICKNAME, key = "#userId")
     public String selectNicknameById(Long userId) {
         SysUser sysUser = baseMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getNickName).eq(SysUser::getId, userId));
-        return ObjectUtil.isNull(sysUser) ? null : sysUser.getNickName();
+                .select(SysUser::getNickname).eq(SysUser::getId, userId));
+        return ObjectUtil.isNull(sysUser) ? null : sysUser.getNickname();
     }
 
     /**
@@ -613,8 +620,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Override
     public String selectPhonenumberById(Long userId) {
         SysUser sysUser = baseMapper.selectOne(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getPhonenumber).eq(SysUser::getId, userId));
-        return ObjectUtil.isNull(sysUser) ? null : sysUser.getPhonenumber();
+                .select(SysUser::getMobilePrefix).eq(SysUser::getId, userId));
+        return ObjectUtil.isNull(sysUser) ? null : sysUser.getMobilePrefix();
     }
 
     /**
@@ -636,8 +643,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
             return Collections.emptyList();
         }
         List<SysUserVo> list = baseMapper.selectVoList(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getId, SysUser::getUserName, SysUser::getNickName, SysUser::getEmail, SysUser::getPhonenumber)
-                .eq(SysUser::getStatus, Constants.NORMAL)
+                .select(SysUser::getId, SysUser::getUsername, SysUser::getNickname, SysUser::getEmail, SysUser::getMobilePrefix)
+                .eq(SysUser::getEnable, Constants.NORMAL)
                 .in(CollUtil.isNotEmpty(userIds), SysUser::getId, userIds));
         return BeanUtil.copyToList(list, UserDTO.class);
     }
@@ -666,8 +673,8 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
             return Collections.emptyList();
         }
         List<SysUserVo> list = baseMapper.selectVoList(new LambdaQueryWrapper<SysUser>()
-                .select(SysUser::getId, SysUser::getUserName, SysUser::getNickName, SysUser::getEmail, SysUser::getPhonenumber)
-                .eq(SysUser::getStatus, Constants.NORMAL)
+                .select(SysUser::getId, SysUser::getUsername, SysUser::getNickname, SysUser::getEmail, SysUser::getMobilePrefix)
+                .eq(SysUser::getEnable, Constants.NORMAL)
                 .in(CollUtil.isNotEmpty(deptIds), SysUser::getDeptId, deptIds));
         return BeanUtil.copyToList(list, UserDTO.class);
     }

@@ -2,7 +2,7 @@ package com.open.starter.cache.aspectj;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.open.commons.constants.GlobalConstants;
-import com.open.commons.exception.BaseException;
+import com.open.commons.exception.BusinessException;
 import com.open.commons.utils.MessageUtils;
 import com.open.commons.utils.ServletUtils;
 import com.open.commons.utils.StringUtils;
@@ -67,11 +67,11 @@ public class RateLimiterAspect {
                 if (StringUtils.startsWith(message, "{") && StringUtils.endsWith(message, "}")) {
                     message = MessageUtils.message(StringUtils.substring(message, 1, message.length() - 1));
                 }
-                throw new BaseException(message);
+                throw new BusinessException(message);
             }
             log.info("限制令牌 => {}, 剩余令牌 => {}, 缓存key => '{}'", count, number, combineKey);
         } catch (Exception e) {
-            if (e instanceof BaseException) {
+            if (e instanceof BusinessException) {
                 throw e;
             } else {
                 throw new RuntimeException("服务器限流异常，请稍候再试", e);
