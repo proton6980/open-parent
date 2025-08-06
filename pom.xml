@@ -194,6 +194,11 @@
             </dependency>
             <dependency>
                 <groupId>com.open</groupId>
+                <artifactId>open-starter-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.open</groupId>
                 <artifactId>open-starter-social</artifactId>
                 <version>${revision}</version>
             </dependency>

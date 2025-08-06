@@ -21,6 +21,7 @@
         <module>json</module>
         <module>mybatis-plus</module>
         <module>oss</module>
+        <module>security</module>
         <module>satoken</module>
         <module>social</module>
         <module>sse</module>
