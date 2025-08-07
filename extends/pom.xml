@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>gateway</module>
         <module>i18n</module>
         <module>manager</module>
     </modules>

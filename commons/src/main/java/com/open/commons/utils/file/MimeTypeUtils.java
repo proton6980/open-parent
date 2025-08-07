@@ -3,7 +3,7 @@ package com.open.commons.utils.file;
 /**
  * 媒体类型工具类
  *
- * @author ruoyi
+ * @author open
  */
 public class MimeTypeUtils {
     public static final String IMAGE_PNG = "image/png";

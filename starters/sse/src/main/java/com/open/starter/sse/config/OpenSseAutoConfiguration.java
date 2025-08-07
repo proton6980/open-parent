@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @author open
  */
 @Configuration
-@ConditionalOnProperty(value = "sse.enabled", havingValue = "true")
+@ConditionalOnProperty(value = "open.sse.enabled", havingValue = "true")
 @EnableConfigurationProperties(SseProperties.class)
 public class OpenSseAutoConfiguration {
 

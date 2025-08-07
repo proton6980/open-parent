@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 客户端管理
+ * 管理后台/系统管理/客户端管理
  *
  * @author Michelle.Chung
  * @date 2023-06-18
@@ -33,7 +33,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/manager/client")
+@RequestMapping("/client")
 public class SysClientController extends BaseController {
 
     private final ISysClientService sysClientService;

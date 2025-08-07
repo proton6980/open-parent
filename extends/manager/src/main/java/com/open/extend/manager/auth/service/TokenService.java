@@ -40,6 +40,8 @@ import com.open.extend.manager.properties.UserPasswordProperties;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.role.service.ISysRoleService;
 import com.open.extend.manager.service.*;
+import com.open.extend.manager.tenant.domain.vo.SysTenantVo;
+import com.open.extend.manager.tenant.service.ISysTenantService;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
 import com.open.extend.manager.user.service.ISysUserService;
@@ -59,6 +61,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Supplier;
@@ -66,7 +69,7 @@ import java.util.function.Supplier;
 /**
  * 登录校验方法
  *
- * @author ruoyi
+ * @author open
  */
 @RequiredArgsConstructor
 @Service
@@ -314,11 +317,10 @@ public class TokenService {
         if (ObjectUtil.isNull(tenant)) {
             log.info("登录租户：{} 不存在.", tenantId);
             throw new RuntimeException("tenant.not.exists");
-        } else if (Constants.DISABLE.equals(tenant.getStatus())) {
+        } else if (Boolean.FALSE.equals(tenant.getEnable())) {
             log.info("登录租户：{} 已被停用.", tenantId);
             throw new RuntimeException("tenant.blocked");
-        } else if (ObjectUtil.isNotNull(tenant.getExpireTime())
-                && new Date().after(tenant.getExpireTime())) {
+        } else if (ObjectUtil.isNotNull(tenant.getExpireTime()) && LocalDateTime.now().isAfter(tenant.getExpireTime())) {
             log.info("登录租户：{} 已超过有效期.", tenantId);
             throw new RuntimeException("tenant.expired");
         }

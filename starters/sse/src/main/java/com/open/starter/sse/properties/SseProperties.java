@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author open
  */
 @Data
-@ConfigurationProperties("sse")
+@ConfigurationProperties("open.sse")
 public class SseProperties {
 
     /**

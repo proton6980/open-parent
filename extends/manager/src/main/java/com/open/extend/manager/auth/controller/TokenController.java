@@ -18,11 +18,12 @@ import com.open.extend.manager.auth.bo.RegisterBody;
 import com.open.extend.manager.auth.bo.SocialLoginBody;
 import com.open.extend.manager.auth.vo.LoginTenantVo;
 import com.open.extend.manager.auth.vo.TenantListVo;
-import com.open.extend.manager.domain.bo.SysTenantBo;
+import com.open.extend.manager.tenant.domain.bo.SysTenantBo;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
-import com.open.extend.manager.domain.vo.SysTenantVo;
+import com.open.extend.manager.tenant.domain.vo.SysTenantVo;
 import com.open.extend.manager.properties.CaptchaProperties;
 import com.open.extend.manager.service.*;
+import com.open.extend.manager.tenant.service.ISysTenantService;
 import com.open.starter.satoken.utils.LoginHelper;
 import com.open.starter.social.properties.SocialLoginConfigProperties;
 import com.open.starter.social.properties.SocialProperties;
@@ -55,7 +56,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
 public class TokenController {
     private final CaptchaProperties captchaProperties;
     private final SocialProperties socialProperties;

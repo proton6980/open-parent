@@ -3,7 +3,7 @@ package com.open.starter.cache.enums;
 /**
  * 限流类型
  *
- * @author ruoyi
+ * @author open
  */
 
 public enum LimitType {

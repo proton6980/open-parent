@@ -17,19 +17,16 @@
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-mybatis-plus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.open</groupId>
-            <artifactId>open-starter-satoken</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-cache</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.open</groupId>
-            <artifactId>open-starter-json</artifactId>
-            <scope>compile</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

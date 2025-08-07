@@ -20,6 +20,10 @@
         </dependency>
         <dependency>
             <groupId>com.open</groupId>
+            <artifactId>open-starter-mybatis-plus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.open</groupId>
             <artifactId>open-starter-tenant</artifactId>
         </dependency>
         <dependency>

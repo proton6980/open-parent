@@ -20,7 +20,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.5.15</spring-boot.version>
         <spring-cloud.version>2020.0.6</spring-cloud.version>
-        <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <hutool.version>5.8.30</hutool.version>
         <sa-token.version>1.44.0</sa-token.version>
 
@@ -154,6 +154,11 @@
             </dependency>
             <dependency>
                 <groupId>com.open</groupId>
+                <artifactId>open-extend-gateway</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.open</groupId>
                 <artifactId>open-extend-i18n</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -195,6 +200,11 @@
             <dependency>
                 <groupId>com.open</groupId>
                 <artifactId>open-starter-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.open</groupId>
+                <artifactId>open-starter-sentinel</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

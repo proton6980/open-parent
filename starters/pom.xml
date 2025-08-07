@@ -15,14 +15,14 @@
 
     <modules>
         <module>cache</module>
-        <module>encrypt</module>
         <module>excel</module>
         <module>http</module>
         <module>json</module>
         <module>mybatis-plus</module>
         <module>oss</module>
-        <module>security</module>
         <module>satoken</module>
+        <module>security</module>
+        <module>sentinel</module>
         <module>social</module>
         <module>sse</module>
         <module>swarm-bots</module>
