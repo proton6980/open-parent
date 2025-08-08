@@ -23,7 +23,7 @@ import java.util.List;
  * @author open
  */
 @RestController
-@ConditionalOnProperty(value = "sse.enabled", havingValue = "true")
+@ConditionalOnProperty(value = "open.sse.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class SseController implements DisposableBean {
 
@@ -32,7 +32,7 @@ public class SseController implements DisposableBean {
     /**
      * 建立 SSE 连接
      */
-    @GetMapping(value = "${sse.path}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "${open.sse.path}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter connect() {
         StpUtil.checkLogin();
         String tokenValue = StpUtil.getTokenValue();
@@ -43,7 +43,7 @@ public class SseController implements DisposableBean {
     /**
      * 关闭 SSE 连接
      */
-    @GetMapping(value = "${sse.path}/close")
+    @GetMapping(value = "${open.sse.path}/close")
     public R<Void> close() {
         String tokenValue = StpUtil.getTokenValue();
         Long userId = LoginHelper.getUserId();
@@ -57,7 +57,7 @@ public class SseController implements DisposableBean {
      * @param userId 目标用户的 ID
      * @param msg    要发送的消息内容
      */
-    @GetMapping(value = "${sse.path}/send")
+    @GetMapping(value = "${open.sse.path}/send")
     public R<Void> send(Long userId, String msg) {
         SseMessageDto dto = new SseMessageDto();
         dto.setUserIds(Collections.singletonList(userId));
@@ -71,7 +71,7 @@ public class SseController implements DisposableBean {
      *
      * @param msg 要发送的消息内容
      */
-    @GetMapping(value = "${sse.path}/sendAll")
+    @GetMapping(value = "${open.sse.path}/sendAll")
     public R<Void> send(String msg) {
         sseEmitterManager.publishAll(msg);
         return R.ok();

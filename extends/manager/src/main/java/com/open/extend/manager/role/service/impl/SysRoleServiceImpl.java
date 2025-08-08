@@ -21,14 +21,14 @@ import com.open.commons.utils.StringUtils;
 import com.open.starter.mybatisplus.core.page.PageQuery;
 import com.open.starter.mybatisplus.core.page.TableDataInfo;
 import com.open.extend.manager.role.domain.SysRole;
-import com.open.extend.manager.domain.SysRoleDept;
-import com.open.extend.manager.domain.SysRoleMenu;
+import com.open.extend.manager.roledept.domain.SysRoleDept;
+import com.open.extend.manager.rolemenu.domain.SysRoleMenu;
 import com.open.extend.manager.userrole.domain.SysUserRole;
 import com.open.extend.manager.role.domain.bo.SysRoleBo;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
-import com.open.extend.manager.mapper.SysRoleDeptMapper;
+import com.open.extend.manager.roledept.mapper.ISysRoleDeptMapper;
 import com.open.extend.manager.role.mapper.ISysRoleMapper;
-import com.open.extend.manager.mapper.SysRoleMenuMapper;
+import com.open.extend.manager.rolemenu.mapper.ISysRoleMenuMapper;
 import com.open.extend.manager.userrole.mapper.ISysUserRoleMapper;
 import com.open.extend.manager.role.service.ISysRoleService;
 import com.open.starter.satoken.utils.LoginHelper;
@@ -46,9 +46,9 @@ import java.util.*;
 @RequiredArgsConstructor
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<ISysRoleMapper, SysRole> implements ISysRoleService {
-    private final SysRoleMenuMapper roleMenuMapper;
+    private final ISysRoleMenuMapper roleMenuMapper;
     private final ISysUserRoleMapper userRoleMapper;
-    private final SysRoleDeptMapper roleDeptMapper;
+    private final ISysRoleDeptMapper roleDeptMapper;
 
     @Override
     public TableDataInfo<SysRoleVo> selectPageRoleList(SysRoleBo role, PageQuery pageQuery) {

@@ -17,9 +17,10 @@ import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.auth.bo.SmsLoginBody;
 import com.open.extend.manager.auth.vo.LoginVo;
-import com.open.extend.manager.exception.CaptchaExpireException;
-import com.open.extend.manager.exception.UserException;
+import com.open.extend.manager.core.exception.CaptchaExpireException;
+import com.open.extend.manager.core.exception.UserException;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.satoken.utils.LoginHelper;
@@ -31,7 +32,7 @@ import org.springframework.stereotype.Service;
 /**
  * 短信认证策略
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Slf4j
 @Service("sms" + IAuthStrategy.BASE_NAME)
@@ -75,18 +76,18 @@ public class SmsAuthStrategy implements IAuthStrategy {
 
     private LoginUser getUserInfoByMobile(String mobilePrefix, String mobileSuffix, String tenantId) throws UserException {
         return TenantHelper.dynamic(tenantId, () -> {
-            SysUser sysUser = sysUserService.getOne(new LambdaQueryWrapper<SysUser>()
+            SysUser user = sysUserService.getOne(new LambdaQueryWrapper<SysUser>()
                     .eq(SysUser::getMobilePrefix, mobilePrefix)
                     .eq(SysUser::getMobileSuffix, mobileSuffix));
-            if (ObjectUtil.isNull(sysUser)) {
+            if (ObjectUtil.isNull(user)) {
                 throw new UserException("user.not.exists", mobilePrefix + " " + mobileSuffix);
             }
-            if (!sysUser.getEnable()) {
+            if (!UserStatus.NORMAL.equals(user.getStatus())) {
                 throw new UserException("user.blocked", mobilePrefix + " " + mobileSuffix);
             }
             // 框架登录不限制从什么表查询 只要最终构建出 LoginUser 即可
             // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
-            return tokenService.buildLoginUser(sysUser);
+            return tokenService.buildLoginUser(user);
         });
     }
 
@@ -96,7 +97,7 @@ public class SmsAuthStrategy implements IAuthStrategy {
     private boolean validateSmsCode(String tenantId, String phonenumber, String smsCode) {
         String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + phonenumber);
         if (StringUtils.isBlank(code)) {
-            tokenService.recordLogininfor(tenantId, phonenumber, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            tokenService.recordLoginInfo(tenantId, phonenumber, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new CaptchaExpireException();
         }
         return code.equals(smsCode);

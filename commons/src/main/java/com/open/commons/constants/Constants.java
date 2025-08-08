@@ -17,35 +17,6 @@ public interface Constants {
     String YES = "Y";
 
     /**
-     * 是否菜单外链（是）
-     */
-    String YES_FRAME = "0";
-
-    /**
-     * 是否菜单外链（否）
-     */
-    String NO_FRAME = "1";
-
-    /**
-     * 菜单类型（目录）
-     */
-    String TYPE_DIR = "M";
-
-    /**
-     * 菜单类型（菜单）
-     */
-    String TYPE_MENU = "C";
-    /**
-     * 菜单显示状态（正常）
-     */
-    String MENU_NORMAL = "0";
-
-    /**
-     * 菜单类型（按钮）
-     */
-    String TYPE_BUTTON = "F";
-
-    /**
      * Layout组件标识
      */
     String LAYOUT = "Layout";

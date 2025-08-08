@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 验证码信息
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Data
 public class CaptchaVo {

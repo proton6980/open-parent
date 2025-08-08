@@ -18,9 +18,10 @@ import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.auth.bo.SocialLoginBody;
 import com.open.extend.manager.auth.vo.LoginVo;
 import com.open.extend.manager.domain.vo.SysSocialVo;
-import com.open.extend.manager.exception.UserException;
+import com.open.extend.manager.core.exception.UserException;
 import com.open.extend.manager.service.ISysSocialService;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.satoken.utils.LoginHelper;
 import com.open.starter.social.properties.SocialProperties;
@@ -114,16 +115,16 @@ public class SocialAuthStrategy implements IAuthStrategy {
 
     public LoginUser getUserInfo(Long userId, String tenantId) throws UserException {
         return TenantHelper.dynamic(tenantId, () -> {
-            SysUser sysUser = sysUserService.getById(userId);
-            if (ObjectUtil.isNull(sysUser)) {
+            SysUser user = sysUserService.getById(userId);
+            if (ObjectUtil.isNull(user)) {
                 throw new UserException("user.not.exists", "");
             }
-            if (!sysUser.getEnable()) {
-                throw new UserException("user.blocked", sysUser.getUsername());
+            if (!UserStatus.NORMAL.equals(user.getStatus())) {
+                throw new UserException("user.blocked", user.getUsername());
             }
             // 框架登录不限制从什么表查询 只要最终构建出 LoginUser 即可
             // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
-            return tokenService.buildLoginUser(sysUser);
+            return tokenService.buildLoginUser(user);
         });
     }
 }

@@ -7,7 +7,7 @@
     <resultMap type="com.open.extend.manager.user.domain.vo.SysUserVo" id="SysUserResult">
         <id property="id" column="id"/>
     </resultMap>
-    <resultMap type="com.open.extend.manager.domain.vo.SysUserExportVo" id="SysUserExportResult">
+    <resultMap type="com.open.extend.manager.user.domain.vo.SysUserExportVo" id="SysUserExportResult">
         <id property="userId" column="id"/>
     </resultMap>
 

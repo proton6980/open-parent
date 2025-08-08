@@ -8,7 +8,7 @@ import com.open.extend.manager.client.domain.vo.SysClientVo;
 /**
  * 授权策略
  *
- * @author Michelle.Chung
+ * @author open
  */
 public interface IAuthStrategy {
 

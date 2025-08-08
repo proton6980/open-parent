@@ -29,7 +29,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/dict/data")
+@RequestMapping("/dict/data")
 public class SysDictDataController extends BaseController {
 
     private final ISysDictDataService dictDataService;

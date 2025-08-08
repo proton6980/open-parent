@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/notice")
+@RequestMapping("/notice")
 public class SysNoticeController extends BaseController {
 
     private final ISysNoticeService noticeService;

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 登录租户对象
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Data
 public class LoginTenantVo {

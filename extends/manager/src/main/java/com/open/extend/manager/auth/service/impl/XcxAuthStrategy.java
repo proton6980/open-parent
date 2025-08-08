@@ -12,8 +12,9 @@ import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.auth.bo.XcxLoginBody;
 import com.open.extend.manager.auth.vo.LoginVo;
-import com.open.extend.manager.exception.UserException;
+import com.open.extend.manager.core.exception.UserException;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.satoken.utils.LoginHelper;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Service;
 /**
  * 邮件认证策略
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Slf4j
 @Service("xcx" + IAuthStrategy.BASE_NAME)
@@ -90,20 +91,20 @@ public class XcxAuthStrategy implements IAuthStrategy {
 
     private XcxLoginUser getUserInfoByOpenid(String openid) throws UserException {
         // todo 自行实现 userService.selectUserByOpenid(openid);
-        SysUser sysUser = new SysUser();
-        if (ObjectUtil.isNull(sysUser)) {
+        SysUser user = new SysUser();
+        if (ObjectUtil.isNull(user)) {
             // todo 用户不存在 业务逻辑自行实现
         }
-        if (!sysUser.getEnable()) {
+        if (!UserStatus.NORMAL.equals(user.getStatus())) {
             // todo 用户已被停用 业务逻辑自行实现
         }
         // 框架登录不限制从什么表查询 只要最终构建出 LoginUser 即可
         // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
         XcxLoginUser loginUser = new XcxLoginUser();
-        loginUser.setUserId(sysUser.getId());
-        loginUser.setUsername(sysUser.getUsername());
-        loginUser.setNickname(sysUser.getNickname());
-        loginUser.setUserType(sysUser.getUserType());
+        loginUser.setUserId(user.getId());
+        loginUser.setUsername(user.getUsername());
+        loginUser.setNickname(user.getNickname());
+        loginUser.setUserType(user.getUserType());
         loginUser.setOpenid(openid);
         return loginUser;
     }

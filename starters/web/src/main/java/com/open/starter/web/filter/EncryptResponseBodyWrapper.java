@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 加密响应参数包装类
  *
- * @author Michelle.Chung
+ * @author open
  */
 public class EncryptResponseBodyWrapper extends HttpServletResponseWrapper {
 

@@ -22,7 +22,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/social")
+@RequestMapping("/social")
 public class SysSocialController extends BaseController {
 
     private final ISysSocialService socialUserService;

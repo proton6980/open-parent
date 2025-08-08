@@ -6,9 +6,9 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.open.commons.utils.StreamUtils;
 import com.open.extend.manager.dept.domain.SysDept;
-import com.open.extend.manager.domain.SysRoleDept;
+import com.open.extend.manager.roledept.domain.SysRoleDept;
 import com.open.extend.manager.dept.mapper.ISysDeptMapper;
-import com.open.extend.manager.mapper.SysRoleDeptMapper;
+import com.open.extend.manager.roledept.mapper.ISysRoleDeptMapper;
 import com.open.extend.manager.service.ISysDataScopeService;
 import com.open.starter.mybatisplus.helper.DataBaseHelper;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import java.util.List;
 @Service("sdss")
 public class SysDataScopeServiceImpl implements ISysDataScopeService {
 
-    private final SysRoleDeptMapper roleDeptMapper;
+    private final ISysRoleDeptMapper roleDeptMapper;
     private final ISysDeptMapper deptMapper;
 
     /**

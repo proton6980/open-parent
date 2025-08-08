@@ -2,6 +2,8 @@ package com.open.extend.manager.user.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.open.commons.constants.Constants;
+import com.open.extend.manager.user.domain.enums.UserSex;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.starter.tenant.core.domain.TenantAdminEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,7 +48,7 @@ public class SysUser extends TenantAdminEntity {
     /**
      * 用户性别
      */
-    private String sex;
+    private UserSex sex;
     /**
      * 用户头像
      */
@@ -63,7 +65,7 @@ public class SysUser extends TenantAdminEntity {
     /**
      * 帐号状态
      */
-    private Boolean enable;
+    private UserStatus status;
     /**
      * 最后登录IP
      */

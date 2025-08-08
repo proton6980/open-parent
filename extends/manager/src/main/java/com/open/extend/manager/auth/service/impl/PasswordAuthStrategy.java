@@ -18,11 +18,12 @@ import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.auth.bo.PasswordLoginBody;
 import com.open.extend.manager.auth.vo.LoginVo;
-import com.open.extend.manager.exception.CaptchaException;
-import com.open.extend.manager.exception.CaptchaExpireException;
-import com.open.extend.manager.exception.UserException;
-import com.open.extend.manager.properties.CaptchaProperties;
+import com.open.extend.manager.core.exception.CaptchaException;
+import com.open.extend.manager.core.exception.CaptchaExpireException;
+import com.open.extend.manager.core.exception.UserException;
+import com.open.extend.manager.core.properties.CaptchaProperties;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.satoken.utils.LoginHelper;
@@ -34,7 +35,7 @@ import org.springframework.stereotype.Service;
 /**
  * 密码认证策略
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Slf4j
 @Service("password" + IAuthStrategy.BASE_NAME)
@@ -86,16 +87,16 @@ public class PasswordAuthStrategy implements IAuthStrategy {
 
     private LoginUser getUserInfo(String username, String tenantId) throws UserException {
         return TenantHelper.dynamic(tenantId, () -> {
-            SysUser sysUser = sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
-            if (ObjectUtil.isNull(sysUser)) {
+            SysUser user = sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
+            if (ObjectUtil.isNull(user)) {
                 throw new UserException("user.not.exists", username);
             }
-            if (!sysUser.getEnable()) {
+            if (!UserStatus.NORMAL.equals(user.getStatus())) {
                 throw new UserException("user.blocked", username);
             }
             // 框架登录不限制从什么表查询 只要最终构建出 LoginUser 即可
             // 此处可根据登录用户的数据不同 自行创建 loginUser 属性不够用继承扩展就行了
-            return tokenService.buildLoginUser(sysUser);
+            return tokenService.buildLoginUser(user);
         });
     }
 
@@ -111,11 +112,11 @@ public class PasswordAuthStrategy implements IAuthStrategy {
         String captcha = RedisUtils.getCacheObject(verifyKey);
         RedisUtils.deleteObject(verifyKey);
         if (captcha == null) {
-            tokenService.recordLogininfor(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            tokenService.recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new CaptchaExpireException();
         }
         if (!code.equalsIgnoreCase(captcha)) {
-            tokenService.recordLogininfor(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
+            tokenService.recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
             throw new CaptchaException();
         }
     }

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.open.extend.manager.user.domain.SysUser;
-import com.open.extend.manager.domain.vo.SysUserExportVo;
+import com.open.extend.manager.user.domain.vo.SysUserExportVo;
 import com.open.extend.manager.user.domain.vo.SysUserVo;
 import com.open.starter.mybatisplus.annotation.DataColumn;
 import com.open.starter.mybatisplus.annotation.DataPermission;

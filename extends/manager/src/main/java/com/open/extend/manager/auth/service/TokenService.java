@@ -28,15 +28,16 @@ import com.open.commons.utils.ReflectUtils;
 import com.open.commons.utils.StringUtils;
 import com.open.extend.manager.auth.bo.RegisterBody;
 import com.open.extend.manager.auth.vo.CaptchaVo;
+import com.open.extend.manager.config.service.ISysConfigService;
 import com.open.extend.manager.dept.domain.vo.SysDeptVo;
 import com.open.extend.manager.dept.service.ISysDeptService;
 import com.open.extend.manager.domain.bo.SysSocialBo;
 import com.open.extend.manager.domain.vo.*;
-import com.open.extend.manager.exception.UserException;
+import com.open.extend.manager.core.exception.UserException;
 import com.open.extend.manager.post.domain.vo.SysPostVo;
 import com.open.extend.manager.post.service.ISysPostService;
-import com.open.extend.manager.properties.CaptchaProperties;
-import com.open.extend.manager.properties.UserPasswordProperties;
+import com.open.extend.manager.core.properties.CaptchaProperties;
+import com.open.extend.manager.core.properties.UserPasswordProperties;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.role.service.ISysRoleService;
 import com.open.extend.manager.service.*;
@@ -48,7 +49,7 @@ import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.cache.annotation.RateLimiter;
 import com.open.starter.cache.enums.LimitType;
 import com.open.starter.cache.utils.RedisUtils;
-import com.open.starter.satoken.event.LogininforEvent;
+import com.open.starter.satoken.event.LoginInfoEvent;
 import com.open.starter.satoken.utils.LoginHelper;
 import com.open.starter.tenant.utils.TenantHelper;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -140,7 +140,7 @@ public class TokenService {
                 // 超级管理员 登出清除动态租户
                 TenantHelper.clearDynamic();
             }
-            recordLogininfor(loginUser.getTenantId(), loginUser.getUsername(), Constants.LOGOUT, MessageUtils.message("user.logout.success"));
+            recordLoginInfo(loginUser.getTenantId(), loginUser.getUsername(), Constants.LOGOUT, MessageUtils.message("user.logout.success"));
         } catch (NotLoginException ignored) {
         } finally {
             try {
@@ -189,7 +189,7 @@ public class TokenService {
         if (!regFlag) {
             throw new BusinessException("user.register.error");
         }
-        recordLogininfor(tenantId, username, Constants.REGISTER, MessageUtils.message("user.register.success"));
+        recordLoginInfo(tenantId, username, Constants.REGISTER, MessageUtils.message("user.register.success"));
     }
 
     /**
@@ -235,11 +235,11 @@ public class TokenService {
         String captcha = RedisUtils.getCacheObject(verifyKey);
         RedisUtils.deleteObject(verifyKey);
         if (captcha == null) {
-            recordLogininfor(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new BusinessException("验证码不存在");
         }
         if (!code.equalsIgnoreCase(captcha)) {
-            recordLogininfor(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
+            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
             throw new BusinessException("验证码不正确");
         }
     }
@@ -252,14 +252,14 @@ public class TokenService {
      * @param message  消息内容
      * @return
      */
-    public void recordLogininfor(String tenantId, String username, String status, String message) {
+    public void recordLoginInfo(String tenantId, String username, String status, String message) {
         // 封装对象
-        LogininforEvent logininforEvent = new LogininforEvent();
-        logininforEvent.setTenantId(tenantId);
-        logininforEvent.setUsername(username);
-        logininforEvent.setStatus(status);
-        logininforEvent.setMessage(message);
-        SpringUtil.getApplicationContext().publishEvent(logininforEvent);
+        LoginInfoEvent loginInfoEvent = new LoginInfoEvent();
+        loginInfoEvent.setTenantId(tenantId);
+        loginInfoEvent.setUsername(username);
+        loginInfoEvent.setStatus(status);
+        loginInfoEvent.setMessage(message);
+        SpringUtil.getApplicationContext().publishEvent(loginInfoEvent);
     }
 
     /**
@@ -275,7 +275,7 @@ public class TokenService {
         int errorNumber = ObjectUtil.defaultIfNull(RedisUtils.getCacheObject(errorKey), 0);
         // 锁定时间内登录 则踢出
         if (errorNumber >= maxRetryCount) {
-            recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+            recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
             throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
         }
 
@@ -285,11 +285,11 @@ public class TokenService {
             RedisUtils.setCacheObject(errorKey, errorNumber, lockTime);
             // 达到规定错误次数 则锁定登录
             if (errorNumber >= maxRetryCount) {
-                recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+                recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
                 throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
             } else {
                 // 未达到规定错误次数
-                recordLogininfor(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
+                recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
                 throw new UserException(loginType.getRetryLimitCount(), errorNumber);
             }
         }

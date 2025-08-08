@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserSex;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.starter.json.annotation.Sensitive;
 import com.open.starter.json.core.SensitiveStrategy;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +71,7 @@ public class SysUserVo implements Serializable {
     /**
      * 用户性别（0男 1女 2未知）
      */
-    private String sex;
+    private UserSex sex;
 
     /**
      * 头像地址
@@ -86,7 +89,7 @@ public class SysUserVo implements Serializable {
     /**
      * 帐号状态（0正常 1停用）
      */
-    private String status;
+    private UserStatus status;
 
     /**
      * 最后登录IP
@@ -96,7 +99,7 @@ public class SysUserVo implements Serializable {
     /**
      * 最后登录时间
      */
-    private Date loginDate;
+    private LocalDateTime loginDate;
 
     /**
      * 备注
@@ -106,7 +109,7 @@ public class SysUserVo implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 部门名

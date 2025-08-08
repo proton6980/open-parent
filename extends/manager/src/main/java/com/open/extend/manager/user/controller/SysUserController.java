@@ -18,11 +18,8 @@ import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.role.service.ISysRoleService;
 import com.open.extend.manager.tenant.service.ISysTenantService;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
-import com.open.extend.manager.domain.vo.*;
-import com.open.extend.manager.listener.SysUserImportListener;
-import com.open.extend.manager.user.domain.vo.SysUserInfoVo;
-import com.open.extend.manager.user.domain.vo.SysUserVo;
-import com.open.extend.manager.user.domain.vo.UserInfoVo;
+import com.open.extend.manager.user.domain.vo.*;
+import com.open.extend.manager.user.listener.SysUserImportListener;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.excel.core.ExcelResult;
 import com.open.starter.excel.utils.ExcelUtil;
@@ -56,7 +53,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/bg/user")
+@RequestMapping("/user")
 public class SysUserController extends BaseController {
 
     private final ISysUserService userService;

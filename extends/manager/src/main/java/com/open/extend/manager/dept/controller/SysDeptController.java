@@ -26,7 +26,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/dept")
+@RequestMapping("/dept")
 public class SysDeptController extends BaseController {
 
     private final ISysDeptService deptService;

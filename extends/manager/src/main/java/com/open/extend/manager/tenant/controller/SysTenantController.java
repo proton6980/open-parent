@@ -34,12 +34,12 @@ import java.util.List;
 /**
  * 租户管理
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/tenant")
+@RequestMapping("/tenant")
 @ConditionalOnProperty(value = "tenant.enable", havingValue = "true")
 public class SysTenantController extends BaseController {
 

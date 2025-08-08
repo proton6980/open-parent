@@ -17,9 +17,10 @@ import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.auth.bo.EmailLoginBody;
 import com.open.extend.manager.auth.vo.LoginVo;
-import com.open.extend.manager.exception.CaptchaExpireException;
-import com.open.extend.manager.exception.UserException;
+import com.open.extend.manager.core.exception.CaptchaExpireException;
+import com.open.extend.manager.core.exception.UserException;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.satoken.utils.LoginHelper;
@@ -31,7 +32,7 @@ import org.springframework.stereotype.Service;
 /**
  * 邮件认证策略
  *
- * @author Michelle.Chung
+ * @author open
  */
 @Slf4j
 @Service("email" + IAuthStrategy.BASE_NAME)
@@ -79,7 +80,7 @@ public class EmailAuthStrategy implements IAuthStrategy {
             if (ObjectUtil.isNull(user)) {
                 throw new UserException("user.not.exists", email);
             }
-            if (!user.getEnable()) {
+            if (!UserStatus.NORMAL.equals(user.getStatus())) {
                 throw new UserException("user.blocked", email);
             }
             // 框架登录不限制从什么表查询 只要最终构建出 LoginUser 即可
@@ -94,7 +95,7 @@ public class EmailAuthStrategy implements IAuthStrategy {
     private boolean validateEmailCode(String tenantId, String email, String emailCode) {
         String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + email);
         if (StringUtils.isBlank(code)) {
-            tokenService.recordLogininfor(tenantId, email, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            tokenService.recordLoginInfo(tenantId, email, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
             throw new CaptchaExpireException();
         }
         return code.equals(emailCode);

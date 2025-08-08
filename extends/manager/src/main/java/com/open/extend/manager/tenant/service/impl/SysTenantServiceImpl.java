@@ -14,12 +14,20 @@ import com.open.commons.constants.Constants;
 import com.open.commons.constants.TenantConstants;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StringUtils;
+import com.open.extend.manager.config.domain.SysConfig;
+import com.open.extend.manager.config.mapper.ISysConfigMapper;
 import com.open.extend.manager.dept.domain.SysDept;
 import com.open.extend.manager.dept.mapper.ISysDeptMapper;
 import com.open.extend.manager.role.domain.SysRole;
 import com.open.extend.manager.role.mapper.ISysRoleMapper;
+import com.open.extend.manager.roledept.domain.SysRoleDept;
+import com.open.extend.manager.roledept.mapper.ISysRoleDeptMapper;
+import com.open.extend.manager.rolemenu.domain.SysRoleMenu;
+import com.open.extend.manager.rolemenu.mapper.ISysRoleMenuMapper;
 import com.open.extend.manager.tenant.domain.SysTenant;
 import com.open.extend.manager.tenant.mapper.SysTenantMapper;
+import com.open.extend.manager.tenantpackage.domain.SysTenantPackage;
+import com.open.extend.manager.tenantpackage.mapper.ISysTenantPackageMapper;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.mapper.ISysUserMapper;
 import com.open.extend.manager.userrole.domain.SysUserRole;
@@ -49,16 +57,16 @@ import java.util.*;
 @Service
 public class SysTenantServiceImpl extends ServiceImpl<SysTenantMapper, SysTenant> implements ISysTenantService {
 
-    private final SysTenantPackageMapper tenantPackageMapper;
+    private final ISysTenantPackageMapper tenantPackageMapper;
     private final ISysUserMapper userMapper;
     private final ISysDeptMapper deptMapper;
     private final ISysRoleMapper roleMapper;
-    private final SysRoleMenuMapper roleMenuMapper;
-    private final SysRoleDeptMapper roleDeptMapper;
+    private final ISysRoleMenuMapper roleMenuMapper;
+    private final ISysRoleDeptMapper roleDeptMapper;
     private final ISysUserRoleMapper userRoleMapper;
     private final SysDictTypeMapper dictTypeMapper;
     private final SysDictDataMapper dictDataMapper;
-    private final SysConfigMapper configMapper;
+    private final ISysConfigMapper configMapper;
 
     /**
      * 查询租户

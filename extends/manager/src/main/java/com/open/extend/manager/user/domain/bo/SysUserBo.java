@@ -3,6 +3,8 @@ package com.open.extend.manager.user.domain.bo;
 import com.open.commons.constants.Constants;
 import com.open.commons.xss.Xss;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserSex;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import com.open.starter.tenant.core.domain.TenantAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -66,7 +68,7 @@ public class SysUserBo extends TenantAdminEntity {
     /**
      * 用户性别（0男 1女 2未知）
      */
-    private String sex;
+    private UserSex sex;
 
     /**
      * 密码
@@ -76,7 +78,7 @@ public class SysUserBo extends TenantAdminEntity {
     /**
      * 帐号状态（0正常 1停用）
      */
-    private String status;
+    private UserStatus status;
 
     /**
      * 备注

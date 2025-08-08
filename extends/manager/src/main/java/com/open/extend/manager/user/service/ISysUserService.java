@@ -1,11 +1,12 @@
 package com.open.extend.manager.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.starter.mybatisplus.core.page.PageQuery;
 import com.open.starter.mybatisplus.core.page.TableDataInfo;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
-import com.open.extend.manager.domain.vo.SysUserExportVo;
+import com.open.extend.manager.user.domain.vo.SysUserExportVo;
 import com.open.extend.manager.user.domain.vo.SysUserVo;
 
 import java.util.List;
@@ -170,7 +171,7 @@ public interface ISysUserService extends IService<SysUser> {
      * @param status 帐号状态
      * @return 结果
      */
-    int updateUserStatus(Long userId, String status);
+    int updateUserStatus(Long userId, UserStatus status);
 
     /**
      * 修改用户基本信息
@@ -179,6 +180,14 @@ public interface ISysUserService extends IService<SysUser> {
      * @return 结果
      */
     int updateUserProfile(SysUserBo user);
+
+    /**
+     * 更新用户信息
+     *
+     * @param userId 用户ID
+     * @param ip     IP地址
+     */
+    void recordLoginInfo(Long userId, String ip);
 
     /**
      * 修改用户头像

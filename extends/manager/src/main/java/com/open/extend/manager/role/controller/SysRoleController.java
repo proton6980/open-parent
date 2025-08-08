@@ -6,7 +6,7 @@ import com.open.extend.manager.userrole.domain.SysUserRole;
 import com.open.extend.manager.dept.domain.bo.SysDeptBo;
 import com.open.extend.manager.role.domain.bo.SysRoleBo;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
-import com.open.extend.manager.domain.vo.DeptTreeSelectVo;
+import com.open.extend.manager.role.domain.vo.DeptTreeSelectVo;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
 import com.open.extend.manager.user.domain.vo.SysUserVo;
 import com.open.extend.manager.dept.service.ISysDeptService;
@@ -34,7 +34,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/role")
+@RequestMapping("/role")
 public class SysRoleController extends BaseController {
 
     private final ISysRoleService roleService;

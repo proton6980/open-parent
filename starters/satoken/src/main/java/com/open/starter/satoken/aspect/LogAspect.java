@@ -11,7 +11,7 @@ import com.open.commons.utils.ServletUtils;
 import com.open.commons.utils.StringUtils;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.enums.BusinessStatus;
-import com.open.starter.satoken.event.OperLogEvent;
+import com.open.starter.satoken.event.OperateLogEvent;
 import com.open.starter.satoken.utils.LoginHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.StopWatch;
@@ -87,7 +87,7 @@ public class LogAspect {
         try {
 
             // *========数据库日志=========*//
-            OperLogEvent operLog = new OperLogEvent();
+            OperateLogEvent operLog = new OperateLogEvent();
             operLog.setTenantId(LoginHelper.getTenantId());
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
             // 请求的地址
@@ -132,7 +132,7 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception
      */
-    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, OperLogEvent operLog, Object jsonResult) throws Exception {
+    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, OperateLogEvent operLog, Object jsonResult) throws Exception {
         // 设置action动作
         operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
@@ -156,7 +156,7 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception 异常
      */
-    private void setRequestValue(JoinPoint joinPoint, OperLogEvent operLog, String[] excludeParamNames) throws Exception {
+    private void setRequestValue(JoinPoint joinPoint, OperateLogEvent operLog, String[] excludeParamNames) throws Exception {
         Map<String, String> paramsMap = ServletUtils.getParamMap(ServletUtils.getRequest());
         String requestMethod = operLog.getRequestMethod();
         if (MapUtil.isEmpty(paramsMap)

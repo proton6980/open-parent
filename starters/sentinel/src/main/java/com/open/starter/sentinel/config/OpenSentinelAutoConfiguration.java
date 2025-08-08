@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * @author Lion Li
+ * @author open
  */
 @ImportAutoConfiguration(SentinelAutoConfiguration.class)
 @Configuration

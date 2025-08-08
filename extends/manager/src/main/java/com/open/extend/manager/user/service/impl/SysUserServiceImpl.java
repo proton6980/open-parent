@@ -17,6 +17,7 @@ import com.open.commons.constants.CacheNames;
 import com.open.commons.constants.Constants;
 import com.open.commons.pojo.dto.UserDTO;
 import com.open.commons.service.UserService;
+import com.open.commons.utils.DateUtils;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StreamUtils;
 import com.open.commons.utils.StringUtils;
@@ -26,6 +27,7 @@ import com.open.extend.manager.post.mapper.ISysPostMapper;
 import com.open.extend.manager.role.domain.SysRole;
 import com.open.extend.manager.role.mapper.ISysRoleMapper;
 import com.open.extend.manager.user.domain.SysUser;
+import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.extend.manager.user.mapper.ISysUserMapper;
 import com.open.extend.manager.userpost.domain.SysUserPost;
 import com.open.extend.manager.userpost.mapper.ISysUserPostMapper;
@@ -36,10 +38,11 @@ import com.open.starter.mybatisplus.core.page.TableDataInfo;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
 import com.open.extend.manager.post.domain.vo.SysPostVo;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
-import com.open.extend.manager.domain.vo.SysUserExportVo;
+import com.open.extend.manager.user.domain.vo.SysUserExportVo;
 import com.open.extend.manager.user.domain.vo.SysUserVo;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.mybatisplus.helper.DataBaseHelper;
+import com.open.starter.mybatisplus.helper.DataPermissionHelper;
 import com.open.starter.satoken.utils.LoginHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +51,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -90,7 +94,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
         wrapper.eq("u.del_flag", Constants.NORMAL)
                 .eq(ObjectUtil.isNotNull(user.getId()), "u.user_id", user.getId())
                 .like(StringUtils.isNotBlank(user.getUserName()), "u.user_name", user.getUserName())
-                .eq(StringUtils.isNotBlank(user.getStatus()), "u.status", user.getStatus())
+                .eq(Objects.nonNull(user.getStatus()), "u.status", user.getStatus())
                 .like(StringUtils.isNotBlank(user.getPhonenumber()), "u.phonenumber", user.getPhonenumber())
                 .between(params.get("beginTime") != null && params.get("endTime") != null,
                         "u.create_time", params.get("beginTime"), params.get("endTime"))
@@ -120,7 +124,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
         wrapper.eq("u.del_flag", Constants.NORMAL)
                 .eq(ObjectUtil.isNotNull(user.getRoleId()), "r.role_id", user.getRoleId())
                 .like(StringUtils.isNotBlank(user.getUserName()), "u.user_name", user.getUserName())
-                .eq(StringUtils.isNotBlank(user.getStatus()), "u.status", user.getStatus())
+                .eq(Objects.nonNull(user.getStatus()), "u.status", user.getStatus())
                 .like(StringUtils.isNotBlank(user.getPhonenumber()), "u.phonenumber", user.getPhonenumber())
                 .orderByAsc("u.user_id");
         Page<SysUserVo> page = baseMapper.selectAllocatedList(pageQuery.build(), wrapper);
@@ -198,7 +202,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     public List<SysUserVo> selectUserByIds(List<Long> userIds, Long deptId) {
         return baseMapper.selectUserList(new LambdaQueryWrapper<SysUser>()
                 .select(SysUser::getId, SysUser::getUsername, SysUser::getNickname)
-                .eq(SysUser::getEnable, Constants.NORMAL)
+                .eq(SysUser::getStatus, Constants.NORMAL)
                 .eq(ObjectUtil.isNotNull(deptId), SysUser::getDeptId, deptId)
                 .in(CollUtil.isNotEmpty(userIds), SysUser::getId, userIds));
     }
@@ -381,10 +385,10 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
      * @return 结果
      */
     @Override
-    public int updateUserStatus(Long userId, String status) {
+    public int updateUserStatus(Long userId, UserStatus status) {
         return baseMapper.update(null,
                 new LambdaUpdateWrapper<SysUser>()
-                        .set(SysUser::getEnable, status)
+                        .set(SysUser::getStatus, status)
                         .eq(SysUser::getId, userId));
     }
 
@@ -404,6 +408,15 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
                         .set(SysUser::getEmail, user.getEmail())
                         .set(SysUser::getSex, user.getSex())
                         .eq(SysUser::getId, user.getId()));
+    }
+    @Override
+    public void recordLoginInfo(Long userId, String ip) {
+        SysUser sysUser = new SysUser();
+        sysUser.setId(userId);
+        sysUser.setLoginIp(ip);
+        sysUser.setLoginTime(LocalDateTime.now());
+        sysUser.setUpdateBy(userId);
+        DataPermissionHelper.ignore(() -> baseMapper.updateById(sysUser));
     }
 
     /**
@@ -644,7 +657,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
         }
         List<SysUserVo> list = baseMapper.selectVoList(new LambdaQueryWrapper<SysUser>()
                 .select(SysUser::getId, SysUser::getUsername, SysUser::getNickname, SysUser::getEmail, SysUser::getMobilePrefix)
-                .eq(SysUser::getEnable, Constants.NORMAL)
+                .eq(SysUser::getStatus, Constants.NORMAL)
                 .in(CollUtil.isNotEmpty(userIds), SysUser::getId, userIds));
         return BeanUtil.copyToList(list, UserDTO.class);
     }
@@ -674,7 +687,7 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
         }
         List<SysUserVo> list = baseMapper.selectVoList(new LambdaQueryWrapper<SysUser>()
                 .select(SysUser::getId, SysUser::getUsername, SysUser::getNickname, SysUser::getEmail, SysUser::getMobilePrefix)
-                .eq(SysUser::getEnable, Constants.NORMAL)
+                .eq(SysUser::getStatus, Constants.NORMAL)
                 .in(CollUtil.isNotEmpty(deptIds), SysUser::getDeptId, deptIds));
         return BeanUtil.copyToList(list, UserDTO.class);
     }
