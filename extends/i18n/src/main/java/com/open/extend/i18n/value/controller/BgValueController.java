@@ -6,7 +6,7 @@ import com.open.commons.validated.Update;
 import com.open.extend.i18n.value.domain.bo.ValueBo;
 import com.open.extend.i18n.value.domain.vo.ValueVo;
 import com.open.extend.i18n.value.service.ValueService;
-import com.open.starter.mybatisplus.core.page.PageQuery;
+import com.open.commons.pojo.page.PageQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

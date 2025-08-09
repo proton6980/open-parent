@@ -1,4 +1,4 @@
-package com.open.extend.manager.domain;
+package com.open.extend.manager.dict.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.open.commons.constants.Constants;
@@ -47,17 +47,13 @@ public class SysDictData extends TenantAdminEntity {
     private String listClass;
 
     /**
-     * 是否默认（Y是 N否）
+     * 是否默认｜否
      */
-    private String isDefault;
+    private Boolean isDefault;
 
     /**
      * 备注
      */
     private String remark;
-
-    public boolean getDefault() {
-        return Constants.YES.equals(this.isDefault);
-    }
 
 }

@@ -1,6 +1,7 @@
 package com.open.starter.web.interceptor;
 
 import com.open.commons.pojo.R;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.commons.utils.JacksonUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -31,6 +32,8 @@ public class ResponseWrapperInterceptor implements ResponseBodyAdvice<Object> {
         if (body instanceof String) {
             // 对于字符串要特殊处理，否则会被当作普通对象序列化成JSON
             return JacksonUtils.toJsonString(R.ok(body));
+        } else if (body instanceof TableDataInfo) {
+            return body;
         }
         return R.ok(body);
     }

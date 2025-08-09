@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.client.domain.SysClient;
 import com.open.extend.manager.client.domain.bo.SysClientBo;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 
 import java.util.Collection;
 import java.util.List;

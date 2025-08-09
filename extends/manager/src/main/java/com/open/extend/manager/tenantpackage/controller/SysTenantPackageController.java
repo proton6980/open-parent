@@ -10,8 +10,8 @@ import com.open.extend.manager.tenantpackage.domain.bo.SysTenantPackageBo;
 import com.open.extend.manager.tenantpackage.domain.vo.SysTenantPackageVo;
 import com.open.extend.manager.tenantpackage.service.ISysTenantPackageService;
 import com.open.starter.excel.utils.ExcelUtil;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.annotation.RepeatSubmit;
 import com.open.starter.satoken.enums.BusinessType;
@@ -36,7 +36,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/tenant/package")
-@ConditionalOnProperty(value = "tenant.enable", havingValue = "true")
+@ConditionalOnProperty(value = "open.tenant.enable", havingValue = "true")
 public class SysTenantPackageController extends BaseController {
 
     private final ISysTenantPackageService tenantPackageService;

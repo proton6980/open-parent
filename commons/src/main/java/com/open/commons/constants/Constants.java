@@ -11,10 +11,6 @@ public interface Constants {
      */
     String DISABLE = "1";
 
-    /**
-     * 是否为系统默认（是）
-     */
-    String YES = "Y";
 
     /**
      * Layout组件标识
@@ -36,10 +32,6 @@ public interface Constants {
      */
     Long SUPER_ADMIN_ID = 1L;
 
-    /**
-     * 根部门祖级列表
-     */
-    String ROOT_DEPT_ANCESTORS = "0";
 
     /**
      * www主域

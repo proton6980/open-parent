@@ -17,7 +17,6 @@ import com.open.commons.constants.CacheNames;
 import com.open.commons.constants.Constants;
 import com.open.commons.pojo.dto.UserDTO;
 import com.open.commons.service.UserService;
-import com.open.commons.utils.DateUtils;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StreamUtils;
 import com.open.commons.utils.StringUtils;
@@ -33,8 +32,8 @@ import com.open.extend.manager.userpost.domain.SysUserPost;
 import com.open.extend.manager.userpost.mapper.ISysUserPostMapper;
 import com.open.extend.manager.userrole.domain.SysUserRole;
 import com.open.extend.manager.userrole.mapper.ISysUserRoleMapper;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
 import com.open.extend.manager.post.domain.vo.SysPostVo;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;
@@ -91,9 +90,9 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     private Wrapper<SysUser> buildQueryWrapper(SysUserBo user) {
         Map<String, Object> params = user.getParams();
         QueryWrapper<SysUser> wrapper = Wrappers.query();
-        wrapper.eq("u.del_flag", Constants.NORMAL)
-                .eq(ObjectUtil.isNotNull(user.getId()), "u.user_id", user.getId())
-                .like(StringUtils.isNotBlank(user.getUserName()), "u.user_name", user.getUserName())
+        wrapper.eq("u.deleted", Constants.ZERO_LONG)
+                .eq(ObjectUtil.isNotNull(user.getId()), "u.id", user.getId())
+                .like(StringUtils.isNotBlank(user.getUserName()), "u.username", user.getUserName())
                 .eq(Objects.nonNull(user.getStatus()), "u.status", user.getStatus())
                 .like(StringUtils.isNotBlank(user.getPhonenumber()), "u.phonenumber", user.getPhonenumber())
                 .between(params.get("beginTime") != null && params.get("endTime") != null,
@@ -105,9 +104,9 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
                     List<Long> ids = StreamUtils.toList(deptList, SysDept::getDeptId);
                     ids.add(user.getDeptId());
                     w.in("u.dept_id", ids);
-                }).orderByAsc("u.user_id");
+                }).orderByAsc("u.id");
         if (StringUtils.isNotBlank(user.getExcludeUserIds())) {
-            wrapper.notIn("u.user_id", StringUtils.splitTo(user.getExcludeUserIds(), Convert::toLong));
+            wrapper.notIn("u.id", StringUtils.splitTo(user.getExcludeUserIds(), Convert::toLong));
         }
         return wrapper;
     }
@@ -121,12 +120,12 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     @Override
     public TableDataInfo<SysUserVo> selectAllocatedList(SysUserBo user, PageQuery pageQuery) {
         QueryWrapper<SysUser> wrapper = Wrappers.query();
-        wrapper.eq("u.del_flag", Constants.NORMAL)
+        wrapper.eq("u.deleted", Constants.ZERO_LONG)
                 .eq(ObjectUtil.isNotNull(user.getRoleId()), "r.role_id", user.getRoleId())
-                .like(StringUtils.isNotBlank(user.getUserName()), "u.user_name", user.getUserName())
+                .like(StringUtils.isNotBlank(user.getUserName()), "u.username", user.getUserName())
                 .eq(Objects.nonNull(user.getStatus()), "u.status", user.getStatus())
                 .like(StringUtils.isNotBlank(user.getPhonenumber()), "u.phonenumber", user.getPhonenumber())
-                .orderByAsc("u.user_id");
+                .orderByAsc("u.id");
         Page<SysUserVo> page = baseMapper.selectAllocatedList(pageQuery.build(), wrapper);
         return TableDataInfo.build(page);
     }
@@ -141,12 +140,12 @@ public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUser> imp
     public TableDataInfo<SysUserVo> selectUnallocatedList(SysUserBo user, PageQuery pageQuery) {
         List<Long> userIds = userRoleMapper.selectUserIdsByRoleId(user.getRoleId());
         QueryWrapper<SysUser> wrapper = Wrappers.query();
-        wrapper.eq("u.del_flag", Constants.NORMAL)
+        wrapper.eq("u.deleted", Constants.ZERO_LONG)
                 .and(w -> w.ne("r.role_id", user.getRoleId()).or().isNull("r.role_id"))
-                .notIn(CollUtil.isNotEmpty(userIds), "u.user_id", userIds)
-                .like(StringUtils.isNotBlank(user.getUserName()), "u.user_name", user.getUserName())
+                .notIn(CollUtil.isNotEmpty(userIds), "u.id", userIds)
+                .like(StringUtils.isNotBlank(user.getUserName()), "u.username", user.getUserName())
                 .like(StringUtils.isNotBlank(user.getPhonenumber()), "u.phonenumber", user.getPhonenumber())
-                .orderByAsc("u.user_id");
+                .orderByAsc("u.id");
         Page<SysUserVo> page = baseMapper.selectUnallocatedList(pageQuery.build(), wrapper);
         return TableDataInfo.build(page);
     }

@@ -13,7 +13,7 @@ import com.open.extend.i18n.language.mapper.ILanguageMapper;
 import com.open.extend.i18n.language.service.LanguageService;
 import com.open.extend.i18n.value.domain.Value;
 import com.open.extend.i18n.value.mapper.IValueMapper;
-import com.open.starter.mybatisplus.core.page.PageQuery;
+import com.open.commons.pojo.page.PageQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

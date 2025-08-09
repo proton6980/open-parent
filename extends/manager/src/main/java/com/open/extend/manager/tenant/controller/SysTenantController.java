@@ -11,8 +11,8 @@ import com.open.extend.manager.tenant.domain.bo.SysTenantBo;
 import com.open.extend.manager.tenant.domain.vo.SysTenantVo;
 import com.open.extend.manager.tenant.service.ISysTenantService;
 import com.open.starter.excel.utils.ExcelUtil;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.annotation.RepeatSubmit;
 import com.open.starter.satoken.enums.BusinessType;
@@ -40,7 +40,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/tenant")
-@ConditionalOnProperty(value = "tenant.enable", havingValue = "true")
+@ConditionalOnProperty(value = "open.tenant.enable", havingValue = "true")
 public class SysTenantController extends BaseController {
 
     private final ISysTenantService tenantService;
@@ -50,8 +50,8 @@ public class SysTenantController extends BaseController {
      */
     @SaCheckRole(TenantConstants.SUPER_ADMIN_ROLE_KEY)
     @SaCheckPermission("system:tenant:list")
-    @GetMapping("/list")
-    public TableDataInfo<SysTenantVo> list(SysTenantBo bo, PageQuery pageQuery) {
+    @GetMapping("/page")
+    public TableDataInfo<SysTenantVo> page(SysTenantBo bo, PageQuery pageQuery) {
         return tenantService.queryPageList(bo, pageQuery);
     }
 

@@ -18,6 +18,10 @@ import com.open.extend.manager.config.domain.SysConfig;
 import com.open.extend.manager.config.mapper.ISysConfigMapper;
 import com.open.extend.manager.dept.domain.SysDept;
 import com.open.extend.manager.dept.mapper.ISysDeptMapper;
+import com.open.extend.manager.dict.domain.SysDictData;
+import com.open.extend.manager.dict.domain.SysDictType;
+import com.open.extend.manager.dict.mapper.ISysDictDataMapper;
+import com.open.extend.manager.dict.mapper.ISysDictTypeMapper;
 import com.open.extend.manager.role.domain.SysRole;
 import com.open.extend.manager.role.mapper.ISysRoleMapper;
 import com.open.extend.manager.roledept.domain.SysRoleDept;
@@ -32,12 +36,10 @@ import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.mapper.ISysUserMapper;
 import com.open.extend.manager.userrole.domain.SysUserRole;
 import com.open.extend.manager.userrole.mapper.ISysUserRoleMapper;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
-import com.open.extend.manager.domain.*;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.tenant.domain.bo.SysTenantBo;
 import com.open.extend.manager.tenant.domain.vo.SysTenantVo;
-import com.open.extend.manager.mapper.*;
 import com.open.extend.manager.tenant.service.ISysTenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -64,8 +66,8 @@ public class SysTenantServiceImpl extends ServiceImpl<SysTenantMapper, SysTenant
     private final ISysRoleMenuMapper roleMenuMapper;
     private final ISysRoleDeptMapper roleDeptMapper;
     private final ISysUserRoleMapper userRoleMapper;
-    private final SysDictTypeMapper dictTypeMapper;
-    private final SysDictDataMapper dictDataMapper;
+    private final ISysDictTypeMapper dictTypeMapper;
+    private final ISysDictDataMapper dictDataMapper;
     private final ISysConfigMapper configMapper;
 
     /**

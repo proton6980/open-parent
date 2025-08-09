@@ -2,8 +2,8 @@ package com.open.extend.manager.operatelog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.operatelog.domain.SysOperateLog;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.operatelog.domain.bo.SysOperateLogBo;
 import com.open.extend.manager.operatelog.domain.vo.SysOperateLogVo;
 

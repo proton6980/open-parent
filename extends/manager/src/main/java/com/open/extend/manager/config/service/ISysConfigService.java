@@ -2,8 +2,8 @@ package com.open.extend.manager.config.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.config.domain.SysConfig;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.config.domain.bo.SysConfigBo;
 import com.open.extend.manager.config.domain.vo.SysConfigVo;
 

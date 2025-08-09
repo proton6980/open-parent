@@ -18,8 +18,8 @@ import com.open.commons.pojo.model.LoginUser;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StreamUtils;
 import com.open.commons.utils.StringUtils;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.role.domain.SysRole;
 import com.open.extend.manager.roledept.domain.SysRoleDept;
 import com.open.extend.manager.rolemenu.domain.SysRoleMenu;
@@ -70,7 +70,7 @@ public class SysRoleServiceImpl extends ServiceImpl<ISysRoleMapper, SysRole> imp
     private Wrapper<SysRole> buildQueryWrapper(SysRoleBo bo) {
         Map<String, Object> params = bo.getParams();
         QueryWrapper<SysRole> wrapper = Wrappers.query();
-        wrapper.eq("r.del_flag", Constants.NORMAL)
+        wrapper.eq("r.deleted", Constants.ZERO_LONG)
             .eq(ObjectUtil.isNotNull(bo.getId()), "r.role_id", bo.getId())
             .like(StringUtils.isNotBlank(bo.getRoleName()), "r.role_name", bo.getRoleName())
             .eq(Objects.nonNull(bo.getEnable()), "r.status", bo.getEnable())

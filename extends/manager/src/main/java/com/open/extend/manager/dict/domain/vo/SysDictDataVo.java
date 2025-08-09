@@ -1,14 +1,15 @@
-package com.open.extend.manager.domain.vo;
+package com.open.extend.manager.dict.domain.vo;
 
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
-import com.open.extend.manager.domain.SysDictData;
+import com.open.extend.manager.dict.domain.SysDictData;
 import com.open.starter.excel.annotation.ExcelDictFormat;
 import com.open.starter.excel.convert.ExcelDictConvert;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -64,11 +65,11 @@ public class SysDictDataVo implements Serializable {
     private String listClass;
 
     /**
-     * 是否默认（Y是 N否）
+     * 是否默认｜否
      */
     @ExcelProperty(value = "是否默认", converter = ExcelDictConvert.class)
     @ExcelDictFormat(dictType = "sys_yes_no")
-    private String isDefault;
+    private Boolean isDefault;
 
     /**
      * 备注
@@ -80,6 +81,6 @@ public class SysDictDataVo implements Serializable {
      * 创建时间
      */
     @ExcelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
 }

@@ -1,4 +1,4 @@
-package com.open.extend.manager.service.impl;
+package com.open.extend.manager.dict.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -7,22 +7,23 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.open.commons.constants.CacheNames;
 import com.open.commons.service.IDictService;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StreamUtils;
 import com.open.commons.utils.StringUtils;
 import com.open.starter.cache.utils.CacheUtils;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
-import com.open.extend.manager.domain.SysDictData;
-import com.open.extend.manager.domain.SysDictType;
-import com.open.extend.manager.domain.bo.SysDictTypeBo;
-import com.open.extend.manager.domain.vo.SysDictDataVo;
-import com.open.extend.manager.domain.vo.SysDictTypeVo;
-import com.open.extend.manager.mapper.SysDictDataMapper;
-import com.open.extend.manager.mapper.SysDictTypeMapper;
-import com.open.extend.manager.service.ISysDictTypeService;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
+import com.open.extend.manager.dict.domain.SysDictData;
+import com.open.extend.manager.dict.domain.SysDictType;
+import com.open.extend.manager.dict.domain.bo.SysDictTypeBo;
+import com.open.extend.manager.dict.domain.vo.SysDictDataVo;
+import com.open.extend.manager.dict.domain.vo.SysDictTypeVo;
+import com.open.extend.manager.dict.mapper.ISysDictDataMapper;
+import com.open.extend.manager.dict.mapper.ISysDictTypeMapper;
+import com.open.extend.manager.dict.service.ISysDictTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -42,10 +43,8 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Service
-public class SysDictTypeServiceImpl implements ISysDictTypeService, IDictService {
-
-    private final SysDictTypeMapper baseMapper;
-    private final SysDictDataMapper dictDataMapper;
+public class SysDictTypeServiceImpl extends ServiceImpl<ISysDictTypeMapper, SysDictType> implements ISysDictTypeService, IDictService {
+    private final ISysDictDataMapper dictDataMapper;
 
     @Override
     public TableDataInfo<SysDictTypeVo> selectPageDictTypeList(SysDictTypeBo dictType, PageQuery pageQuery) {

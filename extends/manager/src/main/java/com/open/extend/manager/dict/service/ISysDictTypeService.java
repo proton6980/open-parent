@@ -1,10 +1,12 @@
-package com.open.extend.manager.service;
+package com.open.extend.manager.dict.service;
 
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
-import com.open.extend.manager.domain.bo.SysDictTypeBo;
-import com.open.extend.manager.domain.vo.SysDictDataVo;
-import com.open.extend.manager.domain.vo.SysDictTypeVo;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.open.extend.manager.dict.domain.SysDictType;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
+import com.open.extend.manager.dict.domain.bo.SysDictTypeBo;
+import com.open.extend.manager.dict.domain.vo.SysDictDataVo;
+import com.open.extend.manager.dict.domain.vo.SysDictTypeVo;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  *
  * @author open
  */
-public interface ISysDictTypeService {
+public interface ISysDictTypeService extends IService<SysDictType> {
 
 
     TableDataInfo<SysDictTypeVo> selectPageDictTypeList(SysDictTypeBo dictType, PageQuery pageQuery);

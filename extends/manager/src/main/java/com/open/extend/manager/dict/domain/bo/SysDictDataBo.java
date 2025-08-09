@@ -1,6 +1,6 @@
-package com.open.extend.manager.domain.bo;
+package com.open.extend.manager.dict.domain.bo;
 
-import com.open.extend.manager.domain.SysDictData;
+import com.open.extend.manager.dict.domain.SysDictData;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
@@ -58,9 +58,9 @@ public class SysDictDataBo extends BaseAdminEntity {
     private String listClass;
 
     /**
-     * 是否默认（Y是 N否）
+     * 是否默认｜否
      */
-    private String isDefault;
+    private Boolean isDefault;
 
     /**
      * 备注

@@ -17,8 +17,8 @@
             ${ew.getSqlSelect}
         </if>
         <if test="ew.getSqlSelect == null">
-            u.id, u.dept_id, u.nickname, u.username, u.email, u.avatar, u.phonenumber, u.sex,
-            u.enable, u.del_flag, u.login_ip, u.login_time, u.create_by, u.create_time, u.remark
+            u.id, u.dept_id, u.nickname, u.username, u.email, u.avatar, u.mobile_prefix, u.mobile_suffix, u.sex,
+            u.status, u.deleted, u.login_ip, u.login_time, u.create_by, u.create_time, u.remark
         </if>
         from sys_user u
         ${ew.getCustomSqlSegment}
@@ -30,8 +30,8 @@
             ${ew.getSqlSelect}
         </if>
         <if test="ew.getSqlSelect == null">
-            u.id, u.dept_id, u.nickname, u.username, u.email, u.avatar, u.phonenumber, u.sex,
-            u.enable, u.del_flag, u.login_ip, u.login_time, u.create_by, u.create_time, u.remark
+            u.id, u.dept_id, u.nickname, u.username, u.email, u.avatar, u.mobile_prefix, u.mobile_suffix, u.sex,
+            u.status, u.deleted, u.login_ip, u.login_time, u.create_by, u.create_time, u.remark
         </if>
         from sys_user u
         ${ew.getCustomSqlSegment}
@@ -44,10 +44,11 @@
                u.username,
                u.email,
                u.avatar,
-               u.phonenumber,
+               u.mobile_prefix,
+               u.mobile_suffix,
                u.sex,
-               u.enable,
-               u.del_flag,
+               u.status,
+               u.deleted,
                u.login_ip,
                u.login_time,
                u.create_by,
@@ -68,8 +69,9 @@
                         u.username,
                         u.nickname,
                         u.email,
-                        u.phonenumber,
-                        u.enable,
+                        u.mobile_prefix,
+                        u.mobile_suffix,
+                        u.status,
                         u.create_time
         from sys_user u
                  left join sys_dept d on u.dept_id = d.id
@@ -84,8 +86,9 @@
                         u.username,
                         u.nickname,
                         u.email,
-                        u.phonenumber,
-                        u.enable,
+                        u.mobile_prefix,
+                        u.mobile_suffix,
+                        u.status,
                         u.create_time
         from sys_user u
                  left join sys_dept d on u.dept_id = d.id

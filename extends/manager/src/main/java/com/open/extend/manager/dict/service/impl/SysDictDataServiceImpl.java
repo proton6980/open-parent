@@ -1,20 +1,21 @@
-package com.open.extend.manager.service.impl;
+package com.open.extend.manager.dict.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.open.commons.constants.CacheNames;
 import com.open.commons.utils.MapstructUtils;
 import com.open.commons.utils.StringUtils;
 import com.open.starter.cache.utils.CacheUtils;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
-import com.open.extend.manager.domain.SysDictData;
-import com.open.extend.manager.domain.bo.SysDictDataBo;
-import com.open.extend.manager.domain.vo.SysDictDataVo;
-import com.open.extend.manager.mapper.SysDictDataMapper;
-import com.open.extend.manager.service.ISysDictDataService;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
+import com.open.extend.manager.dict.domain.SysDictData;
+import com.open.extend.manager.dict.domain.bo.SysDictDataBo;
+import com.open.extend.manager.dict.domain.vo.SysDictDataVo;
+import com.open.extend.manager.dict.mapper.ISysDictDataMapper;
+import com.open.extend.manager.dict.service.ISysDictDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Service
-public class SysDictDataServiceImpl implements ISysDictDataService {
-
-    private final SysDictDataMapper baseMapper;
+public class SysDictDataServiceImpl extends ServiceImpl<ISysDictDataMapper, SysDictData> implements ISysDictDataService {
 
     @Override
     public TableDataInfo<SysDictDataVo> selectPageDictDataList(SysDictDataBo dictData, PageQuery pageQuery) {

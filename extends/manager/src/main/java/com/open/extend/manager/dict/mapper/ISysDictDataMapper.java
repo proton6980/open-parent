@@ -1,9 +1,11 @@
-package com.open.extend.manager.mapper;
+package com.open.extend.manager.dict.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.open.extend.manager.domain.SysDictData;
-import com.open.extend.manager.domain.vo.SysDictDataVo;
+import com.open.extend.manager.dict.domain.SysDictData;
+import com.open.extend.manager.dict.domain.vo.SysDictDataVo;
 import com.open.starter.mybatisplus.core.mapper.IBaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 
 import java.util.List;
 
@@ -12,7 +14,9 @@ import java.util.List;
  *
  * @author open
  */
-public interface SysDictDataMapper extends IBaseMapper<SysDictData, SysDictDataVo> {
+@Mapper
+@ConditionalOnMissingBean(ISysDictDataMapper.class)
+public interface ISysDictDataMapper extends IBaseMapper<SysDictData, SysDictDataVo> {
 
     default List<SysDictDataVo> selectDictDataByType(String dictType) {
         return selectVoList(

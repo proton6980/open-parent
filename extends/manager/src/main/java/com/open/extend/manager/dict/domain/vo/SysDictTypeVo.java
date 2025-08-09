@@ -1,8 +1,8 @@
-package com.open.extend.manager.domain.vo;
+package com.open.extend.manager.dict.domain.vo;
 
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
-import com.open.extend.manager.domain.SysDictType;
+import com.open.extend.manager.dict.domain.SysDictType;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.open.extend.manager.domain.bo;
+package com.open.extend.manager.dict.domain.bo;
 
 import com.open.commons.constants.RegexConstants;
-import com.open.extend.manager.domain.SysDictType;
+import com.open.extend.manager.dict.domain.SysDictType;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;

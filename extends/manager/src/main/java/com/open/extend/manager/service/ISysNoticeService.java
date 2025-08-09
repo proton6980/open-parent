@@ -1,7 +1,7 @@
 package com.open.extend.manager.service;
 
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.domain.bo.SysNoticeBo;
 import com.open.extend.manager.domain.vo.SysNoticeVo;
 

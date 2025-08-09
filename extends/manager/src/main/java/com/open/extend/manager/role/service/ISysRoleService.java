@@ -2,8 +2,8 @@ package com.open.extend.manager.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.role.domain.SysRole;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.userrole.domain.SysUserRole;
 import com.open.extend.manager.role.domain.bo.SysRoleBo;
 import com.open.extend.manager.role.domain.vo.SysRoleVo;

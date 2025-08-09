@@ -19,7 +19,7 @@
     </select>
 
     <select id="countDeptById" resultType="Long">
-        select count(*) from sys_dept where del_flag = '0' and id = #{deptId}
+        select count(*) from sys_dept where deleted = 0 and id = #{deptId}
     </select>
 
     <select id="selectDeptListByRoleId" resultType="Long">

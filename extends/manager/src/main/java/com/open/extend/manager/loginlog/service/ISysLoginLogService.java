@@ -2,8 +2,8 @@ package com.open.extend.manager.loginlog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.loginlog.domain.SysLoginLog;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.loginlog.domain.bo.SysLoginLogBo;
 import com.open.extend.manager.loginlog.domain.vo.SysLoginLogVo;
 

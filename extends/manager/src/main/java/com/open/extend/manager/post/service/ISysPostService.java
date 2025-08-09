@@ -2,8 +2,8 @@ package com.open.extend.manager.post.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.post.domain.SysPost;
-import com.open.starter.mybatisplus.core.page.PageQuery;
-import com.open.starter.mybatisplus.core.page.TableDataInfo;
+import com.open.commons.pojo.page.PageQuery;
+import com.open.commons.pojo.page.TableDataInfo;
 import com.open.extend.manager.post.domain.bo.SysPostBo;
 import com.open.extend.manager.post.domain.vo.SysPostVo;
 

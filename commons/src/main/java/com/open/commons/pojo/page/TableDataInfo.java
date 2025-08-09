@@ -1,4 +1,4 @@
-package com.open.starter.mybatisplus.core.page;
+package com.open.commons.pojo.page;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.http.HttpStatus;
