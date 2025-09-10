@@ -108,8 +108,8 @@ public class SysMenuController extends BaseController {
      */
     @SaCheckRole(TenantConstants.SUPER_ADMIN_ROLE_KEY)
     @SaCheckPermission("system:menu:query")
-    @GetMapping(value = "/tenantPackageMenuTreeselect/{packageId}")
-    public R<MenuTreeSelectVo> tenantPackageMenuTreeselect(@PathVariable("packageId") Long packageId) {
+    @GetMapping(value = "/tenantPackageMenuTreeSelect/{packageId}")
+    public R<MenuTreeSelectVo> tenantPackageMenuTreeSelect(@PathVariable("packageId") Long packageId) {
         List<SysMenuVo> menus = menuService.selectMenuList(LoginHelper.getUserId());
         MenuTreeSelectVo selectVo = new MenuTreeSelectVo();
         selectVo.setCheckedKeys(menuService.selectMenuListByPackageId(packageId));

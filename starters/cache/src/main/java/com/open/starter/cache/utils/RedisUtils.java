@@ -353,6 +353,18 @@ public class RedisUtils {
     }
 
     /**
+     * 是否存在Set数据
+     *
+     * @param key  缓存的键值
+     * @param data 缓存的数据
+     * @return 是否存在
+     */
+    public static <T> boolean containsCacheSet(final String key, final T data) {
+        RSet<T> rSet = CLIENT.getSet(key);
+        return rSet.contains(data);
+    }
+
+    /**
      * 注册Set监听器
      * <p>
      * key 监听器需开启 `notify-keyspace-events` 等 redis 相关配置
