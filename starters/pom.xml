@@ -15,10 +15,12 @@
 
     <modules>
         <module>cache</module>
+        <module>email</module>
         <module>excel</module>
         <module>http</module>
         <module>json</module>
         <module>mybatis-plus</module>
+        <module>netty</module>
         <module>oss</module>
         <module>satoken</module>
         <module>security</module>
@@ -27,6 +29,7 @@
         <module>sse</module>
         <module>swarm-bots</module>
         <module>tenant</module>
+        <module>translate</module>
         <module>web</module>
     </modules>
 

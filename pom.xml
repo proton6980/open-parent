@@ -21,8 +21,10 @@
         <spring-boot.version>2.5.15</spring-boot.version>
         <spring-cloud.version>2020.0.6</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <google-cloud.version>26.67.0</google-cloud.version>
         <hutool.version>5.8.30</hutool.version>
         <sa-token.version>1.44.0</sa-token.version>
+        <netty.version>4.2.3.Final</netty.version>
 
         <okhttp.version>4.12.0</okhttp.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
@@ -61,6 +63,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>${google-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
@@ -74,6 +83,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>${netty.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
@@ -175,6 +192,11 @@
             <dependency>
                 <groupId>com.open</groupId>
                 <artifactId>open-starter-excel</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.open</groupId>
+                <artifactId>open-starter-email</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

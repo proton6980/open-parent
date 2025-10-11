@@ -48,6 +48,24 @@ public final class JacksonUtils {
     }
 
     /**
+     * 将对象转换为JSON格式的字节数组
+     *
+     * @param object 要转换的对象
+     * @return JSON格式的字节数组，如果对象为null，则返回null
+     * @throws RuntimeException 如果转换过程中发生JSON处理异常，则抛出运行时异常
+     */
+    public static byte[] toJsonBytes(Object object) {
+        if (ObjectUtil.isNull(object)) {
+            return null;
+        }
+        try {
+            return OBJECT_MAPPER.writeValueAsBytes(object);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * 将JSON格式的字符串转换为指定类型的对象
      *
      * @param text  JSON格式的字符串
@@ -116,13 +134,13 @@ public final class JacksonUtils {
      */
     public static Dict parseMap(String text) {
         if (StringUtils.isBlank(text)) {
-            return null;
+            return Dict.create();
         }
         try {
             return OBJECT_MAPPER.readValue(text, OBJECT_MAPPER.getTypeFactory().constructType(Dict.class));
         } catch (MismatchedInputException e) {
             // 类型不匹配说明不是json
-            return null;
+            return Dict.create();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

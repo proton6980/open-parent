@@ -10,18 +10,29 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>open-starter-http</artifactId>
+    <artifactId>open-starter-netty</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
+            <groupId>com.open</groupId>
+            <artifactId>open-starter-cache</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
         </dependency>
 
         <dependency>
@@ -30,4 +41,5 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
 </project>

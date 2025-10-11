@@ -6,17 +6,13 @@
 
     <parent>
         <groupId>com.open</groupId>
-        <artifactId>open-parent</artifactId>
+        <artifactId>open-extends</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>open-extends</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>open-extend-im</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>gateway</module>
-        <module>i18n</module>
-        <module>im</module>
-        <module>manager</module>
-    </modules>
+    <dependencies>
+    </dependencies>
 </project>
