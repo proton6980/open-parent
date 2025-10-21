@@ -1,17 +1,49 @@
 package com.open.commons.utils;
 
-import cn.hutool.extra.spring.SpringUtil;
+import com.open.commons.ssl.DefaultX509TrustManager;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
+import javax.net.ssl.*;
 import java.io.IOException;
+import java.security.*;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Arrays;
 
 /**
  * okhttp工具类
  *
  * @author open
  */
+@Slf4j
 public final class OkHttpUtil {
-    private static final OkHttpClient CLIENT = SpringUtil.getBean(OkHttpClient.class);
+    private static final OkHttpClient CLIENT;
+
+    static {
+        if (SpringUtils.containsBean(OkHttpClient.class)) {
+            CLIENT = SpringUtils.getBean(OkHttpClient.class);
+        } else {
+            try {
+                X509TrustManager x509TrustManager = new DefaultX509TrustManager();
+                // 初始化SSL的上下文
+                SSLContext sslContext = SSLContext.getInstance("TLS");
+                sslContext.init(null, new TrustManager[]{x509TrustManager}, new SecureRandom());
+
+                CLIENT = new OkHttpClient.Builder()
+                        .sslSocketFactory(sslContext.getSocketFactory(), x509TrustManager)
+                        // 永远返回true，对所有的host都信任
+                        .hostnameVerifier((s, sslSession) -> true)
+                        .retryOnConnectionFailure(false)
+                        .build();
+            } catch (NoSuchAlgorithmException e) {
+                log.error("okhttp client algorithm error", e);
+            } catch (KeyManagementException e) {
+                log.error("okhttp client key management error", e);
+            }
+            throw new RuntimeException("init okhttp client failure");
+        }
+    }
 
 
     /**

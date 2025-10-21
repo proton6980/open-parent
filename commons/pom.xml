@@ -74,11 +74,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.open</groupId>
-            <artifactId>open-starter-http</artifactId>
-            <version>${revision}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
         </dependency>
 
         <dependency>
