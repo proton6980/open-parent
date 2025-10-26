@@ -1,15 +1,12 @@
 package com.open.commons.utils;
 
-import com.open.commons.ssl.DefaultX509TrustManager;
+import com.open.common.http.ssl.DefaultX509TrustManager;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.security.*;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Arrays;
 
 /**
  * okhttp工具类

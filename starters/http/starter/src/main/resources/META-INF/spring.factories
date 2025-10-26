@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.open.starter.http.config.OkHttpAutoConfiguration,\
+com.open.starter.http.config.RestAutoConfiguration

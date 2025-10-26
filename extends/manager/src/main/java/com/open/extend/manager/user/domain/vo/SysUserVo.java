@@ -10,6 +10,7 @@ import com.open.starter.json.annotation.Sensitive;
 import com.open.starter.json.core.SensitiveStrategy;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -63,10 +64,15 @@ public class SysUserVo implements Serializable {
     private String email;
 
     /**
-     * 手机号码
+     * 号码前缀
+     */
+    private String mobile_suffix;
+
+    /**
+     * 号码后缀
      */
     @Sensitive(strategy = SensitiveStrategy.PHONE, perms = "system:user:edit")
-    private String phonenumber;
+    private String mobilePrefix;
 
     /**
      * 用户性别（0男 1女 2未知）

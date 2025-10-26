@@ -6,15 +6,17 @@
 
     <parent>
         <groupId>com.open</groupId>
-        <artifactId>open-starters</artifactId>
+        <artifactId>open-http</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>open-http</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>open-common-http</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>common</module>
-        <module>starter</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,4 +1,4 @@
-package com.open.commons.ssl;
+package com.open.common.http.ssl;
 
 import lombok.RequiredArgsConstructor;
 

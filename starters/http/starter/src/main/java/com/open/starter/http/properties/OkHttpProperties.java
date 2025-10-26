@@ -1,5 +1,6 @@
 package com.open.starter.http.properties;
 
+import com.open.common.http.SSLPattern;
 import lombok.Data;
 import okhttp3.ConnectionPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,6 +8,7 @@ import org.springframework.boot.convert.DurationUnit;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,6 +23,18 @@ public class OkHttpProperties {
      * 是否启用
      */
     private Boolean enabled;
+
+    /**
+     * ssl 模式
+     */
+    private SSLPattern sslPattern = SSLPattern.TRUST_ALL;
+
+    /**
+     * 证书路径
+     * <p>默认在 classpath:**.pem 或 classpath:**.crt 或 classpath:**.cer</p>
+     * <p>外部文件 file:**.pem 或 file:**.crt 或 file:**.cer</p>
+     */
+    private List<String> certs;
 
     /**
      * 是否重试
