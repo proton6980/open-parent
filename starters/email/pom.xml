@@ -10,23 +10,12 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>open-starter-email</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>open-email</artifactId>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.open</groupId>
-            <artifactId>open-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.open</groupId>
-            <artifactId>open-starter-http</artifactId>
-        </dependency>
+    <modules>
+        <module>common</module>
+        <module>starter</module>
+    </modules>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
 </project>

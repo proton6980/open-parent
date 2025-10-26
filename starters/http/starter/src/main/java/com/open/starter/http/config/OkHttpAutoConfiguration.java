@@ -1,7 +1,7 @@
 package com.open.starter.http.config;
 
+import com.open.common.http.client.DefaultOkHttpClient;
 import com.open.common.http.ssl.CompositeX509TrustManager;
-import com.open.common.http.ssl.DefaultX509TrustManager;
 import com.open.starter.http.properties.OkHttpProperties;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -132,15 +132,8 @@ public class OkHttpAutoConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = "open.okhttp", name = "ssl-pattern", havingValue = "TRUST_ALL", matchIfMissing = true)
     public OkHttpClient defaultOkHttpClient(OkHttpProperties properties) throws Exception {
-        X509TrustManager x509TrustManager = new DefaultX509TrustManager();
-        // 初始化SSL的上下文
-        SSLContext sslContext = SSLContext.getInstance("TLS");
-        sslContext.init(null, new TrustManager[]{x509TrustManager}, new SecureRandom());
-
-        return new OkHttpClient.Builder()
-                .sslSocketFactory(sslContext.getSocketFactory(), x509TrustManager)
-                // 永远返回true，对所有的host都信任
-                .hostnameVerifier((s, sslSession) -> true)
+        return DefaultOkHttpClient.getInstance()
+                .newBuilder()
                 .retryOnConnectionFailure(properties.getRetry())
                 .connectionPool(properties.getPool())
                 .connectTimeout(properties.getConnectTimeout())
