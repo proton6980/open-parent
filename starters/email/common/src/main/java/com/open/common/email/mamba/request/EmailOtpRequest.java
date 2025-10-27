@@ -21,21 +21,21 @@ public class EmailOtpRequest {
     /**
      * 内容
      */
-    private C content;
+    private Content content;
     /**
      * 收件人集合
      */
-    private List<R> recipients;
+    private List<Recipient> recipients;
     /**
      * 发件人
      */
-    private F from;
+    private From from;
 
     /**
      * 发件人
      */
     @Builder
-    public static class F {
+    public static class From {
         /**
          * 邮箱
          */
@@ -50,11 +50,11 @@ public class EmailOtpRequest {
      * 收件人
      */
     @Builder
-    public static class R {
+    public static class Recipient {
         /**
          * 地址
          */
-        private A address;
+        private Address address;
         /**
          * 元数据
          * <p>对应html的数据填充</p>
@@ -66,7 +66,7 @@ public class EmailOtpRequest {
      * 地址
      */
     @Builder
-    public static class A {
+    public static class Address {
         /**
          * 邮箱
          */
@@ -81,7 +81,7 @@ public class EmailOtpRequest {
      * 邮件内容
      */
     @Builder
-    public static class C {
+    public static class Content {
         /**
          * 主题
          */

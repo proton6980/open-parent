@@ -16,7 +16,8 @@
     <dependencies>
         <dependency>
             <groupId>com.open</groupId>
-            <artifactId>open-commons</artifactId>
+            <artifactId>open-common-email</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.open</groupId>

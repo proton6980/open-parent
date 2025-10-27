@@ -14,7 +14,7 @@ public class AccessTokenResponse {
      */
     private String token;
     /**
-     * g
+     * 过期时长，单位：秒
      */
     private Long expire;
 }

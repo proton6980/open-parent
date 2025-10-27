@@ -1,10 +1,14 @@
 package com.open.common.email.mamba;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.open.common.email.mamba.request.AccessTokenRequest;
 import com.open.common.email.mamba.request.EmailOtpRequest;
+import com.open.common.email.mamba.response.AccessTokenResponse;
+import com.open.common.email.mamba.response.EmailOtpResponse;
 import com.open.common.http.client.DefaultOkHttpClient;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -16,6 +20,7 @@ import java.util.Objects;
  *
  * @author open
  */
+@Slf4j
 @RequiredArgsConstructor
 public class MambaEmailClient {
     /**
@@ -49,8 +54,11 @@ public class MambaEmailClient {
                 .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
-                String json = response.body().string();
-                return JSONUtil.parseObj(json).getStr("data");
+                JSONObject body = JSONUtil.parseObj(response.body().string());
+                if (1 == body.getInt("code")) {
+                    return JSONUtil.toBean(body, AccessTokenResponse.class).getToken();
+                }
+//                System.err.println("获取访问令牌失败，" + body);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -73,7 +81,11 @@ public class MambaEmailClient {
                 .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
-                return 1 == JSONUtil.parseObj(response.body().string()).getInt("code");
+                JSONObject body = JSONUtil.parseObj(response.body().string());
+                if (1 == body.getInt("code")) {
+                    return request.getRecipients().size() == JSONUtil.toBean(body, EmailOtpResponse.class).getSuccessCount();
+                }
+//                System.err.println("访问失败");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
