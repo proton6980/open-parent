@@ -9,7 +9,12 @@ import lombok.Data;
  */
 @Data
 public class AccessTokenResponse {
-
+    /**
+     * token
+     */
     private String token;
-
+    /**
+     * g
+     */
+    private Long expire;
 }

@@ -1,6 +1,8 @@
 package com.open.common.email.mamba;
 
+import cn.hutool.json.JSONUtil;
 import com.open.common.email.mamba.request.AccessTokenRequest;
+import com.open.common.email.mamba.request.EmailOtpRequest;
 import com.open.common.http.client.DefaultOkHttpClient;
 import lombok.*;
 import okhttp3.*;
@@ -14,8 +16,7 @@ import java.util.Objects;
  *
  * @author open
  */
-@Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MambaEmailClient {
     /**
      * 密钥
@@ -28,26 +29,28 @@ public class MambaEmailClient {
     /**
      * okhttp客户端
      */
+    @Setter
     private OkHttpClient okHttpClient;
 
-    public MambaEmailClient(String apiKey, String privateKey) {
-        this.apiKey = apiKey;
-        this.privateKey = privateKey;
-    }
-
+    /**
+     * 获取访问令牌
+     *
+     * @param expire 过期时间
+     * @return 访问令牌
+     */
     public String authenticate(Duration expire) {
         AccessTokenRequest request = AccessTokenRequest.builder()
-                .apiKey(getApiKey())
-                .privateKey(getPrivateKey())
+                .apiKey(this.apiKey)
+                .privateKey(this.privateKey)
                 .expire(expire)
                 .build();
         try (Response response = getOkHttpClient().newCall(new Request.Builder()
                 .url("https://send.mambasms.com/open/api/v1/access-token")
-                .post(RequestBody.create(request.toJson(), MediaType.parse("application/json; charset=utf-8")))
+                .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
                 String json = response.body().string();
-                return null;
+                return JSONUtil.parseObj(json).getStr("data");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -55,11 +58,30 @@ public class MambaEmailClient {
         return null;
     }
 
-    public OkHttpClient getOkHttpClient() {
-        return Objects.isNull(this.okHttpClient) ? DefaultOkHttpClient.getInstance() : this.okHttpClient;
+    /**
+     * 发送邮件
+     *
+     * @param token   令牌
+     * @param request 请求
+     * @return 是否成功
+     */
+    public boolean sendEmail(String token, EmailOtpRequest request) {
+        try (Response response = getOkHttpClient().newCall(new Request.Builder()
+                .url("https://send.mambasms.com/api/v1/email/otp")
+                .header("X-Mamba-Access-Token", token)
+                .header("Content-Type", "application/json")
+                .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
+                .build()).execute()) {
+            if (response.isSuccessful() && Objects.nonNull(response.body())) {
+                return 1 == JSONUtil.parseObj(response.body().string()).getInt("code");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 
-    public void setOkHttpClient(OkHttpClient okHttpClient) {
-        this.okHttpClient = okHttpClient;
+    public OkHttpClient getOkHttpClient() {
+        return Objects.isNull(this.okHttpClient) ? DefaultOkHttpClient.getInstance() : this.okHttpClient;
     }
 }
