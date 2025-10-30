@@ -23,6 +23,11 @@
             <groupId>com.open</groupId>
             <artifactId>open-starter-http</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.open</groupId>
+            <artifactId>open-starter-cache</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

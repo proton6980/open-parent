@@ -22,11 +22,12 @@ import java.util.Objects;
  */
 @Slf4j
 @RequiredArgsConstructor
-public class SubmailClient {
+public class SubmailEmailClient {
     /**
      * 域名
      */
-    private final String domain = "https://api.mysubmail.com";
+    @Setter
+    private String domain = "https://api.mysubmail.com";
     /**
      * 密钥
      */

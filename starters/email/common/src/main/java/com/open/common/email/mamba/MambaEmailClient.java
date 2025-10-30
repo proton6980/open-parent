@@ -26,7 +26,8 @@ public class MambaEmailClient {
     /**
      * 域名
      */
-    private final String domain = "https://send.mambasms.com";
+    @Setter
+    private String domain = "https://send.mambasms.com";
     /**
      * 密钥
      */
@@ -56,7 +57,7 @@ public class MambaEmailClient {
         String requestBody = JSONUtil.toJsonStr(request);
         log.info("邮件发送获取访问令牌请求：{}", requestBody);
         try (Response response = getOkHttpClient().newCall(new Request.Builder()
-                .url("https://send.mambasms.com/open/api/v1/access-token")
+                .url(this.domain + "/open/api/v1/access-token")
                 .post(RequestBody.create(requestBody, MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
@@ -83,7 +84,7 @@ public class MambaEmailClient {
         String requestBody = JSONUtil.toJsonStr(request);
         log.info("发送邮件请求：{}", requestBody);
         try (Response response = getOkHttpClient().newCall(new Request.Builder()
-                .url("https://send.mambasms.com/api/v1/email/otp")
+                .url(this.domain + "/api/v1/email/otp")
                 .header("X-Mamba-Access-Token", token)
                 .header("Content-Type", "application/json")
                 .post(RequestBody.create(requestBody, MediaType.parse("application/json; charset=utf-8")))

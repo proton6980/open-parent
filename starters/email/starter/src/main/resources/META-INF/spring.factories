@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.open.starter.email.submail.config.OpenSubmailAutoConfiguration
+com.open.starter.email.config.OpenEmailAutoConfiguration

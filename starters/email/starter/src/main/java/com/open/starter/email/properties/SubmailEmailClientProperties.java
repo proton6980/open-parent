@@ -1,4 +1,4 @@
-package com.open.starter.email.submail.properties;
+package com.open.starter.email.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,17 +10,25 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "open.mail.submail")
-public class SubmailProperties {
+public class SubmailEmailClientProperties {
     /**
      * 启用|禁用
      */
     private boolean enabled;
     /**
+     * 域名
+     */
+    private String domain;
+    /**
      * 应用appid
      */
     private String appid;
     /**
-     * 应用app-key
+     * 应用签名
      */
-    private String appKey;
+    private String signature;
+    /**
+     * 发件人邮箱地址
+     */
+    private String from;
 }
