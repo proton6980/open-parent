@@ -4,6 +4,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.open.common.email.submail.request.EmailSendRequest;
 import com.open.common.email.submail.response.EmailSendResponse;
+import com.open.common.email.submail.response.EmailSendTemplateRequest;
 import com.open.common.http.client.DefaultOkHttpClient;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,6 +23,10 @@ import java.util.Objects;
 @Slf4j
 @RequiredArgsConstructor
 public class SubmailClient {
+    /**
+     * 域名
+     */
+    private final String domain = "https://api.mysubmail.com";
     /**
      * 密钥
      */
@@ -46,9 +52,25 @@ public class SubmailClient {
                 .subject(subject)
                 .html(content)
                 .build();
+        return this.send("/mail/send", JSONUtil.toJsonStr(request));
+    }
+
+    public boolean sendTemplate(String email, String templateId, Map<String, Object> vars) {
+        EmailSendTemplateRequest request = EmailSendTemplateRequest.builder()
+                .appid(this.appid)
+                .signature(this.signature)
+                .to(email)
+                .project(templateId)
+                .vars(JSONUtil.toJsonStr(vars))
+                .build();
+        return this.send("/mail/xsend", JSONUtil.toJsonStr(request));
+    }
+
+    private boolean send(String urlSuffix, String requestBody) {
+        log.info("发送邮件请求：{}", requestBody);
         try (Response response = getOkHttpClient().newCall(new Request.Builder()
-                .url("https://api.mysubmail.com/mail/send.json")
-                .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
+                .url(this.domain + urlSuffix)
+                .post(RequestBody.create(requestBody, MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
                 JSONObject body = JSONUtil.parseObj(response.body().string());
@@ -56,7 +78,7 @@ public class SubmailClient {
                     EmailSendResponse res = JSONUtil.parseArray(body).get(0, EmailSendResponse.class);
                     return "success".equals(res.getStatus());
                 }
-                log.warn("获取访问令牌失败，{}", body);
+                log.warn("发送邮件失败，{}", body);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

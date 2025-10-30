@@ -25,8 +25,4 @@ public class AccessTokenRequest {
      * 过期时长
      */
     private Duration expire;
-
-    public String toJson() {
-        return "{\"apiKey\":\"" + apiKey + "\",\"privateKey\":\"" + privateKey + "\",\"expireSeconds\":\"" + expire.getSeconds() + "\",}";
-    }
 }

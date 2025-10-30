@@ -24,6 +24,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class MambaEmailClient {
     /**
+     * 域名
+     */
+    private final String domain = "https://send.mambasms.com";
+    /**
      * 密钥
      */
     private final String apiKey;
@@ -49,16 +53,18 @@ public class MambaEmailClient {
                 .privateKey(this.privateKey)
                 .expire(expire)
                 .build();
+        String requestBody = JSONUtil.toJsonStr(request);
+        log.info("邮件发送获取访问令牌请求：{}", requestBody);
         try (Response response = getOkHttpClient().newCall(new Request.Builder()
                 .url("https://send.mambasms.com/open/api/v1/access-token")
-                .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
+                .post(RequestBody.create(requestBody, MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
                 JSONObject body = JSONUtil.parseObj(response.body().string());
                 if (1 == body.getInt("code")) {
                     return JSONUtil.toBean(body.getJSONObject("data"), AccessTokenResponse.class).getToken();
                 }
-//                System.err.println("获取访问令牌失败，" + body);
+                log.warn("邮件发送获取访问令牌失败，{}", body);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
