@@ -34,6 +34,7 @@ public class EmailOtpRequest {
     /**
      * 发件人
      */
+    @Data
     @Builder
     public static class From {
         /**
@@ -49,6 +50,7 @@ public class EmailOtpRequest {
     /**
      * 收件人
      */
+    @Data
     @Builder
     public static class Recipient {
         /**
@@ -65,6 +67,7 @@ public class EmailOtpRequest {
     /**
      * 地址
      */
+    @Data
     @Builder
     public static class Address {
         /**
@@ -80,6 +83,7 @@ public class EmailOtpRequest {
     /**
      * 邮件内容
      */
+    @Data
     @Builder
     public static class Content {
         /**

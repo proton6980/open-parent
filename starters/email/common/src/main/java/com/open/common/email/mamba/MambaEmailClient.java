@@ -56,7 +56,7 @@ public class MambaEmailClient {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
                 JSONObject body = JSONUtil.parseObj(response.body().string());
                 if (1 == body.getInt("code")) {
-                    return JSONUtil.toBean(body, AccessTokenResponse.class).getToken();
+                    return JSONUtil.toBean(body.getJSONObject("data"), AccessTokenResponse.class).getToken();
                 }
 //                System.err.println("获取访问令牌失败，" + body);
             }
@@ -74,18 +74,20 @@ public class MambaEmailClient {
      * @return 是否成功
      */
     public boolean sendEmail(String token, EmailOtpRequest request) {
+        String requestBody = JSONUtil.toJsonStr(request);
+        log.info("发送邮件请求：{}", requestBody);
         try (Response response = getOkHttpClient().newCall(new Request.Builder()
                 .url("https://send.mambasms.com/api/v1/email/otp")
                 .header("X-Mamba-Access-Token", token)
                 .header("Content-Type", "application/json")
-                .post(RequestBody.create(JSONUtil.toJsonStr(request), MediaType.parse("application/json; charset=utf-8")))
+                .post(RequestBody.create(requestBody, MediaType.parse("application/json; charset=utf-8")))
                 .build()).execute()) {
             if (response.isSuccessful() && Objects.nonNull(response.body())) {
                 JSONObject body = JSONUtil.parseObj(response.body().string());
                 if (1 == body.getInt("code")) {
-                    return request.getRecipients().size() == JSONUtil.toBean(body, EmailOtpResponse.class).getSuccessCount();
+                    return request.getRecipients().size() == JSONUtil.toBean(body.getJSONObject("data"), EmailOtpResponse.class).getSuccessCount();
                 }
-//                System.err.println("访问失败");
+                log.info("邮件发送失败，" + body.getStr("message"));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
