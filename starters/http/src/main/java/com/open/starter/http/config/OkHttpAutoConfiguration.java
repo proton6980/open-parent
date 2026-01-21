@@ -1,7 +1,7 @@
 package com.open.starter.http.config;
 
-import com.open.common.http.client.DefaultOkHttpClient;
-import com.open.common.http.ssl.CompositeX509TrustManager;
+import com.open.common.core.http.client.DefaultOkHttpClient;
+import com.open.common.core.http.ssl.CompositeX509TrustManager;
 import com.open.starter.http.properties.OkHttpProperties;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;

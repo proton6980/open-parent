@@ -1,4 +1,4 @@
-package com.open.common.http;
+package com.open.common.core.http;
 
 import lombok.Getter;
 

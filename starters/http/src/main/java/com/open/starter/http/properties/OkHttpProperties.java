@@ -1,6 +1,6 @@
 package com.open.starter.http.properties;
 
-import com.open.common.http.SSLPattern;
+import com.open.common.core.http.SSLPattern;
 import lombok.Data;
 import okhttp3.ConnectionPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;

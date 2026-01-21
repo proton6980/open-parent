@@ -10,11 +10,32 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>open-http</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>open-starter-http</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>common</module>
-        <module>starter</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.open</groupId>
+            <artifactId>open-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>

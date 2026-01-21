@@ -1,6 +1,6 @@
-package com.open.common.http.client;
+package com.open.common.core.http.client;
 
-import com.open.common.http.ssl.DefaultX509TrustManager;
+import com.open.common.core.http.ssl.DefaultX509TrustManager;
 import okhttp3.OkHttpClient;
 import okhttp3.ConnectionPool;
 

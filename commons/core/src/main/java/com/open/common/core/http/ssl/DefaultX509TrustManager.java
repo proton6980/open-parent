@@ -1,4 +1,4 @@
-package com.open.common.http.ssl;
+package com.open.common.core.http.ssl;
 
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
