@@ -1,8 +1,7 @@
 package com.open.starter.oss.factory;
 
-import com.open.commons.constants.CacheNames;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.cache.utils.CacheUtils;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.oss.constants.OssConstant;
@@ -41,7 +40,7 @@ public class OssFactory {
      * 根据类型获取实例
      */
     public static synchronized OssClient instance(String configKey) {
-        String json = CacheUtils.get(CacheNames.SYS_OSS_CONFIG, configKey);
+        String json = CacheUtils.get(OssConstant.CONFIG_KEY, configKey);
         if (json == null) {
             throw new RuntimeException("系统异常, '" + configKey + "'配置信息不存在!");
         }

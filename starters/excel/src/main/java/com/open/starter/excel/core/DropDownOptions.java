@@ -1,7 +1,7 @@
 package com.open.starter.excel.core;
 
 import cn.hutool.core.util.StrUtil;
-import com.open.commons.exception.BusinessException;
+import com.open.common.spring.exception.OpenBusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -67,7 +67,7 @@ public class DropDownOptions {
         for (int i = 0; i < vars.length; i++) {
             String var = StrUtil.trimToEmpty(String.valueOf(vars[i]));
             if (!var.matches(regex)) {
-                throw new BusinessException("选项数据不符合规则，仅允许使用中英文字符以及数字");
+                throw new OpenBusinessException("选项数据不符合规则，仅允许使用中英文字符以及数字");
             }
             stringBuffer.append(var);
             if (i < vars.length - 1) {
@@ -76,7 +76,7 @@ public class DropDownOptions {
             }
         }
         if (stringBuffer.toString().matches("^\\d_*$")) {
-            throw new BusinessException("禁止以数字开头");
+            throw new OpenBusinessException("禁止以数字开头");
         }
         return stringBuffer.toString();
     }

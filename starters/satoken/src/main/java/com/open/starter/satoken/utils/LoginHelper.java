@@ -6,10 +6,10 @@ import cn.dev33.satoken.stp.parameter.SaLoginParameter;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.constants.Constants;
-import com.open.commons.constants.TenantConstants;
-import com.open.commons.enums.UserType;
-import com.open.commons.pojo.model.LoginUser;
+import com.open.common.business.constants.TenantConstants;
+import com.open.common.business.enums.UserType;
+import com.open.common.business.pojo.model.LoginUser;
+import com.open.common.core.constants.Constants;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

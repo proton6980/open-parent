@@ -4,7 +4,7 @@ import cn.dev33.satoken.dao.SaTokenDao;
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpLogic;
-import com.open.commons.factory.YmlPropertySourceFactory;
+import com.open.common.spring.factory.YmlPropertySourceFactory;
 import com.open.starter.satoken.aspect.RepeatSubmitAspect;
 import com.open.starter.satoken.core.dao.OpenSaTokenDao;
 import com.open.starter.satoken.core.service.SaPermissionImpl;

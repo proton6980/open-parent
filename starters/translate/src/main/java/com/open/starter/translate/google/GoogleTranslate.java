@@ -2,15 +2,13 @@ package com.open.starter.translate.google;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.OkHttpUtil;
-import com.open.starter.translate.ITranslate;
-import com.open.starter.translate.exception.OpenTranslateException;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.OkHttpUtil;
+import com.open.common.core.utils.StringUtils;
+import com.open.common.core.utils.translate.ITranslateClient;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -19,22 +17,30 @@ import java.util.Map;
  * @author open
  */
 @Slf4j
-public class GoogleTranslate implements ITranslate {
-
-    @Override
-    public String translate(String text, String from, String to) throws OpenTranslateException {
-        try {
-//            OkHttpUtil.get()
-
-
-            return "";
-        } catch (Exception e) {
-//            throw new OpenTranslateException();
-        }
-        return "";
-    }
+public class GoogleTranslate implements ITranslateClient {
 
     private static final String TRANSLATE_URL = "https://translate.google.com/translate_a/single";
+
+    @Override
+    public String translate(Locale locale, String text) {
+        try {
+            String targetLang = locale.toLanguageTag();
+            // 如果目标语言是中文，转换为zh-CN格式
+            if (targetLang.startsWith("zh")) {
+                targetLang = "zh-CN";
+            }
+
+            return translate2(text, "auto", targetLang);
+        } catch (Exception e) {
+            log.error("翻译出错", e);
+            return text; // 翻译失败时返回原文本
+        }
+    }
+
+    @Override
+    public String translate(Locale locale, String text, Object... args) {
+        return translate(locale, StringUtils.format(text, args));
+    }
 
     /**
      * 翻译文本
@@ -46,26 +52,19 @@ public class GoogleTranslate implements ITranslate {
      */
     public static String translate2(String text, String sourceLang, String targetLang) {
         try {
-            Map<String, Object> params = new HashMap<>();
-            params.put("client", "gtx");
-            params.put("dt", "t");
-            params.put("dj", "1");
-            params.put("ie", "UTF-8");
-            params.put("sl", sourceLang);
-            params.put("tl", targetLang);
-            params.put("q", text);
+            // 构建查询参数字符串
+            String queryParams = String.format("client=gtx&dt=t&dj=1&ie=UTF-8&sl=%s&tl=%s&q=%s", sourceLang, targetLang,
+                    java.net.URLEncoder.encode(text, "UTF-8"));
 
-            HttpResponse response = HttpRequest.get(TRANSLATE_URL)
-                    .form(params)
-                    .timeout(5000)
-                    .execute();
+            String urlWithParams = TRANSLATE_URL + "?" + queryParams;
 
-            if (response.isOk()) {
-                String result = response.body();
+            String result = OkHttpUtil.get(urlWithParams);
+
+            if (StringUtils.isEmpty(result)) {
+                log.error("谷歌翻译请求失败，返回结果为空");
+            } else {
                 // 解析返回的JSON数据
                 return parseTranslationResult(result);
-            } else {
-                log.error("谷歌翻译请求失败，状态码: {}", response.getStatus());
             }
         } catch (Exception e) {
             log.error("谷歌翻译出错", e);
@@ -109,38 +108,24 @@ public class GoogleTranslate implements ITranslate {
     }
 
     /**
-     * 自动检测文本语言并翻译
-     *
-     * @param text       要翻译的文本
-     * @param targetLang 目标语言代码
-     * @return 翻译后的文本
-     */
-//    public static String autoTranslate(String text, String targetLang) {
-//        return translate(text, "auto", targetLang);
-//    }
-
-    /**
      * 检测文本语言
      *
      * @param text 要检测的文本
      * @return 检测到的语言代码
      */
     public static String detectLanguage(String text) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("client", "gtx");
-        params.put("dt", "t");
-        params.put("dj", "1");
-        params.put("ie", "UTF-8");
-        params.put("sl", "auto");
-        params.put("tl", "en");
-        params.put("q", text);
-        try(HttpResponse response = HttpRequest.get(TRANSLATE_URL)
-                .form(params)
-                .timeout(5000)
-                .execute()) {
+        try {
+            // 构建查询参数字符串
+            String queryParams = String.format(
+                    "client=gtx&dt=t&dj=1&ie=UTF-8&sl=auto&tl=en&q=%s",
+                    java.net.URLEncoder.encode(text, "UTF-8")
+            );
 
-            if (response.isOk()) {
-                String result = response.body();
+            String urlWithParams = TRANSLATE_URL + "?" + queryParams;
+
+            String result = OkHttpUtil.get(urlWithParams);
+
+            if (StringUtils.isNotEmpty(result)) {
                 // 解析返回的JSON数据获取源语言
                 return parseSourceLanguage(result);
             }
@@ -160,7 +145,7 @@ public class GoogleTranslate implements ITranslate {
         try {
             Map<String, Object> resultMap = JacksonUtils.parseMap(jsonResult);
             String src = MapUtil.getStr(resultMap, "src");
-            if (StrUtil.isEmpty(src)) {
+            if (StrUtil.isNotEmpty(src)) {
                 return src;
             }
         } catch (Exception e) {

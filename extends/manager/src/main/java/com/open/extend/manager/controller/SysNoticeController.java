@@ -1,13 +1,13 @@
 package com.open.extend.manager.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.open.commons.pojo.R;
-import com.open.commons.service.IDictService;
+import com.open.common.core.pojo.R;
+import com.open.common.business.service.IDictService;
 import com.open.extend.manager.domain.bo.SysNoticeBo;
 import com.open.extend.manager.domain.vo.SysNoticeVo;
 import com.open.extend.manager.service.ISysNoticeService;
-import com.open.commons.pojo.page.PageQuery;
-import com.open.commons.pojo.page.TableDataInfo;
+import com.open.common.core.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.TableDataInfo;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.enums.BusinessType;
 import com.open.starter.sse.utils.SseMessageUtils;

@@ -1,7 +1,7 @@
 package com.open.extend.manager.core.properties;
 
-import com.open.commons.enums.CaptchaCategory;
-import com.open.commons.enums.CaptchaType;
+import com.open.common.core.enums.CaptchaCategory;
+import com.open.common.core.enums.CaptchaType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

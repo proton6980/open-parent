@@ -1,6 +1,6 @@
 package com.open.extend.manager.role.domain.bo;
 
-import com.open.commons.constants.Constants;
+import com.open.common.core.constants.Constants;
 import com.open.extend.manager.role.domain.SysRole;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;

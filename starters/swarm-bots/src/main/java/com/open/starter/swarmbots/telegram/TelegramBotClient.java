@@ -2,7 +2,7 @@ package com.open.starter.swarmbots.telegram;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
-import com.open.commons.utils.OkHttpUtil;
+import com.open.common.core.utils.OkHttpUtil;
 import com.open.starter.swarmbots.BotClient;
 import com.open.starter.swarmbots.telegram.properties.TelegramBotProperties;
 import lombok.RequiredArgsConstructor;

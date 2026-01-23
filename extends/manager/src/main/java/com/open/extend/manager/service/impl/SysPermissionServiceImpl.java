@@ -1,6 +1,6 @@
 package com.open.extend.manager.service.impl;
 
-import com.open.commons.constants.TenantConstants;
+import com.open.common.business.constants.TenantConstants;
 import com.open.extend.manager.menu.service.ISysMenuService;
 import com.open.extend.manager.service.ISysPermissionService;
 import com.open.extend.manager.role.service.ISysRoleService;

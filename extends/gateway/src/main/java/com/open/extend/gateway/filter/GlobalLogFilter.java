@@ -2,7 +2,7 @@ package com.open.extend.gateway.filter;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.utils.JacksonUtils;
+import com.open.common.core.utils.JacksonUtils;
 import com.open.extend.gateway.properties.ApiDecryptProperties;
 import com.open.extend.gateway.properties.CustomGatewayProperties;
 import com.open.extend.gateway.utils.WebFluxUtils;

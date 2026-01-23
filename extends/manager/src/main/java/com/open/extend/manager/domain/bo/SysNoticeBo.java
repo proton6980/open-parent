@@ -1,6 +1,6 @@
 package com.open.extend.manager.domain.bo;
 
-import com.open.commons.xss.Xss;
+import com.open.common.core.pojo.validated.xss.Xss;
 import com.open.extend.manager.domain.SysNotice;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;

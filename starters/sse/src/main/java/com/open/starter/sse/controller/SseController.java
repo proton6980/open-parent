@@ -1,7 +1,7 @@
 package com.open.starter.sse.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.open.commons.pojo.R;
+import com.open.common.core.pojo.R;
 import com.open.starter.satoken.utils.LoginHelper;
 import com.open.starter.sse.core.SseEmitterManager;
 import com.open.starter.sse.dto.SseMessageDto;
@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * SSE 控制器

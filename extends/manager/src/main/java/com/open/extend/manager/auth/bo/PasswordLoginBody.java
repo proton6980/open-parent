@@ -2,7 +2,7 @@ package com.open.extend.manager.auth.bo;
 
 import javax.validation.constraints.NotBlank;
 
-import com.open.commons.pojo.LoginBody;
+import com.open.common.business.pojo.LoginBody;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;

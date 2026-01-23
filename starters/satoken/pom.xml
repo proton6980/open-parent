@@ -16,7 +16,8 @@
     <dependencies>
         <dependency>
             <groupId>com.open</groupId>
-            <artifactId>open-commons</artifactId>
+            <artifactId>open-common-business</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>cn.dev33</groupId>
@@ -30,6 +31,7 @@
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-cache</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>

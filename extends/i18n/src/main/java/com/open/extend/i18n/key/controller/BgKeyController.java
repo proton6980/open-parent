@@ -1,12 +1,12 @@
 package com.open.extend.i18n.key.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.open.commons.validated.Save;
-import com.open.commons.validated.Update;
+import com.open.common.core.pojo.validated.Save;
+import com.open.common.core.pojo.validated.Update;
 import com.open.extend.i18n.key.domain.bo.KyeBo;
 import com.open.extend.i18n.key.domain.vo.KeyVo;
 import com.open.extend.i18n.key.service.KeyService;
-import com.open.commons.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.PageQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

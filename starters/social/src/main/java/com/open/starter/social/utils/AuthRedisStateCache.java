@@ -1,6 +1,6 @@
 package com.open.starter.social.utils;
 
-import com.open.commons.constants.GlobalConstants;
+import com.open.common.core.constants.GlobalConstants;
 import com.open.starter.cache.utils.RedisUtils;
 import lombok.AllArgsConstructor;
 import me.zhyd.oauth.cache.AuthStateCache;

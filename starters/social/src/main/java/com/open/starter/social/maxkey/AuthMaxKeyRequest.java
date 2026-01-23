@@ -2,7 +2,7 @@ package com.open.starter.social.maxkey;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.utils.JacksonUtils;
+import com.open.common.core.utils.JacksonUtils;
 import me.zhyd.oauth.cache.AuthStateCache;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.exception.AuthException;

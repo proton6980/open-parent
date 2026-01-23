@@ -16,7 +16,8 @@
     <dependencies>
         <dependency>
             <groupId>com.open</groupId>
-            <artifactId>open-commons</artifactId>
+            <artifactId>open-common-core</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.open</groupId>
@@ -36,6 +37,7 @@
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-web</artifactId>
+            <version>${revision}</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>

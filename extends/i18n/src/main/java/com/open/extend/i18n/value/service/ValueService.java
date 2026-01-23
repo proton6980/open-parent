@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.i18n.value.domain.Value;
 import com.open.extend.i18n.value.domain.bo.ValueBo;
 import com.open.extend.i18n.value.domain.vo.ValueVo;
-import com.open.commons.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.PageQuery;
 
 /**
  * 值业务接口

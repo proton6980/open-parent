@@ -3,7 +3,7 @@ package com.open.starter.web.interceptor;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.web.annotation.EncryptField;
 import com.open.starter.web.core.EncryptContext;
 import com.open.starter.web.core.EncryptorManager;
@@ -17,6 +17,7 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
+
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.util.*;
@@ -73,7 +74,7 @@ public class MybatisEncryptInterceptor implements Interceptor {
         }
         if (sourceObject instanceof List<?>) {
             List<?> list = (List<?>) sourceObject;
-            if(CollUtil.isEmpty(list)) {
+            if (CollUtil.isEmpty(list)) {
                 return;
             }
             // 判断第一个元素是否含有注解。如果没有直接返回，提高效率
@@ -86,7 +87,7 @@ public class MybatisEncryptInterceptor implements Interceptor {
         }
         // 不在缓存中的类,就是没有加密注解的类(当然也有可能是typeAliasesPackage写错)
         Set<Field> fields = encryptorManager.getFieldCache(sourceObject.getClass());
-        if(ObjectUtil.isNull(fields)){
+        if (ObjectUtil.isNull(fields)) {
             return;
         }
         try {
@@ -113,9 +114,9 @@ public class MybatisEncryptInterceptor implements Interceptor {
         EncryptContext encryptContext = new EncryptContext();
         encryptContext.setAlgorithm(encryptField.algorithm() == AlgorithmType.DEFAULT ? defaultProperties.getAlgorithm() : encryptField.algorithm());
         encryptContext.setEncode(encryptField.encode() == EncodeType.DEFAULT ? defaultProperties.getEncode() : encryptField.encode());
-        encryptContext.setPassword(StringUtils.isBlank(encryptField.password()) ? defaultProperties.getPassword() : encryptField.password());
-        encryptContext.setPrivateKey(StringUtils.isBlank(encryptField.privateKey()) ? defaultProperties.getPrivateKey() : encryptField.privateKey());
-        encryptContext.setPublicKey(StringUtils.isBlank(encryptField.publicKey()) ? defaultProperties.getPublicKey() : encryptField.publicKey());
+        encryptContext.setPassword(StringUtils.blankToDefault(encryptField.password(), defaultProperties.getPassword()));
+        encryptContext.setPrivateKey(StringUtils.blankToDefault(encryptField.privateKey(), defaultProperties.getPrivateKey()));
+        encryptContext.setPublicKey(StringUtils.blankToDefault(encryptField.publicKey(), defaultProperties.getPublicKey()));
         return this.encryptorManager.encrypt(value, encryptContext);
     }
 

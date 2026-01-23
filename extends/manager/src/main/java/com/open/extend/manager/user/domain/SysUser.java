@@ -1,7 +1,7 @@
 package com.open.extend.manager.user.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.open.commons.constants.Constants;
+import com.open.common.core.constants.Constants;
 import com.open.extend.manager.user.domain.enums.UserSex;
 import com.open.extend.manager.user.domain.enums.UserStatus;
 import com.open.starter.tenant.core.domain.TenantAdminEntity;

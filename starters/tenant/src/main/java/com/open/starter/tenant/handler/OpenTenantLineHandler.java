@@ -2,7 +2,7 @@ package com.open.starter.tenant.handler;
 
 import cn.hutool.core.collection.ListUtil;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.tenant.properties.TenantProperties;
 import com.open.starter.tenant.utils.TenantHelper;
 import lombok.AllArgsConstructor;

@@ -2,8 +2,8 @@ package com.open.extend.manager.menu.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.open.commons.constants.Constants;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.constants.Constants;
+import com.open.common.core.utils.StringUtils;
 import com.open.extend.manager.menu.domain.enums.MenuType;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import lombok.Data;

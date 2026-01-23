@@ -5,7 +5,7 @@ import com.alibaba.cloud.sentinel.SentinelProperties;
 import com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration;
 import com.alibaba.csp.sentinel.init.InitExecutor;
 import com.alibaba.csp.sentinel.transport.config.TransportConfig;
-import com.open.commons.utils.StreamUtils;
+import com.open.common.core.utils.StreamUtils;
 import com.open.starter.sentinel.properties.SentinelCustomProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;

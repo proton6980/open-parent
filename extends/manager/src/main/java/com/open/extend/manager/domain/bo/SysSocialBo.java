@@ -1,7 +1,7 @@
 package com.open.extend.manager.domain.bo;
 
-import com.open.commons.validated.Save;
-import com.open.commons.validated.Update;
+import com.open.common.core.pojo.validated.Save;
+import com.open.common.core.pojo.validated.Update;
 import com.open.extend.manager.domain.SysSocial;
 import com.open.starter.tenant.core.domain.TenantAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;

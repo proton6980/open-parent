@@ -2,11 +2,11 @@ package com.open.starter.oss.core;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
-import com.open.commons.constants.Constants;
-import com.open.commons.utils.DateUtils;
-import com.open.commons.utils.file.FileUtils;
+import com.open.common.core.constants.Constants;
+import com.open.common.core.utils.DateUtils;
+import com.open.common.core.utils.StringUtils;
+import com.open.common.core.utils.file.FileUtils;
 import com.open.starter.oss.constants.OssConstant;
-import com.open.commons.utils.StringUtils;
 import com.open.starter.oss.enums.AccessPolicyType;
 import com.open.starter.oss.propertoes.OssProperties;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;

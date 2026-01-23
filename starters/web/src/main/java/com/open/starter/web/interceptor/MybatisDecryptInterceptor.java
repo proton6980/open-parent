@@ -3,7 +3,7 @@ package com.open.starter.web.interceptor;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.web.annotation.EncryptField;
 import com.open.starter.web.core.EncryptContext;
 import com.open.starter.web.core.EncryptorManager;
@@ -117,9 +117,9 @@ public class MybatisDecryptInterceptor implements Interceptor {
         EncryptContext encryptContext = new EncryptContext();
         encryptContext.setAlgorithm(encryptField.algorithm() == AlgorithmType.DEFAULT ? defaultProperties.getAlgorithm() : encryptField.algorithm());
         encryptContext.setEncode(encryptField.encode() == EncodeType.DEFAULT ? defaultProperties.getEncode() : encryptField.encode());
-        encryptContext.setPassword(StringUtils.isBlank(encryptField.password()) ? defaultProperties.getPassword() : encryptField.password());
-        encryptContext.setPrivateKey(StringUtils.isBlank(encryptField.privateKey()) ? defaultProperties.getPrivateKey() : encryptField.privateKey());
-        encryptContext.setPublicKey(StringUtils.isBlank(encryptField.publicKey()) ? defaultProperties.getPublicKey() : encryptField.publicKey());
+        encryptContext.setPassword(StringUtils.blankToDefault(encryptField.password(), defaultProperties.getPassword()));
+        encryptContext.setPrivateKey(StringUtils.blankToDefault(encryptField.privateKey(), defaultProperties.getPrivateKey()));
+        encryptContext.setPublicKey(StringUtils.blankToDefault(encryptField.publicKey(), defaultProperties.getPublicKey()));
         return this.encryptorManager.decrypt(value, encryptContext);
     }
 

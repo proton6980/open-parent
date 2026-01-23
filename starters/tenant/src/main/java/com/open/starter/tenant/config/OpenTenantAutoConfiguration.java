@@ -3,7 +3,7 @@ package com.open.starter.tenant.config;
 import cn.dev33.satoken.dao.SaTokenDao;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import com.open.commons.utils.ReflectUtils;
+import com.open.common.core.utils.ReflectUtils;
 import com.open.starter.cache.config.OpenRedisAutoConfiguration;
 import com.open.starter.cache.properties.RedissonProperties;
 import com.open.starter.tenant.core.dao.TenantSaTokenDao;

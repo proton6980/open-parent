@@ -2,8 +2,8 @@ package com.open.extend.manager.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.user.domain.enums.UserStatus;
-import com.open.commons.pojo.page.PageQuery;
-import com.open.commons.pojo.page.TableDataInfo;
+import com.open.common.core.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.TableDataInfo;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.domain.bo.SysUserBo;
 import com.open.extend.manager.user.domain.vo.SysUserExportVo;

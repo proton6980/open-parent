@@ -2,7 +2,7 @@ package com.open.extend.manager.role.domain.vo;
 
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
-import com.open.commons.constants.Constants;
+import com.open.common.core.constants.Constants;
 import com.open.extend.manager.role.domain.SysRole;
 import com.open.starter.excel.annotation.ExcelDictFormat;
 import com.open.starter.excel.convert.ExcelDictConvert;

@@ -2,8 +2,8 @@ package com.open.extend.manager.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.open.commons.utils.MapstructUtils;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.MapstructUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.extend.manager.domain.SysSocial;
 import com.open.extend.manager.domain.bo.SysSocialBo;
 import com.open.extend.manager.domain.vo.SysSocialVo;

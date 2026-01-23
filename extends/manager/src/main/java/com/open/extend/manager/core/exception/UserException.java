@@ -1,13 +1,13 @@
 package com.open.extend.manager.core.exception;
 
-import com.open.commons.exception.OpenException;
+import com.open.common.spring.exception.OpenBusinessException;
 
 /**
  * 用户异常
  *
  * @author open
  */
-public class UserException extends OpenException {
+public class UserException extends OpenBusinessException {
 
     public UserException(String message, Object... args) {
         this(null, message, args);

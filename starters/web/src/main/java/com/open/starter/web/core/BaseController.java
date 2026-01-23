@@ -1,6 +1,6 @@
 package com.open.starter.web.core;
 
-import com.open.commons.pojo.R;
+import com.open.common.core.pojo.R;
 
 /**
  * web层通用数据处理

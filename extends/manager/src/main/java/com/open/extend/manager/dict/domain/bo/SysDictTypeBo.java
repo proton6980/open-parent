@@ -1,6 +1,6 @@
 package com.open.extend.manager.dict.domain.bo;
 
-import com.open.commons.constants.RegexConstants;
+import com.open.common.core.constants.RegexConstants;
 import com.open.extend.manager.dict.domain.SysDictType;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;

@@ -1,6 +1,6 @@
 package com.open.extend.manager.domain;
 
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

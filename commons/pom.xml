@@ -11,14 +11,15 @@
     </parent>
 
     <artifactId>open-commons</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>core</module>
+        <module>spring</module>
+        <module>business</module>
+    </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>com.open</groupId>
-            <artifactId>open-common-http</artifactId>
-            <version>${revision}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,18 +57,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
+
         <!-- 离线IP地址定位库 -->
         <dependency>
             <groupId>org.lionsoul</groupId>
             <artifactId>ip2region</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

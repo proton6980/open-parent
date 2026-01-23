@@ -7,11 +7,11 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.http.Method;
-import com.open.commons.exception.BusinessException;
-import com.open.commons.pojo.model.LoginUser;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.StreamUtils;
-import com.open.commons.utils.ValidatorUtils;
+import com.open.common.spring.exception.OpenBusinessException;
+import com.open.common.business.pojo.model.LoginUser;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.StreamUtils;
+import com.open.common.core.utils.ValidatorUtils;
 import com.open.extend.manager.auth.service.IAuthStrategy;
 import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
@@ -65,7 +65,7 @@ public class SocialAuthStrategy implements IAuthStrategy {
             loginBody.getSource(), loginBody.getSocialCode(),
             loginBody.getSocialState(), socialProperties);
         if (!response.ok()) {
-            throw new BusinessException(response.getMsg());
+            throw new OpenBusinessException(response.getMsg());
         }
         AuthUser authUserData = response.getData();
         if ("GITEE".equals(authUserData.getSource())) {
@@ -80,13 +80,13 @@ public class SocialAuthStrategy implements IAuthStrategy {
 
         List<SysSocialVo> list = sysSocialService.selectByAuthId(authUserData.getSource() + authUserData.getUuid());
         if (CollUtil.isEmpty(list)) {
-            throw new BusinessException("你还没有绑定第三方账号，绑定后才可以登录！");
+            throw new OpenBusinessException("你还没有绑定第三方账号，绑定后才可以登录！");
         }
         SysSocialVo socialVo;
         if (TenantHelper.isEnable()) {
             Optional<SysSocialVo> opt = StreamUtils.findAny(list, x -> x.getTenantId().equals(loginBody.getTenantId()));
             if (opt.isPresent()) {
-                throw new BusinessException("对不起，你没有权限登录当前租户！");
+                throw new OpenBusinessException("对不起，你没有权限登录当前租户！");
             }
             socialVo = opt.get();
         } else {

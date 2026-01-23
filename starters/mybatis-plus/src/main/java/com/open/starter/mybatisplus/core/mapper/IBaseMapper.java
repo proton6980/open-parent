@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
-import com.open.commons.utils.MapstructUtils;
+import com.open.common.core.utils.MapstructUtils;
 import com.open.starter.mybatisplus.core.domain.BaseEntity;
 
 import java.io.Serializable;

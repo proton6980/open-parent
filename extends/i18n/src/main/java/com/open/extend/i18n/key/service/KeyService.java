@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.i18n.key.domain.Key;
 import com.open.extend.i18n.key.domain.bo.KyeBo;
 import com.open.extend.i18n.key.domain.vo.KeyVo;
-import com.open.commons.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.PageQuery;
 
 import java.util.Map;
 

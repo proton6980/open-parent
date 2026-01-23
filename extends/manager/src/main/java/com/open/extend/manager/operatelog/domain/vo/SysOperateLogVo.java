@@ -3,7 +3,7 @@ package com.open.extend.manager.operatelog.domain.vo;
 import cn.hutool.core.util.StrUtil;
 import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import cn.idev.excel.annotation.ExcelProperty;
-import com.open.commons.utils.ip.RegionUtils;
+import com.open.common.core.utils.ip.RegionUtils;
 import com.open.extend.manager.operatelog.domain.SysOperateLog;
 import com.open.starter.excel.annotation.ExcelDictFormat;
 import com.open.starter.excel.convert.ExcelDictConvert;

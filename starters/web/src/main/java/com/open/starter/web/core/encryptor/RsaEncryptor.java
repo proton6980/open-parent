@@ -1,6 +1,6 @@
 package com.open.starter.web.core.encryptor;
 
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.web.core.EncryptContext;
 import com.open.starter.web.enums.AlgorithmType;
 import com.open.starter.web.enums.EncodeType;

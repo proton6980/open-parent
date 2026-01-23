@@ -1,9 +1,9 @@
 package com.open.extend.i18n.exception;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.exception.OpenException;
-import com.open.commons.utils.I18nUtils;
+import com.open.common.core.exception.OpenException;
 import com.open.extend.i18n.key.service.KeyService;
+import com.open.common.core.utils.I18nUtils;
 
 /**
  * 多语言异常

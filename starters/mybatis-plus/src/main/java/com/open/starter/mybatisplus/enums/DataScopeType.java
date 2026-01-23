@@ -1,7 +1,7 @@
 package com.open.starter.mybatisplus.enums;
 
-import com.open.commons.pojo.model.LoginUser;
-import com.open.commons.utils.StringUtils;
+import com.open.common.business.pojo.model.LoginUser;
+import com.open.common.core.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,7 +13,7 @@ import lombok.Getter;
  * - {@code user}: 当前登录用户信息，参考 {@link LoginUser}
  * 内置服务：
  * - {@code sdss}: 系统数据权限服务，参考 SysDataScopeService
- * 如需扩展数据，可以通过 {@link DataPermissionHelper} 进行操作
+ * 如需扩展数据，可以通过 {@link com.open.starter.mybatisplus.helper.DataPermissionHelper} 进行操作
  * 如需扩展服务，可以通过 SysDataScopeService 自行编写
  * </p>
  *

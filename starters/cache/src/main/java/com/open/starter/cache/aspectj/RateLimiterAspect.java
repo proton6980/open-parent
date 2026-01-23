@@ -1,11 +1,12 @@
 package com.open.starter.cache.aspectj;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.constants.GlobalConstants;
-import com.open.commons.exception.BusinessException;
-import com.open.commons.utils.MessageUtils;
-import com.open.commons.utils.ServletUtils;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.constants.GlobalConstants;
+import com.open.common.core.utils.ServletUtils;
+import com.open.common.core.utils.StringUtils;
+import com.open.common.core.utils.translate.ITranslateClient;
+import com.open.common.spring.exception.OpenBusinessException;
+import com.open.common.spring.utils.SpringUtils;
 import com.open.starter.cache.annotation.RateLimiter;
 import com.open.starter.cache.enums.LimitType;
 import com.open.starter.cache.utils.RedisUtils;
@@ -17,6 +18,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RateType;
 import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.Expression;
@@ -65,16 +67,16 @@ public class RateLimiterAspect {
             if (number == -1) {
                 String message = rateLimiter.message();
                 if (StringUtils.startsWith(message, "{") && StringUtils.endsWith(message, "}")) {
-                    message = MessageUtils.message(StringUtils.substring(message, 1, message.length() - 1));
+                    message = SpringUtils.getBean(ITranslateClient.class).translate(LocaleContextHolder.getLocale(), StringUtils.substring(message, 1, message.length() - 1));
                 }
-                throw new BusinessException(message);
+                throw new OpenBusinessException(message);
             }
             log.info("限制令牌 => {}, 剩余令牌 => {}, 缓存key => '{}'", count, number, combineKey);
         } catch (Exception e) {
-            if (e instanceof BusinessException) {
+            if (e instanceof OpenBusinessException) {
                 throw e;
             } else {
-                throw new RuntimeException("服务器限流异常，请稍候再试", e);
+                throw new RuntimeException("Server current limit exception, please try again later.", e);
             }
         }
     }

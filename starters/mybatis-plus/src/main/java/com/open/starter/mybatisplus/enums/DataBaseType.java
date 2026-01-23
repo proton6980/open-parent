@@ -1,6 +1,6 @@
 package com.open.starter.mybatisplus.enums;
 
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

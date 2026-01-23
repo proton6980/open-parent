@@ -1,6 +1,6 @@
 package com.open.starter.oss.constants;
 
-import com.open.commons.constants.GlobalConstants;
+import com.open.common.core.constants.GlobalConstants;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,11 @@ public interface OssConstant {
     /**
      * 默认配置KEY
      */
-    String DEFAULT_CONFIG_KEY = GlobalConstants.GLOBAL_REDIS_KEY + "sys_oss:default_config";
+    String DEFAULT_CONFIG_KEY = GlobalConstants.GLOBAL_REDIS_KEY + "oss_config:default";
+    /**
+     * 配置KEY
+     */
+    String CONFIG_KEY = GlobalConstants.GLOBAL_REDIS_KEY + "oss_config";
 
     /**
      * 预览列表资源开关Key

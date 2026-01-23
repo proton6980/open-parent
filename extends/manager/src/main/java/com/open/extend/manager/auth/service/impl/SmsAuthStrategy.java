@@ -4,14 +4,14 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.stp.parameter.SaLoginParameter;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.open.commons.constants.Constants;
-import com.open.commons.constants.GlobalConstants;
-import com.open.commons.enums.LoginType;
-import com.open.commons.pojo.model.LoginUser;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.MessageUtils;
-import com.open.commons.utils.StringUtils;
-import com.open.commons.utils.ValidatorUtils;
+import com.open.common.core.constants.Constants;
+import com.open.common.core.constants.GlobalConstants;
+import com.open.common.business.enums.LoginType;
+import com.open.common.business.pojo.model.LoginUser;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.I18nUtils;
+import com.open.common.core.utils.StringUtils;
+import com.open.common.core.utils.ValidatorUtils;
 import com.open.extend.manager.auth.service.IAuthStrategy;
 import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
@@ -97,7 +97,7 @@ public class SmsAuthStrategy implements IAuthStrategy {
     private boolean validateSmsCode(String tenantId, String phonenumber, String smsCode) {
         String code = RedisUtils.getCacheObject(GlobalConstants.CAPTCHA_CODE_KEY + phonenumber);
         if (StringUtils.isBlank(code)) {
-            tokenService.recordLoginInfo(tenantId, phonenumber, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
+            tokenService.recordLoginInfo(tenantId, phonenumber, Constants.LOGIN_FAIL, I18nUtils.message("user.jcaptcha.expire"));
             throw new CaptchaExpireException();
         }
         return code.equals(smsCode);

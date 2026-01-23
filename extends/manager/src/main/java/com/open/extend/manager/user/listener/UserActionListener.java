@@ -7,10 +7,10 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.open.commons.constants.Constants;
-import com.open.commons.utils.MessageUtils;
-import com.open.commons.utils.ServletUtils;
-import com.open.commons.utils.ip.AddressUtils;
+import com.open.common.core.constants.Constants;
+import com.open.common.core.utils.I18nUtils;
+import com.open.common.core.utils.ServletUtils;
+import com.open.common.core.utils.ip.AddressUtils;
 import com.open.extend.manager.user.domain.SysUserOnline;
 import com.open.extend.manager.user.constants.UserConstants;
 import com.open.extend.manager.user.service.ISysUserService;
@@ -67,7 +67,7 @@ public class UserActionListener implements SaTokenListener {
         loginInfoEvent.setTenantId(tenantId);
         loginInfoEvent.setUsername(username);
         loginInfoEvent.setStatus(Constants.LOGIN_SUCCESS);
-        loginInfoEvent.setMessage(MessageUtils.message("user.login.success"));
+        loginInfoEvent.setMessage(I18nUtils.message("user.login.success"));
         SpringUtil.publishEvent(loginInfoEvent);
         // 更新登录信息
         sysUserService.recordLoginInfo((Long) loginParameter.getExtra(LoginHelper.USER_KEY), ip);

@@ -1,8 +1,8 @@
 package com.open.starter.tenant.handler;
 
 import com.baomidou.mybatisplus.core.plugins.InterceptorIgnoreHelper;
-import com.open.commons.constants.GlobalConstants;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.constants.GlobalConstants;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.cache.handler.KeyPrefixHandler;
 import com.open.starter.tenant.utils.TenantHelper;
 import lombok.extern.slf4j.Slf4j;

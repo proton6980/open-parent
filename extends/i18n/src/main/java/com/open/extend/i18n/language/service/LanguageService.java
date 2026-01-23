@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.i18n.language.domain.Language;
 import com.open.extend.i18n.language.domain.bo.LanguageBo;
 import com.open.extend.i18n.language.domain.vo.LanguageVo;
-import com.open.commons.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.PageQuery;
 
 /**
  * 语言业务接口

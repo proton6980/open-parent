@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.open.commons.utils.StreamUtils;
+import com.open.common.core.utils.StreamUtils;
 import com.open.extend.manager.dept.domain.SysDept;
 import com.open.extend.manager.roledept.domain.SysRoleDept;
 import com.open.extend.manager.dept.mapper.ISysDeptMapper;

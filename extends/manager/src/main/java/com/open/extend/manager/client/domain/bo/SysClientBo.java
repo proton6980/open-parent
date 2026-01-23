@@ -1,7 +1,7 @@
 package com.open.extend.manager.client.domain.bo;
 
-import com.open.commons.validated.Save;
-import com.open.commons.validated.Update;
+import com.open.common.core.pojo.validated.Save;
+import com.open.common.core.pojo.validated.Update;
 import com.open.extend.manager.client.domain.SysClient;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;

@@ -2,13 +2,13 @@ package com.open.extend.manager.post.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.pojo.R;
+import com.open.common.core.pojo.R;
 import com.open.extend.manager.post.domain.bo.SysPostBo;
 import com.open.extend.manager.post.domain.vo.SysPostVo;
 import com.open.extend.manager.post.service.ISysPostService;
 import com.open.starter.excel.utils.ExcelUtil;
-import com.open.commons.pojo.page.PageQuery;
-import com.open.commons.pojo.page.TableDataInfo;
+import com.open.common.core.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.TableDataInfo;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.enums.BusinessType;
 import com.open.starter.web.core.BaseController;

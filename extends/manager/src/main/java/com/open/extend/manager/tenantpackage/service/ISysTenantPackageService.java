@@ -2,8 +2,8 @@ package com.open.extend.manager.tenantpackage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.open.extend.manager.tenantpackage.domain.SysTenantPackage;
-import com.open.commons.pojo.page.PageQuery;
-import com.open.commons.pojo.page.TableDataInfo;
+import com.open.common.core.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.TableDataInfo;
 import com.open.extend.manager.tenantpackage.domain.bo.SysTenantPackageBo;
 import com.open.extend.manager.tenantpackage.domain.vo.SysTenantPackageVo;
 

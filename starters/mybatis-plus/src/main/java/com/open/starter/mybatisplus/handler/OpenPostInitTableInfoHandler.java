@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.handlers.PostInitTableInfoHandler;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.open.commons.utils.ReflectUtils;
+import com.open.common.core.utils.ReflectUtils;
 import org.apache.ibatis.session.Configuration;
 
 /**

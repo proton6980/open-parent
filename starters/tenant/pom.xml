@@ -17,11 +17,13 @@
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-mybatis-plus</artifactId>
+            <version>${revision}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-cache</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>

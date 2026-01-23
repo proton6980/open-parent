@@ -2,8 +2,8 @@ package com.open.extend.manager.dept.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.core.convert.Convert;
-import com.open.commons.pojo.R;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.pojo.R;
+import com.open.common.core.utils.StringUtils;
 import com.open.extend.manager.dept.domain.bo.SysDeptBo;
 import com.open.extend.manager.dept.domain.vo.SysDeptVo;
 import com.open.extend.manager.dept.service.ISysDeptService;

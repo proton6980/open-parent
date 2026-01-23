@@ -5,8 +5,9 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.open.commons.exception.OpenException;
-import com.open.commons.utils.MapstructUtils;
+import com.open.common.core.exception.OpenException;
+import com.open.common.core.utils.MapstructUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.extend.i18n.key.domain.Key;
 import com.open.extend.i18n.key.domain.bo.KyeBo;
 import com.open.extend.i18n.key.domain.vo.KeyVo;
@@ -16,7 +17,7 @@ import com.open.extend.i18n.language.domain.Language;
 import com.open.extend.i18n.language.mapper.ILanguageMapper;
 import com.open.extend.i18n.value.domain.Value;
 import com.open.extend.i18n.value.mapper.IValueMapper;
-import com.open.commons.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.PageQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -84,11 +85,11 @@ public class KeyServiceImpl extends ServiceImpl<IKeyMapper, Key> implements KeyS
     public String build(String languageCode, String keyCode, Object... args) {
         Key key = this.getOneOpt(Wrappers.lambdaQuery(Key.class)
                         .eq(Key::getCode, keyCode))
-                .orElseThrow(() -> new OpenException("i18n-db", 500, "keyCode {} is not exist", keyCode));
+                .orElseThrow(() -> new OpenException("i18n-db", 500, StringUtils.format("keyCode {} is not exist", keyCode)));
         Language language = this.languageMapper.selectOne(Wrappers.lambdaQuery(Language.class)
                 .eq(Language::getCode, languageCode));
         if (Objects.isNull(language)) {
-            throw new OpenException("i18n-db", 500, "languageCode {} is not exist", languageCode);
+            throw new OpenException("i18n-db", 500, StringUtils.format("languageCode {} is not exist", languageCode));
         }
         Value value = this.valueMapper.selectOne(Wrappers.lambdaQuery(Value.class)
                 .eq(Value::getKeyId, key.getId())

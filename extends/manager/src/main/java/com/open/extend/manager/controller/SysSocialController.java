@@ -1,6 +1,6 @@
 package com.open.extend.manager.controller;
 
-import com.open.commons.pojo.R;
+import com.open.common.core.pojo.R;
 import com.open.extend.manager.domain.vo.SysSocialVo;
 import com.open.extend.manager.service.ISysSocialService;
 import com.open.starter.satoken.utils.LoginHelper;

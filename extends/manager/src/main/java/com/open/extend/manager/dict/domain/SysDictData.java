@@ -1,7 +1,7 @@
 package com.open.extend.manager.dict.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.open.commons.constants.Constants;
+import com.open.common.core.constants.Constants;
 import com.open.starter.tenant.core.domain.TenantAdminEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

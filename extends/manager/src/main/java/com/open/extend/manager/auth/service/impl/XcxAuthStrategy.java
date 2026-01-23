@@ -3,10 +3,10 @@ package com.open.extend.manager.auth.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.stp.parameter.SaLoginParameter;
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.exception.BusinessException;
-import com.open.commons.pojo.model.XcxLoginUser;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.ValidatorUtils;
+import com.open.common.spring.exception.OpenBusinessException;
+import com.open.common.business.pojo.model.XcxLoginUser;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.ValidatorUtils;
 import com.open.extend.manager.auth.service.IAuthStrategy;
 import com.open.extend.manager.auth.service.TokenService;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
@@ -64,7 +64,7 @@ public class XcxAuthStrategy implements IAuthStrategy {
             // 微信小程序只有关联到微信开放平台下之后才能获取到 unionId，因此unionId不一定能返回。
             unionId = token.getUnionId();
         } else {
-            throw new BusinessException(resp.getMsg());
+            throw new OpenBusinessException(resp.getMsg());
         }
         // todo getUserInfoByOpenid 方法内部查询逻辑需要自行根据业务实现
         XcxLoginUser loginUser = this.getUserInfoByOpenid(openid);

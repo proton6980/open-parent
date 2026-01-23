@@ -1,6 +1,6 @@
 package com.open.starter.tenant.core.dao;
 
-import com.open.commons.constants.GlobalConstants;
+import com.open.common.core.constants.GlobalConstants;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.satoken.core.dao.OpenSaTokenDao;
 

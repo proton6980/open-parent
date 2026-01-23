@@ -7,13 +7,14 @@ import cn.hutool.crypto.SecureUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.open.commons.constants.GlobalConstants;
-import com.open.commons.exception.BusinessException;
-import com.open.commons.pojo.R;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.MessageUtils;
-import com.open.commons.utils.ServletUtils;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.constants.GlobalConstants;
+import com.open.common.core.utils.translate.ITranslateClient;
+import com.open.common.spring.exception.OpenBusinessException;
+import com.open.common.core.pojo.R;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.ServletUtils;
+import com.open.common.core.utils.StringUtils;
+import com.open.common.spring.utils.SpringUtils;
 import com.open.starter.cache.utils.RedisUtils;
 import com.open.starter.satoken.annotation.RepeatSubmit;
 import org.aspectj.lang.JoinPoint;
@@ -21,6 +22,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,7 +47,7 @@ public class RepeatSubmitAspect {
         long interval = repeatSubmit.timeUnit().toMillis(repeatSubmit.interval());
 
         if (interval < 1000) {
-            throw new BusinessException("重复提交间隔时间不能小于'1'秒");
+            throw new OpenBusinessException("重复提交间隔时间不能小于'1'秒");
         }
         HttpServletRequest request = ServletUtils.getRequest();
         String nowParams = argsArrayToString(point.getArgs());
@@ -64,9 +66,9 @@ public class RepeatSubmitAspect {
         } else {
             String message = repeatSubmit.message();
             if (StringUtils.startsWith(message, "{") && StringUtils.endsWith(message, "}")) {
-                message = MessageUtils.message(StringUtils.substring(message, 1, message.length() - 1));
+                message = SpringUtils.getBean(ITranslateClient.class).translate(LocaleContextHolder.getLocale(), StringUtils.substring(message, 1, message.length() - 1));
             }
-            throw new BusinessException(message);
+            throw new OpenBusinessException(message);
         }
     }
 

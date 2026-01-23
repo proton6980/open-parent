@@ -1,7 +1,7 @@
 package com.open.extend.manager.menu.domain.bo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.open.commons.constants.RegexConstants;
+import com.open.common.core.constants.RegexConstants;
 import com.open.extend.manager.menu.domain.SysMenu;
 import com.open.extend.manager.menu.domain.enums.MenuType;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;

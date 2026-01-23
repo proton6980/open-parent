@@ -1,7 +1,7 @@
 package com.open.extend.manager.role.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.open.commons.pojo.R;
+import com.open.common.core.pojo.R;
 import com.open.extend.manager.userrole.domain.SysUserRole;
 import com.open.extend.manager.dept.domain.bo.SysDeptBo;
 import com.open.extend.manager.role.domain.bo.SysRoleBo;
@@ -13,8 +13,8 @@ import com.open.extend.manager.dept.service.ISysDeptService;
 import com.open.extend.manager.role.service.ISysRoleService;
 import com.open.extend.manager.user.service.ISysUserService;
 import com.open.starter.excel.utils.ExcelUtil;
-import com.open.commons.pojo.page.PageQuery;
-import com.open.commons.pojo.page.TableDataInfo;
+import com.open.common.core.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.TableDataInfo;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.enums.BusinessType;
 import com.open.starter.web.core.BaseController;

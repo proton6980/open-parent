@@ -20,6 +20,9 @@ import java.lang.annotation.Target;
 @JacksonAnnotationsInside
 @JsonSerialize(using = SensitiveHandler.class)
 public @interface Sensitive {
+    /**
+     * 策略
+     */
     SensitiveStrategy strategy();
 
     /**

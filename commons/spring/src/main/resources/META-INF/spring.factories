@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.open.common.spring.config.OpenUtilAutoConfiguration,\
+  com.open.common.spring.config.OpenAsyncAutoConfiguration,\
+  com.open.common.spring.config.OpenThreadPoolAutoConfiguration

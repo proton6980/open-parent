@@ -13,19 +13,21 @@ import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.lock.annotation.Lock4j;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.open.commons.constants.Constants;
-import com.open.commons.constants.GlobalConstants;
-import com.open.commons.constants.TenantConstants;
-import com.open.commons.enums.CaptchaType;
-import com.open.commons.enums.LoginType;
-import com.open.commons.enums.UserType;
-import com.open.commons.exception.BusinessException;
-import com.open.commons.pojo.model.LoginUser;
-import com.open.commons.pojo.model.PostDTO;
-import com.open.commons.pojo.model.RoleDTO;
-import com.open.commons.utils.MessageUtils;
-import com.open.commons.utils.ReflectUtils;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.constants.Constants;
+import com.open.common.core.constants.GlobalConstants;
+import com.open.common.business.constants.TenantConstants;
+import com.open.common.core.enums.CaptchaType;
+import com.open.common.business.enums.LoginType;
+import com.open.common.business.enums.UserType;
+import com.open.common.core.utils.I18nUtils;
+import com.open.common.core.utils.translate.ITranslateClient;
+import com.open.common.spring.exception.OpenBusinessException;
+import com.open.common.business.pojo.model.LoginUser;
+import com.open.common.business.pojo.model.PostDTO;
+import com.open.common.business.pojo.model.RoleDTO;
+import com.open.common.core.utils.ReflectUtils;
+import com.open.common.core.utils.StringUtils;
+import com.open.common.spring.utils.SpringUtils;
 import com.open.extend.manager.auth.bo.RegisterBody;
 import com.open.extend.manager.auth.vo.CaptchaVo;
 import com.open.extend.manager.config.service.ISysConfigService;
@@ -56,6 +58,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -108,7 +111,7 @@ public class TokenService {
         bo.setNickName(authUserData.getNickname());
         List<SysSocialVo> checkList = sysSocialService.selectByAuthId(authId);
         if (CollUtil.isNotEmpty(checkList)) {
-            throw new BusinessException("此三方账号已经被绑定!");
+            throw new OpenBusinessException("此三方账号已经被绑定!");
         }
         // 查询是否已经绑定用户
         SysSocialBo params = new SysSocialBo();
@@ -140,7 +143,8 @@ public class TokenService {
                 // 超级管理员 登出清除动态租户
                 TenantHelper.clearDynamic();
             }
-            recordLoginInfo(loginUser.getTenantId(), loginUser.getUsername(), Constants.LOGOUT, MessageUtils.message("user.logout.success"));
+            recordLoginInfo(loginUser.getTenantId(), loginUser.getUsername(), Constants.LOGOUT,
+                    SpringUtils.getBean(ITranslateClient.class).translate(LocaleContextHolder.getLocale(), "user.logout.success"));
         } catch (NotLoginException ignored) {
         } finally {
             try {
@@ -176,20 +180,20 @@ public class TokenService {
 
         boolean exist = TenantHelper.dynamic(tenantId, () -> {
             if (!("true".equals(sysConfigService.selectConfigByKey("sys.account.registerUser")))) {
-                throw new BusinessException("当前系统没有开启注册功能");
+                throw new OpenBusinessException("当前系统没有开启注册功能");
             }
             return sysUserService.exists(new LambdaQueryWrapper<SysUser>()
                     .eq(SysUser::getUsername, sysUserBo.getUserName()));
         });
         if (exist) {
-            throw new BusinessException("user.register.save.error", username);
+            throw new OpenBusinessException("", 500, "user.register.save.error", username);
         }
 
         boolean regFlag = sysUserService.registerUser(sysUserBo, tenantId);
         if (!regFlag) {
-            throw new BusinessException("user.register.error");
+            throw new OpenBusinessException("user.register.error");
         }
-        recordLoginInfo(tenantId, username, Constants.REGISTER, MessageUtils.message("user.register.success"));
+        recordLoginInfo(tenantId, username, Constants.REGISTER, I18nUtils.message("user.register.success"));
     }
 
     /**
@@ -235,12 +239,12 @@ public class TokenService {
         String captcha = RedisUtils.getCacheObject(verifyKey);
         RedisUtils.deleteObject(verifyKey);
         if (captcha == null) {
-            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"));
-            throw new BusinessException("验证码不存在");
+            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, I18nUtils.message("user.jcaptcha.expire"));
+            throw new OpenBusinessException("验证码不存在");
         }
         if (!code.equalsIgnoreCase(captcha)) {
-            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"));
-            throw new BusinessException("验证码不正确");
+            recordLoginInfo(tenantId, username, Constants.LOGIN_FAIL, I18nUtils.message("user.jcaptcha.error"));
+            throw new OpenBusinessException("验证码不正确");
         }
     }
 
@@ -275,7 +279,7 @@ public class TokenService {
         int errorNumber = ObjectUtil.defaultIfNull(RedisUtils.getCacheObject(errorKey), 0);
         // 锁定时间内登录 则踢出
         if (errorNumber >= maxRetryCount) {
-            recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+            recordLoginInfo(tenantId, username, loginFail, I18nUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
             throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
         }
 
@@ -285,11 +289,11 @@ public class TokenService {
             RedisUtils.setCacheObject(errorKey, errorNumber, lockTime);
             // 达到规定错误次数 则锁定登录
             if (errorNumber >= maxRetryCount) {
-                recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
+                recordLoginInfo(tenantId, username, loginFail, I18nUtils.message(loginType.getRetryLimitExceed(), maxRetryCount, lockTime));
                 throw new UserException(loginType.getRetryLimitExceed(), maxRetryCount, lockTime);
             } else {
                 // 未达到规定错误次数
-                recordLoginInfo(tenantId, username, loginFail, MessageUtils.message(loginType.getRetryLimitCount(), errorNumber));
+                recordLoginInfo(tenantId, username, loginFail, I18nUtils.message(loginType.getRetryLimitCount(), errorNumber));
                 throw new UserException(loginType.getRetryLimitCount(), errorNumber);
             }
         }

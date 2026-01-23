@@ -9,7 +9,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.http.HttpStatus;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.extend.gateway.properties.IgnoreWhiteProperties;
 import com.open.starter.satoken.utils.LoginHelper;
 import org.springframework.context.annotation.Bean;

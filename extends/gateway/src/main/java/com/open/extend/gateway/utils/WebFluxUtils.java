@@ -1,9 +1,9 @@
 package com.open.extend.gateway.utils;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.open.commons.pojo.R;
-import com.open.commons.utils.JacksonUtils;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.pojo.R;
+import com.open.common.core.utils.JacksonUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.extend.gateway.filter.WebCacheRequestFilter;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.core.io.buffer.DataBuffer;

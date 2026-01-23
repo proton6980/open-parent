@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.open</groupId>
-            <artifactId>open-commons</artifactId>
+            <artifactId>open-common-spring</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

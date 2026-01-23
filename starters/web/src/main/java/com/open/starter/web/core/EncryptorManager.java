@@ -3,7 +3,7 @@ package com.open.starter.web.core;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import com.open.starter.web.annotation.EncryptField;
 import org.apache.ibatis.io.Resources;
 import lombok.NoArgsConstructor;
@@ -150,8 +150,8 @@ public class EncryptorManager {
             clazz = clazz.getSuperclass();
         }
         fieldSet = fieldSet.stream().filter(field ->
-                field.isAnnotationPresent(EncryptField.class) && field.getType() == String.class)
-            .collect(Collectors.toSet());
+                        field.isAnnotationPresent(EncryptField.class) && field.getType() == String.class)
+                .collect(Collectors.toSet());
         for (Field field : fieldSet) {
             field.setAccessible(true);
         }

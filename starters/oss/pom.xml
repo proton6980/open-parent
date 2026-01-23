@@ -16,15 +16,18 @@
     <dependencies>
         <dependency>
             <groupId>com.open</groupId>
-            <artifactId>open-commons</artifactId>
+            <artifactId>open-common-core</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-cache</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-starter-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!--  AWS SDK for Java 2.x  -->

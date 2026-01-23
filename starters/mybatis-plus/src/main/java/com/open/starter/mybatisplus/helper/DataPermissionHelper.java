@@ -6,7 +6,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.plugins.IgnoreStrategy;
 import com.baomidou.mybatisplus.core.plugins.InterceptorIgnoreHelper;
-import com.open.commons.utils.ReflectUtils;
+import com.open.common.core.utils.ReflectUtils;
 import com.open.starter.mybatisplus.annotation.DataPermission;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package com.open.extend.manager.user.domain.bo;
 
-import com.open.commons.constants.Constants;
-import com.open.commons.xss.Xss;
+import com.open.common.core.constants.Constants;
+import com.open.common.core.pojo.validated.xss.Xss;
 import com.open.extend.manager.user.domain.SysUser;
 import com.open.extend.manager.user.domain.enums.UserSex;
 import com.open.extend.manager.user.domain.enums.UserStatus;

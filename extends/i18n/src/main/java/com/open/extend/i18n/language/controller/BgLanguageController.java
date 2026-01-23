@@ -1,12 +1,12 @@
 package com.open.extend.i18n.language.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.open.commons.validated.Save;
-import com.open.commons.validated.Update;
+import com.open.common.core.pojo.validated.Save;
+import com.open.common.core.pojo.validated.Update;
 import com.open.extend.i18n.language.domain.bo.LanguageBo;
 import com.open.extend.i18n.language.domain.vo.LanguageVo;
 import com.open.extend.i18n.language.service.LanguageService;
-import com.open.commons.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.PageQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

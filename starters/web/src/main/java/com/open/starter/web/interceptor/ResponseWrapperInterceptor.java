@@ -1,8 +1,8 @@
 package com.open.starter.web.interceptor;
 
-import com.open.commons.pojo.R;
-import com.open.commons.pojo.page.TableDataInfo;
-import com.open.commons.utils.JacksonUtils;
+import com.open.common.core.pojo.R;
+import com.open.common.core.pojo.page.TableDataInfo;
+import com.open.common.core.utils.JacksonUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

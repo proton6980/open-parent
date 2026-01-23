@@ -1,15 +1,15 @@
 package com.open.extend.manager.client.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.open.commons.pojo.R;
-import com.open.commons.validated.Save;
-import com.open.commons.validated.Update;
+import com.open.common.core.pojo.R;
+import com.open.common.core.pojo.validated.Save;
+import com.open.common.core.pojo.validated.Update;
 import com.open.extend.manager.client.domain.bo.SysClientBo;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
 import com.open.extend.manager.client.service.ISysClientService;
 import com.open.starter.excel.utils.ExcelUtil;
-import com.open.commons.pojo.page.PageQuery;
-import com.open.commons.pojo.page.TableDataInfo;
+import com.open.common.core.pojo.page.PageQuery;
+import com.open.common.core.pojo.page.TableDataInfo;
 import com.open.starter.satoken.annotation.Log;
 import com.open.starter.satoken.annotation.RepeatSubmit;
 import com.open.starter.satoken.enums.BusinessType;

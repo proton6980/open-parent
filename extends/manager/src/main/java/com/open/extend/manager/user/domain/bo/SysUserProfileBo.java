@@ -1,7 +1,7 @@
 package com.open.extend.manager.user.domain.bo;
 
-import com.open.commons.constants.RegexConstants;
-import com.open.commons.xss.Xss;
+import com.open.common.core.constants.RegexConstants;
+import com.open.common.core.pojo.validated.xss.Xss;
 import com.open.starter.json.annotation.Sensitive;
 import com.open.starter.json.core.SensitiveStrategy;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;

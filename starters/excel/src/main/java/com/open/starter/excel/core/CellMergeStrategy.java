@@ -8,7 +8,7 @@ import cn.idev.excel.metadata.Head;
 import cn.idev.excel.write.handler.WorkbookWriteHandler;
 import cn.idev.excel.write.handler.context.WorkbookWriteHandlerContext;
 import cn.idev.excel.write.merge.AbstractMergeStrategy;
-import com.open.commons.utils.ReflectUtils;
+import com.open.common.core.utils.ReflectUtils;
 import com.open.starter.excel.annotation.CellMerge;
 import lombok.AllArgsConstructor;
 import lombok.Data;

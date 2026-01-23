@@ -1,7 +1,7 @@
 package com.open.extend.manager.auth.service;
 
-import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.exception.BusinessException;
+import com.open.common.spring.exception.OpenBusinessException;
+import com.open.common.spring.utils.SpringUtils;
 import com.open.extend.manager.auth.vo.LoginVo;
 import com.open.extend.manager.client.domain.vo.SysClientVo;
 
@@ -25,10 +25,10 @@ public interface IAuthStrategy {
     static LoginVo login(String body, SysClientVo client, String grantType) {
         // 授权类型和客户端id
         String beanName = grantType + BASE_NAME;
-        if (!SpringUtil.getBeanFactory().containsBean(beanName)) {
-            throw new BusinessException("授权类型不正确!");
+        if (!SpringUtils.getBeanFactory().containsBean(beanName)) {
+            throw new OpenBusinessException("授权类型不正确!");
         }
-        IAuthStrategy instance = SpringUtil.getBean(beanName);
+        IAuthStrategy instance = SpringUtils.getBean(beanName);
         return instance.login(body, client);
     }
 

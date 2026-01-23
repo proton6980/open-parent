@@ -1,7 +1,7 @@
 package com.open.starter.web.handler;
 
-import com.open.commons.exception.OpenException;
-import com.open.commons.pojo.R;
+import com.open.common.core.exception.OpenException;
+import com.open.common.core.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

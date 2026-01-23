@@ -3,7 +3,7 @@ package com.open.starter.cache.utils;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.open.commons.utils.StringUtils;
+import com.open.common.core.utils.StringUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.redisson.api.RIdGenerator;

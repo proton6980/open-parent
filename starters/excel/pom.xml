@@ -16,7 +16,13 @@
     <dependencies>
         <dependency>
             <groupId>com.open</groupId>
+            <artifactId>open-common-business</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open</groupId>
             <artifactId>open-starter-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>

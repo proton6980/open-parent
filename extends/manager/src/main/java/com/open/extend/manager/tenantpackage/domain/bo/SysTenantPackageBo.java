@@ -1,7 +1,7 @@
 package com.open.extend.manager.tenantpackage.domain.bo;
 
-import com.open.commons.validated.Save;
-import com.open.commons.validated.Update;
+import com.open.common.core.pojo.validated.Save;
+import com.open.common.core.pojo.validated.Update;
 import com.open.extend.manager.tenantpackage.domain.SysTenantPackage;
 import com.open.starter.mybatisplus.core.domain.BaseAdminEntity;
 import io.github.linpeilie.annotations.AutoMapper;
@@ -37,7 +37,7 @@ public class SysTenantPackageBo extends BaseAdminEntity {
     /**
      * 关联菜单id
      */
-    @AutoMapping(target = "menuIds", expression = "java(com.open.commons.utils.StringUtils.join(source.getMenuIds(), \",\"))")
+    @AutoMapping(target = "menuIds", expression = "java(com.open.common.core.utils.StringUtils.join(source.getMenuIds(), \",\"))")
     private Long[] menuIds;
 
     /**
