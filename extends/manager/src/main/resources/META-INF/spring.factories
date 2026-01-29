@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.open.extend.manager.core.OpenManagerAutoConfiguration
+  com.open.extend.manager.config.OpenManagerAutoConfiguration

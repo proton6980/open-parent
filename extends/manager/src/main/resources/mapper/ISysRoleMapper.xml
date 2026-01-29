@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.open.extend.manager.role.mapper.ISysRoleMapper">
+<mapper namespace="com.open.extend.manager.function.role.mapper.ISysRoleMapper">
 
-    <resultMap type="com.open.extend.manager.role.domain.vo.SysRoleVo" id="SysRoleResult">
+    <resultMap type="com.open.extend.manager.function.role.domain.vo.SysRoleVo" id="SysRoleResult">
     </resultMap>
 
     <sql id="selectRoleVo">

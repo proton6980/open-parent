@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.open.extend.manager.user.mapper.ISysUserMapper">
+<mapper namespace="com.open.extend.manager.function.user.mapper.ISysUserMapper">
 
-    <resultMap type="com.open.extend.manager.user.domain.vo.SysUserVo" id="SysUserResult">
+    <resultMap type="com.open.extend.manager.function.user.domain.vo.SysUserVo" id="SysUserResult">
         <id property="id" column="id"/>
     </resultMap>
-    <resultMap type="com.open.extend.manager.user.domain.vo.SysUserExportVo" id="SysUserExportResult">
+    <resultMap type="com.open.extend.manager.function.user.domain.vo.SysUserExportVo" id="SysUserExportResult">
         <id property="userId" column="id"/>
     </resultMap>
 

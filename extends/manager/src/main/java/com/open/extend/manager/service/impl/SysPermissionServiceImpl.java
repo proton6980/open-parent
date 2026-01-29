@@ -1,9 +1,10 @@
 package com.open.extend.manager.service.impl;
 
 import com.open.common.business.constants.TenantConstants;
-import com.open.extend.manager.menu.service.ISysMenuService;
+import com.open.common.business.service.IPermissionService;
+import com.open.extend.manager.function.menu.service.ISysMenuService;
 import com.open.extend.manager.service.ISysPermissionService;
-import com.open.extend.manager.role.service.ISysRoleService;
+import com.open.extend.manager.function.role.service.ISysRoleService;
 import com.open.starter.satoken.utils.LoginHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.Set;
  */
 @RequiredArgsConstructor
 @Service
-public class SysPermissionServiceImpl implements ISysPermissionService {
+public class SysPermissionServiceImpl implements ISysPermissionService, IPermissionService {
 
     private final ISysRoleService roleService;
     private final ISysMenuService menuService;

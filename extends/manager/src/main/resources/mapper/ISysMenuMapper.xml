@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.open.extend.manager.menu.mapper.ISysMenuMapper">
+<mapper namespace="com.open.extend.manager.function.menu.mapper.ISysMenuMapper">
 
-    <resultMap type="com.open.extend.manager.menu.domain.SysMenu" id="SysMenuResult">
+    <resultMap type="com.open.extend.manager.function.menu.domain.SysMenu" id="SysMenuResult">
     </resultMap>
 
     <select id="selectMenuListByUserId" resultMap="SysMenuResult">
